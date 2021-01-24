@@ -1,19 +1,23 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 const setSchema = mongoose.Schema({
-    set_number: {
-        type: Number,
-        required: true,
-        unique: true
-    },
-    num_questions: {
-        type: Number,
-        required: true
-    },
-    question_ids: {
-        type: [ String ],
-        required: true
-    }
+  set_id: {
+    type: Number,
+    required: true,
+    unique: true,
+  },
+  questions: {
+    type: [Number],
+    required: true,
+  },
+  audios: {
+    type: [Number],
+    required: true,
+  },
+  switch: {
+    type: [Number],
+    required: true,
+  },
 });
 
-export default mongoose.model('sets', setSchema);
+export default mongoose.model("sets", setSchema);
