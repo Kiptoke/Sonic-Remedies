@@ -3,6 +3,7 @@ import { Route, Redirect, Switch } from "react-router-dom";
 import Survey from "./components/survey";
 import SurveyMap from "./components/surveyMap";
 import Home from "./components/home";
+import Example from "./components/example";
 import NotFound from "./components/notFound";
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
         <Route path="/survey" component={Survey} />
         <Route path="/surveymap" component={SurveyMap} />
         <Route path="/home" component={Home} />
+        <Route path="/example" component={Example} />
         <Route path="/not-found" component={NotFound} />
         <Redirect from="/" exact to="/home" />
         <Redirect to="/not-found" />
