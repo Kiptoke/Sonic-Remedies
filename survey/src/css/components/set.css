@@ -1,0 +1,30 @@
+html {
+  scroll-snap-type: y mandatory;
+}
+
+.set {
+  position: relative;
+  height: 100vh;
+  background-color: black;
+  display: grid;
+  place-items: center;
+  scroll-padding-block: auto;
+}
+
+.set_questions {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  overflow: scroll;
+  border-radius: 20px;
+  scroll-snap-type: y mandatory;
+}
+
+.set_questions::-webkit-scrollbar {
+  display: none;
+}
+
+.set_questions {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
