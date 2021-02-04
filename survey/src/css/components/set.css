@@ -1,4 +1,5 @@
-html {
+html,
+body {
   scroll-snap-type: y mandatory;
   padding: auto;
   margin: auto;
@@ -7,17 +8,15 @@ html {
 .set {
   height: 100vh;
   width: 100vw;
-  background-color: black;
   display: grid;
   place-items: center;
 }
 
 .set_questions {
   position: relative;
-  height: 100vh;
-  width: 100vw;
+  height: 100%;
+  width: 100%;
   overflow: scroll;
-  border-radius: 20px;
   scroll-snap-type: y mandatory;
 }
 
