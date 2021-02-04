@@ -8,10 +8,10 @@ h1 {
 h2 {
   -webkit-user-select: none;
   padding: 1rem;
-  border-radius: 1rem;
   color: white;
   background-color: #2f4858;
   font-size: 2rem;
+  margin: 1rem;
 }
 
 input {
