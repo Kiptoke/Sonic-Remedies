@@ -9,5 +9,7 @@ body {
 
 /*Defining colors*/
 html {
-  --main-bg-color: rgb(255, 239, 191);
+  --main-bg-color: rgb(234, 219, 236);
+  --text-bg-color: #2f4858;
+  --text-hov-color: rgb(102, 36, 133);
 }

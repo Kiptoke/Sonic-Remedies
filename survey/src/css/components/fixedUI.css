@@ -1,0 +1,10 @@
+.fixedUI {
+  position: fixed;
+  margin: 0 auto;
+  bottom: 0;
+  width: 50%;
+  height: 5vh;
+  color: white;
+  background-color: var(--text-bg-color);
+  text-align: center;
+}

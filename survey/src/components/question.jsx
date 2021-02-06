@@ -1,19 +1,9 @@
-import "../css/components/question.css";
+import MultipleChoice from "./multipleChoice";
 
-function Question() {
-  return (
-    <div className="question">
-      <div className="question_container">
-        <h1>This is a question</h1>
-        <h3>Here's a subheading idk</h3>
-        <ul>
-          <li>Item 1</li>
-          <li>Item 2</li>
-          <li>Item 3</li>
-        </ul>
-      </div>
-    </div>
-  );
+function Question({ question }) {
+  const { ask, responses } = question;
+  //Later add logic for if the question.type is not multiple choice
+  return <MultipleChoice ask={ask} responses={responses} />;
 }
 
 export default Question;

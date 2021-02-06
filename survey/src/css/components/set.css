@@ -1,19 +1,16 @@
 html,
 body {
-  scroll-snap-type: y mandatory;
-  padding: auto;
-  margin: auto;
+  background-image: url("../../images/bg-arc.jpg");
+  background-size: auto 100%;
+  background-color: var(--main-bg-color);
 }
 
 .set {
   height: 100vh;
   width: 100vw;
-  display: grid;
-  place-items: center;
 }
 
 .set_questions {
-  position: relative;
   height: 100%;
   width: 100%;
   overflow: scroll;
@@ -27,4 +24,13 @@ body {
 .set_questions {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+.question {
+  position: relative;
+  background-color: rgb(255, 255, 255, 0);
+  width: 100%;
+  height: 100%;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
 }
