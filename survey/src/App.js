@@ -5,6 +5,7 @@ import SurveyMap from "./components/surveyMap";
 import Home from "./components/home";
 import Set from "./components/set";
 import NotFound from "./components/notFound";
+import Admin from "./components/Admin";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/surveymap" component={SurveyMap} />
         <Route path="/home" component={Home} />
         <Route path="/set" component={Set} />
+        <Route path="/admin" component={Admin} />
         <Route path="/not-found" component={NotFound} />
         <Redirect from="/" exact to="/home" />
         <Redirect to="/not-found" />
