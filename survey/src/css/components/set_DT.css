@@ -1,9 +1,4 @@
 @media (orientation: landscape) {
-  html,
-  body {
-    background-size: 100%;
-    background-position: 25vw;
-  }
   .set {
     width: 50vw;
     margin: 0 auto;
