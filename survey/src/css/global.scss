@@ -6,8 +6,11 @@ $textBgColor: #2f4858;
 $textHovColor: rgb(102, 36, 133);
 
 html,
-body {
+body,
+#root {
   font-family: Lato;
   margin: 0;
   padding: 0;
+  height: 100%;
+  width: 100%;
 }

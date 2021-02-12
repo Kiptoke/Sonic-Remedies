@@ -11,7 +11,7 @@ const Set = ({ setId, questions }) => {
           return <Question key={question.ask} question={question} />;
         })}
       </div>
-      <FixedUI />
+      <FixedUI numQuestions={questions.length} currentQuestion={1} />
     </div>
   );
 };
