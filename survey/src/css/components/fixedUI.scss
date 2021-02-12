@@ -9,3 +9,24 @@
   background-color: $textBgColor;
   text-align: center;
 }
+
+.circles {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.circle {
+  background-size: cover;
+  margin-right: 1rem;
+  width: 1rem;
+  height: 1rem;
+}
+
+.circle-filled {
+  background-image: url("../../vectors/circleFilled.svg");
+}
+.circle-empty {
+  background-image: url("../../vectors/circleEmpty.svg");
+}
