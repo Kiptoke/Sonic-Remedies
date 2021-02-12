@@ -1,8 +1,7 @@
-html,
-body {
-  background-image: url("../../images/bg-arc.jpg");
-  background-size: auto 100%;
+.set {
   background-color: var(--main-bg-color);
+  background-image: url("../../images/bg-arc.jpg");
+  background-size: 100%;
 }
 
 .set {
@@ -24,13 +23,4 @@ body {
 .set_questions {
   -ms-overflow-style: none;
   scrollbar-width: none;
-}
-
-.question {
-  position: relative;
-  background-color: rgb(255, 255, 255, 0);
-  width: 100%;
-  height: 100%;
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
 }

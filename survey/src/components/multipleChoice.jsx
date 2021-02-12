@@ -1,7 +1,7 @@
-import "../css/components/multipleChoice.css";
+import "../css/components/multipleChoice.scss";
 const MultipleChoice = ({ ask, responses }) => {
   return (
-    <div className="question container-fluid p-0">
+    <div className="question-mc container-fluid p-0">
       <h1>{ask}</h1>
       {responses.map((res) => {
         return (
