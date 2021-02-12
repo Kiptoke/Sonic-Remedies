@@ -1,3 +1,4 @@
+@import "../global.scss";
 .fixedUI {
   position: fixed;
   margin: 0 auto;
@@ -5,6 +6,6 @@
   width: 50%;
   height: 5vh;
   color: white;
-  background-color: var(--text-bg-color);
+  background-color: $textBgColor;
   text-align: center;
 }

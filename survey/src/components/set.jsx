@@ -1,4 +1,4 @@
-import "../css/components/set.css";
+import "../css/components/set.scss";
 import "../css/components/set_DT.css";
 import Question from "./question";
 import FixedUI from "./fixedUI";
