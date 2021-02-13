@@ -1,4 +1,4 @@
-import "../css/components/question.css";
+import "../css/components/question.scss";
 import MultipleChoice from "./multipleChoice";
 
 function Question({ question }) {
@@ -6,7 +6,9 @@ function Question({ question }) {
   //Later add logic for if the question.type is not multiple choice
   return (
     <div className="question">
-      <MultipleChoice ask={ask} responses={responses} />
+      <h1>{ask}</h1>
+      <MultipleChoice responses={responses} />
+      <div className="next-button">Next</div>
     </div>
   );
 }
