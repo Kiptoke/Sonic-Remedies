@@ -1,14 +1,12 @@
 import "../css/components/multipleChoice.scss";
-const MultipleChoice = ({ ask, responses }) => {
+const MultipleChoice = ({ responses }) => {
   return (
     <div className="question-mc container-fluid p-0">
-      <h1>{ask}</h1>
       {responses.map((res) => {
         return (
-          <div key={res} className="row align-items-center no-gutters">
-            <div className="col">
-              <h2>{res}</h2>
-            </div>
+          <div key={res} className="option">
+            {res}
+            <div className="radar"></div>
           </div>
         );
       })}
