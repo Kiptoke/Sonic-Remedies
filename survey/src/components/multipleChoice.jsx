@@ -3,9 +3,9 @@ import { useState } from "react";
 
 const renderRadar = (a, b) => {
   return a === b ? (
-    <div className="radar chosen"></div>
+    <div className="radio chosen"></div>
   ) : (
-    <div className="radar"></div>
+    <div className="radio"></div>
   );
 };
 
