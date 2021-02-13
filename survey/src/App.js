@@ -25,10 +25,10 @@ function App() {
         <Route path="/surveymap" component={SurveyMap} />
         <Route path="/home" component={Home} />
         <Route path="/set/:id" render={() => <SetLoader />} />
-        <Route path="/set" component={Set} />
         <Route path="/admin" component={Admin} />
         <Route path="/not-found" component={NotFound} />
         <Redirect from="/" exact to="/home" />
+        <Redirect from="/set" exact to="/set/0" />
         <Redirect to="/not-found" />
       </Switch>
     </Fragment>
