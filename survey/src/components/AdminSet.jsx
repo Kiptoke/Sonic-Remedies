@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 
 import AdminQuestion from "./AdminQuestion";
+import AddQuestion from "./AddQuestion";
 
 const AdminSet = ({ set, onDelete }) => {
   const [questions, setQuestions] = useState([]);
+  const [showAddQuestion, setShowAddQuestion] = useState(false);
 
   useEffect(() => {
     setQuestions(set.questions);
@@ -39,6 +41,34 @@ const AdminSet = ({ set, onDelete }) => {
     setQuestions(updated.questions);
   };
 
+  const displayQuestions = () => {
+    setShowAddQuestion(!showAddQuestion);
+    console.log(showAddQuestion);
+  };
+
+  const onAddQuestions = async (selected) => {
+    const init_res = await fetch(`http://localhost:5000/sets/${set.id}`);
+    const data = await init_res.json();
+    let set_questions = data.questions;
+
+    for (let i = 0; i < selected.length; i++) {
+      set_questions.push(selected[i]);
+    }
+    console.log(set_questions);
+
+    const res = await fetch(`http://localhost:5000/sets/${set.id}`, {
+      method: "PUT",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({ ...data, questions: set_questions }),
+    });
+    const updated_data = await res.json();
+
+    setQuestions(updated_data.questions);
+    setShowAddQuestion(!showAddQuestion);
+  };
+
   return (
     <div>
       <h1>{set.title}</h1>
@@ -50,7 +80,13 @@ const AdminSet = ({ set, onDelete }) => {
           deleteQuestion={deleteQuestion}
         />
       ))}
-      <button>Add Question to Set</button>
+      <button onClick={() => displayQuestions()}>Add Questions to Set</button>
+      {showAddQuestion && (
+        <AddQuestion
+          onAddQuestions={onAddQuestions}
+          currentQuestions={questions}
+        />
+      )}
       <hr></hr>
     </div>
   );

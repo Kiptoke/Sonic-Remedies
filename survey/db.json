@@ -3,12 +3,20 @@
     {
       "id": 1,
       "title": "Set 1",
-      "questions": [1, 2, 3]
+      "questions": [
+        1,
+        2,
+        3
+      ]
     },
     {
       "id": 2,
       "title": "Set 2",
-      "questions": [2, 3, 4]
+      "questions": [
+        2,
+        3,
+        4
+      ]
     },
     {
       "title": "new set w0w",
@@ -21,19 +29,34 @@
       "id": 1,
       "title": "Question one",
       "input_type": "multiple-choice",
-      "options": ["choice A", "choice B", "choice C", "choice D"]
+      "options": [
+        "choice A",
+        "choice B",
+        "choice C",
+        "choice D"
+      ]
     },
     {
       "id": 2,
       "title": "Attack on Titan characters cuz I'm a weeb",
       "input_type": "multiple-choice",
-      "options": ["Eren", "Armin", "Levi", "Erwin", "Jean"]
+      "options": [
+        "Eren",
+        "Armin",
+        "Levi",
+        "Erwin",
+        "Jean"
+      ]
     },
     {
       "id": 3,
       "title": "VE?",
       "input_type": "check-box",
-      "options": ["various efforts", "volcanic erection", "yes"]
+      "options": [
+        "various efforts",
+        "volcanic erection",
+        "yes"
+      ]
     },
     {
       "id": 4,

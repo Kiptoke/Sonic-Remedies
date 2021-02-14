@@ -42,6 +42,9 @@ const AdminQuestion = ({ qid, deleteQuestion }) => {
             <li>{option}</li>
           ))}
         </ul>
+        <button onClick={() => deleteQuestion(question.id)}>
+          Delete Question
+        </button>
       </div>
     );
   }
@@ -50,6 +53,9 @@ const AdminQuestion = ({ qid, deleteQuestion }) => {
       <div>
         <h3>{question.title}</h3>
         <h5>{question.input_type}</h5>
+        <button onClick={() => deleteQuestion(question.id)}>
+          Delete Question
+        </button>
       </div>
     );
   }
@@ -58,6 +64,9 @@ const AdminQuestion = ({ qid, deleteQuestion }) => {
       <div>
         <h3>{question.title}</h3>
         <h5>{question.input_type}</h5>
+        <button onClick={() => deleteQuestion(question.id)}>
+          Delete Question
+        </button>
       </div>
     );
   }
