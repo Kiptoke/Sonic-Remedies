@@ -22,9 +22,32 @@ function Admin() {
     return data;
   };
 
+  const deleteSet = async (id) => {
+    await fetch(`http://localhost:5000/sets/${id}`, {
+      method: "DELETE",
+    });
+    setSets(sets.filter((set) => set.id !== id));
+  };
+
+  const addSet = async (title) => {
+    const questions = [];
+    const set = { title: title, questions: questions };
+
+    const res = await fetch("http://localhost:5000/sets", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(set),
+    });
+
+    const data = await res.json();
+    setSets([...sets, data]);
+  };
+
   return (
     <div>
-      <AdminSets sets={sets} />
+      <AdminSets sets={sets} onDelete={deleteSet} onAddSet={addSet} />
     </div>
   );
 }
