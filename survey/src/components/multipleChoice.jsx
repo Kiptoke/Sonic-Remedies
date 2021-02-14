@@ -9,7 +9,7 @@ const renderRadar = (a, b) => {
   );
 };
 
-const MultipleChoice = ({ responses }) => {
+const MultipleChoice = ({ responses, setIfChosen }) => {
   const [choice, setChoice] = useState(-1);
   return (
     <div className="question-mc container-fluid p-0">
@@ -18,6 +18,7 @@ const MultipleChoice = ({ responses }) => {
           <div key={num} className="option" onClick={() => setChoice(num)}>
             <div className="response">{res}</div>
             {renderRadar(choice, num)}
+            {setIfChosen(true)}
           </div>
         );
       })}
