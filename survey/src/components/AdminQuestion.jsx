@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 
-const AdminQuestion = ({ qid }) => {
+const AdminQuestion = ({ qid, deleteQuestion }) => {
   const [question, setQuestion] = useState({});
 
   useEffect(() => {
@@ -13,11 +13,64 @@ const AdminQuestion = ({ qid }) => {
       });
   }, [qid]);
 
-  return (
-    <div>
-      <h3>{question.title}</h3>
-    </div>
-  );
+  console.log(question);
+
+  if (question.input_type === "multiple-choice") {
+    return (
+      <div>
+        <h3>{question.title}</h3>
+        <h5>{question.input_type}</h5>
+
+        <ul>
+          {question.options.map((option) => (
+            <li>{option}</li>
+          ))}
+        </ul>
+        <button onClick={() => deleteQuestion(question.id)}>
+          Delete Question
+        </button>
+      </div>
+    );
+  }
+  if (question.input_type === "check-box") {
+    return (
+      <div>
+        <h3>{question.title}</h3>
+        <h5>{question.input_type}</h5>
+        <ul>
+          {question.options.map((option) => (
+            <li>{option}</li>
+          ))}
+        </ul>
+        <button onClick={() => deleteQuestion(question.id)}>
+          Delete Question
+        </button>
+      </div>
+    );
+  }
+  if (question.input_type === "short-answer") {
+    return (
+      <div>
+        <h3>{question.title}</h3>
+        <h5>{question.input_type}</h5>
+        <button onClick={() => deleteQuestion(question.id)}>
+          Delete Question
+        </button>
+      </div>
+    );
+  }
+  if (question.input_type === "long-answer") {
+    return (
+      <div>
+        <h3>{question.title}</h3>
+        <h5>{question.input_type}</h5>
+        <button onClick={() => deleteQuestion(question.id)}>
+          Delete Question
+        </button>
+      </div>
+    );
+  }
+  return <h3>Error: invalid input type</h3>;
 };
 
 export default AdminQuestion;
