@@ -2,30 +2,66 @@
   "sets": [
     {
       "id": 1,
-      "questions": [1, 2, 3]
+      "title": "Set 1",
+      "questions": [
+        1,
+        2,
+        3
+      ]
     },
     {
       "id": 2,
-      "questions": [2, 3, 4]
+      "title": "Set 2",
+      "questions": [
+        2,
+        3,
+        4
+      ]
+    },
+    {
+      "title": "new set w0w",
+      "questions": [],
+      "id": 3
     }
   ],
-
   "questions": [
     {
       "id": 1,
-      "title": "Question one"
+      "title": "Question one",
+      "input_type": "multiple-choice",
+      "options": [
+        "choice A",
+        "choice B",
+        "choice C",
+        "choice D"
+      ]
     },
     {
       "id": 2,
-      "title": "Question two"
+      "title": "Attack on Titan characters cuz I'm a weeb",
+      "input_type": "multiple-choice",
+      "options": [
+        "Eren",
+        "Armin",
+        "Levi",
+        "Erwin",
+        "Jean"
+      ]
     },
     {
       "id": 3,
-      "title": "Question three"
+      "title": "VE?",
+      "input_type": "check-box",
+      "options": [
+        "various efforts",
+        "volcanic erection",
+        "yes"
+      ]
     },
     {
       "id": 4,
-      "title": "Question four"
+      "title": "Question four",
+      "input_type": "short-answer"
     }
   ]
 }
