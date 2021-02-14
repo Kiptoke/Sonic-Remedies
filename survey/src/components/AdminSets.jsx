@@ -6,7 +6,7 @@ const AdminSets = ({ sets, onDelete, onAddSet }) => {
   const [showAddSet, setShowAddSet] = useState(false);
 
   const handleClick = () => {
-    setShowAddSet(true);
+    setShowAddSet(!showAddSet);
     console.log(showAddSet);
   };
   return (
