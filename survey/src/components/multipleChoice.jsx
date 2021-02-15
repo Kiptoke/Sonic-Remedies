@@ -1,5 +1,5 @@
 import "../css/components/multipleChoice.scss";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const renderRadar = (a, b) => {
   return a === b ? (
@@ -9,8 +9,13 @@ const renderRadar = (a, b) => {
   );
 };
 
-const MultipleChoice = ({ responses, setIfChosen }) => {
+const MultipleChoice = ({ responses, handleChosen }) => {
   const [choice, setChoice] = useState(-1);
+  useEffect(() => {
+    if (choice > -1) {
+      handleChosen(choice);
+    }
+  }, [handleChosen, choice]);
   return (
     <div className="question-mc container-fluid p-0">
       {responses.map((res, num) => {
@@ -18,7 +23,6 @@ const MultipleChoice = ({ responses, setIfChosen }) => {
           <div key={num} className="option" onClick={() => setChoice(num)}>
             <div className="response">{res}</div>
             {renderRadar(choice, num)}
-            {setIfChosen(true)}
           </div>
         );
       })}
