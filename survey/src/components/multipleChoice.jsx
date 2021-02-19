@@ -1,11 +1,13 @@
 import "../css/components/multipleChoice.scss";
 import { useState, useEffect } from "react";
+import { ReactComponent as RadioChosen } from "../vectors/circleFilled.svg";
+import { ReactComponent as Radio } from "../vectors/circleEmpty.svg";
 
 const renderRadar = (a, b) => {
   return a === b ? (
-    <div className="radio chosen"></div>
+    <RadioChosen className="radio" />
   ) : (
-    <div className="radio"></div>
+    <Radio className="radio" />
   );
 };
 
