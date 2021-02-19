@@ -1,6 +1,6 @@
 import "../css/components/question.scss";
 import MultipleChoice from "./multipleChoice";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function renderNext(ifChosen) {
   return ifChosen ? (
@@ -10,13 +10,17 @@ function renderNext(ifChosen) {
   );
 }
 
-function Question({ question }) {
+function Question({ question, handleResponse }) {
   const { ask, responses } = question;
   const [ifChosen, setIfChosen] = useState(false);
 
   function handleChosen() {
     setIfChosen(true);
   }
+
+  useEffect(() => {
+    if (ifChosen) handleResponse();
+  }, [ifChosen, handleResponse]);
   //Later add logic for if the question.type is not multiple choice
   return (
     <div className="question">
