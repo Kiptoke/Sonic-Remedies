@@ -12,10 +12,11 @@ const Set = ({ setId, questions }) => {
   return (
     <div className="set">
       <div className="set_questions">
-        {questions.map((question) => {
+        {questions.map((question, id) => {
           return (
             <Question
-              key={question.ask}
+              key={id}
+              pos={id}
               question={question}
               handleResponse={handleResponse}
             />
