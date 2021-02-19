@@ -1,32 +1,44 @@
 import "../css/components/question.scss";
 import MultipleChoice from "./multipleChoice";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
+import { ReactComponent as NextButtonChosen } from "../vectors/arrowDownChosen.svg";
+import { ReactComponent as NextButton } from "../vectors/arrowDown.svg";
 
 function renderNext(ifChosen) {
   return ifChosen ? (
-    <div className="next-button chosen"></div>
+    <NextButtonChosen className="next-button" />
   ) : (
-    <div className="next-button"></div>
+    <NextButton className="next-button" />
   );
+}
+
+function usePrevious(value) {
+  const ref = useRef();
+  useEffect(() => {
+    ref.current = value;
+  }, [value]);
+
+  return ref.current;
 }
 
 function Question({ question, handleResponse }) {
   const { ask, responses } = question;
   const [ifChosen, setIfChosen] = useState(false);
+  const ifChosenPrev = usePrevious(ifChosen);
 
   function handleChosen() {
     setIfChosen(true);
   }
 
   useEffect(() => {
-    if (ifChosen) handleResponse();
-  }, [ifChosen, handleResponse]);
+    if (ifChosen & (ifChosenPrev === false)) handleResponse();
+  }, [ifChosen, ifChosenPrev, handleResponse]);
   //Later add logic for if the question.type is not multiple choice
   return (
     <div className="question">
       <h1>{ask}</h1>
       <MultipleChoice responses={responses} handleChosen={handleChosen} />
-      {renderNext(ifChosen)}
+      <div className="next">{renderNext(ifChosen)}</div>
     </div>
   );
 }

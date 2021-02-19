@@ -1,12 +1,15 @@
 import "../css/components/fixedUI.scss";
 import "../css/components/fixedUI_DT.css";
+import React from "react";
+import { ReactComponent as CircleEmpty } from "../vectors/circleEmpty.svg";
+import { ReactComponent as CircleFilled } from "../vectors/circleFilled.svg";
 
 const renderCircles = (numCirc, currentCirc) => {
   let circles = [];
   for (let i = 0; i < numCirc; i++) {
     i <= currentCirc
-      ? circles.push(<div key={i} className="circle circle-filled"></div>)
-      : circles.push(<div key={i} className="circle circle-empty"></div>);
+      ? circles.push(<CircleFilled key={i} className="circle" />)
+      : circles.push(<CircleEmpty key={i} className="circle" />);
   }
   return circles;
 };
