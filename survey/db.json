@@ -17,11 +17,6 @@
         3,
         4
       ]
-    },
-    {
-      "title": "new set w0w",
-      "questions": [],
-      "id": 3
     }
   ],
   "questions": [
@@ -38,7 +33,7 @@
     },
     {
       "id": 2,
-      "title": "Attack on Titan characters cuz I'm a weeb",
+      "title": "Attack on Titan characters because it's an amazing show and I recommend",
       "input_type": "multiple-choice",
       "options": [
         "Eren",
@@ -50,12 +45,13 @@
     },
     {
       "id": 3,
-      "title": "VE?",
+      "title": "Choose your favorite breakfast foods",
       "input_type": "check-box",
       "options": [
-        "various efforts",
-        "volcanic erection",
-        "yes"
+        "cereal",
+        "pancakes",
+        "waffles",
+        "eggs"
       ]
     },
     {
