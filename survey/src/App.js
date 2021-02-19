@@ -9,8 +9,21 @@ import Admin from "./components/Admin";
 
 function App() {
   const questions = [
-    { ask: "What's up?", responses: ["nothing much.", "so much", "???"] },
-    { ask: "How's it going?", responses: ["Super", "Meh", "Horribly!"] },
+    {
+      type: "mc",
+      ask: "Which of these colors is your favorite?",
+      responses: ["Blue", "Green", "Yellow", "Orange", "Red"],
+    },
+    {
+      type: "mc",
+      ask: "Which of these pokemon is your favorite?",
+      responses: ["Pikachu", "Squirtle", "Charizard", "Mewtwo"],
+    },
+    {
+      type: "mc",
+      ask: "What is the loudest?",
+      responses: ["Train", "Bus", "Airplane", "Lawn Mower"],
+    },
   ];
 
   function SetLoader() {

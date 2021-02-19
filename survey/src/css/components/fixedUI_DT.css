@@ -1,3 +1,5 @@
-.fixedUI {
-  width: 50%;
+@media (min-width: 960px) {
+  .fixedUI {
+    width: 50%;
+  }
 }

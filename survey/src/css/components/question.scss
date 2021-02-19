@@ -20,6 +20,12 @@
     justify-content: center;
   }
 
+  .next-link {
+    margin: 0 auto;
+    text-align: center;
+    color: $textHovColor;
+  }
+
   .next-button {
     color: $textBgColor;
     font-weight: bold;
@@ -27,7 +33,6 @@
     text-align: center;
     background-size: 100%;
     background-repeat: no-repeat;
-    margin: 0 auto;
     width: 3rem;
     height: 3rem;
   }
