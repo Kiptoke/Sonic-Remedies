@@ -45,9 +45,18 @@ function Admin() {
     setSets([...sets, data]);
   };
 
+  const newQuestion = async (title, type, options) => {
+    console.log("yo angelo");
+  };
+
   return (
     <div>
-      <AdminSets sets={sets} onDelete={deleteSet} onAddSet={addSet} />
+      <AdminSets
+        sets={sets}
+        onDelete={deleteSet}
+        onAddSet={addSet}
+        onAddQuestion={newQuestion}
+      />
     </div>
   );
 }
