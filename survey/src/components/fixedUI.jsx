@@ -3,8 +3,8 @@ import "../css/components/fixedUI_DT.css";
 
 const renderCircles = (numCirc, currentCirc) => {
   let circles = [];
-  for (let i = 1; i <= numCirc; i++) {
-    i === currentCirc
+  for (let i = 0; i < numCirc; i++) {
+    i <= currentCirc
       ? circles.push(<div key={i} className="circle circle-filled"></div>)
       : circles.push(<div key={i} className="circle circle-empty"></div>);
   }
