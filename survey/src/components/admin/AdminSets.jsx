@@ -22,7 +22,7 @@ const AdminSets = ({ sets, onDelete, onAddSet, onNewQuestion }) => {
         <AdminSet qid={set.id} set={set} onDelete={onDelete} />
       ))}
       <button onClick={() => handleClick()}>Add Set</button>
-      <button>Manage Questions</button>
+      <button onClick={() => handleManageQuestions()}>Manage Questions</button>
       {showAddSet && <AddSet onAddSet={onAddSet} />}
       {showAddQuestion && <NewQuestion onNewQuestion={onNewQuestion} />}
     </div>
