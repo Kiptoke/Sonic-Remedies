@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import "../css/components/admin.css";
+
 import AdminSets from "./AdminSets";
 
 function Admin() {
@@ -55,7 +55,7 @@ function Admin() {
         sets={sets}
         onDelete={deleteSet}
         onAddSet={addSet}
-        onAddQuestion={newQuestion}
+        onNewQuestion={newQuestion}
       />
     </div>
   );

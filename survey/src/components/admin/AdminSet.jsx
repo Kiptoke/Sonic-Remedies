@@ -73,6 +73,7 @@ const AdminSet = ({ set, onDelete }) => {
     <div>
       <h1>{set.title}</h1>
       <button onClick={() => onDelete(set.id)}>Delete Set</button>
+      <button>Change Question Order</button>
       {questions.map((question) => (
         <AdminQuestion
           key={question}

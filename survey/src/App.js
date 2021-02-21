@@ -5,7 +5,7 @@ import SurveyMap from "./components/surveyMap";
 import Home from "./components/home";
 import Set from "./components/set";
 import NotFound from "./components/notFound";
-import Admin from "./components/Admin";
+import Admin from "./components/admin/Admin";
 
 function App() {
   const questions = [
