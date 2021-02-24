@@ -10,7 +10,7 @@
 .set_questions {
   height: 100%;
   width: 100%;
-  overflow: scroll;
+  overflow: hidden;
   scroll-snap-type: y mandatory;
   -ms-overflow-style: none;
   scrollbar-width: none;

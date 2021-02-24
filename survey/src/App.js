@@ -3,19 +3,19 @@ import { Route, Redirect, Switch, useParams } from "react-router-dom";
 import Survey from "./components/survey";
 import SurveyMap from "./components/surveyMap";
 import Home from "./components/home";
-import Set from "./components/set";
+import Set from "./components/setUI/set";
 import NotFound from "./components/notFound";
 import Admin from "./components/admin/Admin";
 
 function App() {
   const questions = [
     {
-      type: "mc",
-      ask: "Which of these colors is your favorite?",
+      type: "ms",
+      ask: "Which of these colors is your favorite? (Select all that apply)",
       responses: ["Blue", "Green", "Yellow", "Orange", "Red"],
     },
     {
-      type: "mc",
+      type: "ms",
       ask: "Which of these pokemon is your favorite?",
       responses: ["Pikachu", "Squirtle", "Charizard", "Mewtwo"],
     },
