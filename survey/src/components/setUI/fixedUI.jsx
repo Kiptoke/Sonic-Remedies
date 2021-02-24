@@ -1,8 +1,8 @@
-import "../css/components/fixedUI.scss";
-import "../css/components/fixedUI_DT.css";
+import "../../css/components/fixedUI.scss";
+import "../../css/components/fixedUI_DT.css";
 import React from "react";
-import { ReactComponent as CircleEmpty } from "../vectors/circleEmpty.svg";
-import { ReactComponent as CircleFilled } from "../vectors/circleFilled.svg";
+import { ReactComponent as CircleEmpty } from "../../vectors/circleEmpty.svg";
+import { ReactComponent as CircleFilled } from "../../vectors/circleFilled.svg";
 
 const renderCircles = (numCirc, currentCirc) => {
   let circles = [];
