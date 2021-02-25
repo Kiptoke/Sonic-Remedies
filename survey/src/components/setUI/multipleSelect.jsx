@@ -22,7 +22,8 @@ const MultipleSelect = ({ responses, handleSelection }) => {
   const [selections, setSelections] = useState(init);
 
   useEffect(() => {
-    handleSelection(selections);
+    if (selections.find((el) => el === true)) handleSelection(true);
+    else handleSelection(false);
   }, [selections, handleSelection]);
 
   return (

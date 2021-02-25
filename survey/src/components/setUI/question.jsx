@@ -17,10 +17,10 @@ function renderQuestion(type, responses, handleAnswered) {
 
 function Question({ question, handleResponse, pos }) {
   const { type, ask, responses } = question;
-  const [ifChosen, setIfChosen] = useState(false);
+  const [ifChosen, setIfAnswered] = useState(false);
 
-  function handleAnswered() {
-    setIfChosen(true);
+  function handleAnswered(answered) {
+    setIfAnswered(answered);
   }
   //Later add logic for if the question.type is not multiple choice
   return (

@@ -5,12 +5,15 @@ $mainBgColor: #eadbec;
 $textBgColor: #2f4858;
 $textHovColor: #662485;
 
+//Function for getting the propper height for mobile
+@function vh($quantity) {
+  @return calc(var(--vh, 1vh) * #{$quantity});
+}
+
 html,
 body,
 #root {
   font-family: Lato;
   margin: 0;
   padding: 0;
-  height: 100%;
-  width: 100%;
 }
