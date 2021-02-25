@@ -15,7 +15,7 @@ const MultipleChoice = ({ responses, handleChosen }) => {
   const [choice, setChoice] = useState(-1);
   useEffect(() => {
     if (choice > -1) {
-      handleChosen(choice);
+      handleChosen(true);
     }
   }, [handleChosen, choice]);
   return (

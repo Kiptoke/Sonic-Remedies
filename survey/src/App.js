@@ -6,18 +6,34 @@ import Home from "./components/home";
 import Set from "./components/setUI/set";
 import NotFound from "./components/notFound";
 import Admin from "./components/admin/Admin";
+import setViewHeight from "./utils/setViewHeight";
 
 function App() {
+  setViewHeight(window, document);
+
   const questions = [
     {
       type: "ms",
-      ask: "Which of these colors is your favorite? (Select all that apply)",
-      responses: ["Blue", "Green", "Yellow", "Orange", "Red"],
+      ask: "Which of these colors do you like? Select all that apply.",
+      responses: [
+        "Blue",
+        "Green",
+        "Yellow",
+        "Orange",
+        "Red",
+        "None of the above",
+      ],
     },
     {
       type: "ms",
-      ask: "Which of these pokemon is your favorite?",
-      responses: ["Pikachu", "Squirtle", "Charizard", "Mewtwo"],
+      ask: "Which are cute? Select all that apply.",
+      responses: [
+        "Pikachu",
+        "Squirtle",
+        "Charizard",
+        "Mewtwo",
+        "None of the above",
+      ],
     },
     {
       type: "mc",
