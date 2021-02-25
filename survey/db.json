@@ -17,6 +17,11 @@
         3,
         4
       ]
+    },
+    {
+      "title": "new set",
+      "questions": [],
+      "id": 3
     }
   ],
   "questions": [
@@ -58,6 +63,16 @@
       "id": 4,
       "title": "Question four",
       "input_type": "short-answer"
+    },
+    {
+      "title": "soup",
+      "type": "multiple-choice",
+      "options": [
+        "chicken noodle",
+        "tomato",
+        "french onion"
+      ],
+      "id": 5
     }
   ]
 }
