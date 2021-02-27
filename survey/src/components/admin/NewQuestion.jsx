@@ -34,14 +34,10 @@ const NewQuestion = ({ onNewQuestion }) => {
             <br></br>
             <label>Question Type</label>
             <div onChange={(e) => setType(e.target.value)}>
-                <input type="radio" value="multiple-choice" name="option" /> Multiple
-        Choice
-        <input type="radio" value="check-box" name="option" />
-        Checkbox
-        <input type="radio" value="short-answer" name="option" />
-        Short Answer
-        <input type="radio" value="long=answer" name="option" />
-        Long Answer
+                <input type="radio" value="multiple-choice" name="option" /> Multiple Choice
+                <input type="radio" value="check-box" name="option" /> Checkbox
+                <input type="radio" value="short-answer" name="option" /> Short Answer
+                <input type="radio" value="long-answer" name="option" /> Long Answer
       </div>
             {(type === "multiple-choice" || type === "check-box") && (
                 <label>Options (please separate each option with a semicolon)</label>
