@@ -24,7 +24,7 @@ function Admin() {
   const fetchSets = async () => {
     const res = await fetch("http://localhost:5000/sets");
     const data = await res.json();
-
+    console.log(data)
     return data;
   };
 
@@ -40,7 +40,7 @@ function Admin() {
     await fetch(`http://localhost:5000/sets/${id}`, {
       method: "DELETE",
     });
-    setSets(sets.filter((set) => set.id !== id));
+    setSets(sets.filter((set) => set._id !== id));
   };
 
   const addSet = async (title) => {
@@ -60,7 +60,8 @@ function Admin() {
   };
 
   const newQuestion = async (title, type, options) => {
-    const question = { title: title, type: type }
+    console.log(type);
+    const question = { title: title, input_type: type }
     if (options !== "") {
       const opts_arr = parseOptions(options);
       question.options = opts_arr;

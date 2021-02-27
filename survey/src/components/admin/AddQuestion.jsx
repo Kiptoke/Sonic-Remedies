@@ -11,7 +11,7 @@ const AddQuestion = ({ onAddQuestions, currentQuestions }) => {
       const serverQuestions = await fetch("http://localhost:5000/questions");
       const data = await serverQuestions.json();
       const filtered = data.filter(
-        (question) => !currentQuestions.includes(question.id)
+        (question) => !currentQuestions.includes(question._id)
       );
       setQuestions(filtered);
     };

@@ -5,7 +5,7 @@ const AdminQCheckbox = ({ question, addToSelected }) => {
 
   const handleChange = () => {
     setChecked(!checked);
-    addToSelected(question.id);
+    addToSelected(question._id);
   };
   return (
     <div>
@@ -14,7 +14,7 @@ const AdminQCheckbox = ({ question, addToSelected }) => {
           type="checkbox"
           value={question.title}
           checked={checked}
-          onChange={() => handleChange(question.id)}
+          onChange={() => handleChange(question._id)}
         />
       </label>
       {question.title}
