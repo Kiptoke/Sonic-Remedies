@@ -1,13 +1,12 @@
-import "../../css/components/multipleSelect.scss";
 import { useState, useEffect } from "react";
 import { ReactComponent as SelectChosen } from "../../vectors/squareFilled.svg";
 import { ReactComponent as SelectNotChosen } from "../../vectors/squareEmpty.svg";
 
 const renderSelect = (selections, i) => {
   return selections[i] === true ? (
-    <SelectChosen className="radio" />
+    <SelectChosen className="indicator" />
   ) : (
-    <SelectNotChosen className="radio" />
+    <SelectNotChosen className="indicator" />
   );
 };
 
@@ -16,18 +15,18 @@ const Select = (selections, i) => {
   return selections;
 };
 
-const MultipleSelect = ({ responses, handleSelection }) => {
+const MultipleSelect = ({ responses, handleResponded }) => {
   let init = [];
   for (let i = 0; i < responses.length; i++) init[i] = false;
   const [selections, setSelections] = useState(init);
 
   useEffect(() => {
-    if (selections.find((el) => el === true)) handleSelection(true);
-    else handleSelection(false);
-  }, [selections, handleSelection]);
+    if (selections.find((el) => el === true)) handleResponded(true);
+    else handleResponded(false);
+  }, [selections, handleResponded]);
 
   return (
-    <div className="question-ms container-fluid p-0">
+    <div className="question-ms">
       {responses.map((res, num) => {
         return (
           <div

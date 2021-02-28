@@ -6,23 +6,16 @@ import Home from "./components/home";
 import Set from "./components/setUI/set";
 import NotFound from "./components/notFound";
 import Admin from "./components/admin/Admin";
-import setViewHeight from "./utils/setViewHeight";
+import { initViewHeight } from "./utils/viewHeight";
 
 function App() {
-  setViewHeight(window, document);
+  initViewHeight();
 
   const questions = [
     {
-      type: "ms",
-      ask: "Which of these colors do you like? Select all that apply.",
-      responses: [
-        "Blue",
-        "Green",
-        "Yellow",
-        "Orange",
-        "Red",
-        "None of the above",
-      ],
+      type: "fr",
+      ask: "Describe your favorite meal.",
+      responses: [],
     },
     {
       type: "ms",
