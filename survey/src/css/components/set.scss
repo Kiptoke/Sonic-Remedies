@@ -2,7 +2,7 @@
 .set {
   background-color: $mainBgColor;
   background-image: url("../../images/bg-arc.jpg");
-  background-size: auto 100%;
+  background-size: cover;
   height: vh(100);
   width: 100%;
 }

@@ -2,6 +2,6 @@
   .set {
     width: 50vw;
     margin: 0 auto;
-    background-size: 100%;
+    background-size: cover;
   }
 }

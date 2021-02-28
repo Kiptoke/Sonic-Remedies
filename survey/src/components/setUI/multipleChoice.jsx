@@ -1,25 +1,24 @@
-import "../../css/components/multipleChoice.scss";
 import { useState, useEffect } from "react";
 import { ReactComponent as RadioChosen } from "../../vectors/circleFilled.svg";
 import { ReactComponent as Radio } from "../../vectors/circleEmpty.svg";
 
 const renderRadar = (a, b) => {
   return a === b ? (
-    <RadioChosen className="radio" />
+    <RadioChosen className="indicator" />
   ) : (
-    <Radio className="radio" />
+    <Radio className="indicator" />
   );
 };
 
-const MultipleChoice = ({ responses, handleChosen }) => {
+const MultipleChoice = ({ responses, handleResponded }) => {
   const [choice, setChoice] = useState(-1);
   useEffect(() => {
     if (choice > -1) {
-      handleChosen(true);
+      handleResponded(true);
     }
-  }, [handleChosen, choice]);
+  }, [handleResponded, choice]);
   return (
-    <div className="question-mc container-fluid p-0">
+    <div className="question-mc">
       {responses.map((res, num) => {
         return (
           <div key={num} className="option" onClick={() => setChoice(num)}>

@@ -1,37 +1,39 @@
 import "../../css/components/question.scss";
-import MultipleChoice from "./multipleChoice";
-import MultipleSelect from "./multipleSelect";
 import { useState } from "react";
 import NextButton from "./nextButton";
+import MultipleChoice from "./multipleChoice";
+import MultipleSelect from "./multipleSelect";
+import FreeResponse from "./freeResponse";
 
-function renderQuestion(type, responses, handleAnswered) {
-  if (type === "mc")
-    return (
-      <MultipleChoice responses={responses} handleChosen={handleAnswered} />
-    );
-  else if (type === "ms")
-    return (
-      <MultipleSelect responses={responses} handleSelection={handleAnswered} />
-    );
+function handleNext(handleResponse, setClickedNext) {
+  handleResponse();
+  setClickedNext(true); //to hide the arrow (avoid double click)
+}
+function renderQuestion(type, responses, handleResponded) {
+  const params = { responses: responses, handleResponded: handleResponded };
+  if (type === "mc") return <MultipleChoice {...params} />;
+  else if (type === "ms") return <MultipleSelect {...params} />;
+  else if (type === "fr") return <FreeResponse {...params} />;
 }
 
 function Question({ question, handleResponse, pos }) {
   const { type, ask, responses } = question;
-  const [ifChosen, setIfAnswered] = useState(false);
+  const [responded, setResponded] = useState(false);
+  const [clickedNext, setClickedNext] = useState(false);
 
-  function handleAnswered(answered) {
-    setIfAnswered(answered);
+  function handleResponded(responded) {
+    setResponded(responded);
   }
   //Later add logic for if the question.type is not multiple choice
   return (
     <div className="question" id={"question" + pos}>
       <h1>{ask}</h1>
-      {renderQuestion(type, responses, handleAnswered)}
+      {renderQuestion(type, responses, handleResponded)}
       <div className="next">
         <NextButton
-          revealNext={ifChosen}
+          revealNext={responded & !clickedNext}
           pos={pos}
-          handleClicked={handleResponse}
+          handleClicked={() => handleNext(handleResponse, setClickedNext)}
         />
       </div>
     </div>
