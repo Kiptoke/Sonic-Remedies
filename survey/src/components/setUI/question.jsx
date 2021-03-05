@@ -4,6 +4,7 @@ import NextButton from "./nextButton";
 import MultipleChoice from "./multipleChoice";
 import MultipleSelect from "./multipleSelect";
 import FreeResponse from "./freeResponse";
+import ColorChoice from "./colorChoice";
 
 function handleNext(handleResponse, setClickedNext) {
   handleResponse();
@@ -14,15 +15,16 @@ function renderQuestion(type, responses, handleResponded) {
   if (type === "mc") return <MultipleChoice {...params} />;
   else if (type === "ms") return <MultipleSelect {...params} />;
   else if (type === "fr") return <FreeResponse {...params} />;
+  else if (type === "color") return <ColorChoice {...params} />;
 }
 
 function Question({ question, handleResponse, pos }) {
   const { type, ask, responses } = question;
-  const [responded, setResponded] = useState(false);
+  const [response, setResponse] = useState(null);
   const [clickedNext, setClickedNext] = useState(false);
 
-  function handleResponded(responded) {
-    setResponded(responded);
+  function handleResponded(response) {
+    setResponse(response);
   }
   //Later add logic for if the question.type is not multiple choice
   return (
@@ -31,7 +33,7 @@ function Question({ question, handleResponse, pos }) {
       {renderQuestion(type, responses, handleResponded)}
       <div className="next">
         <NextButton
-          revealNext={responded & !clickedNext}
+          revealNext={(response !== null) & !clickedNext}
           pos={pos}
           handleClicked={() => handleNext(handleResponse, setClickedNext)}
         />

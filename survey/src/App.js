@@ -13,8 +13,8 @@ function App() {
 
   const questions = [
     {
-      type: "fr",
-      ask: "Describe your favorite meal.",
+      type: "color",
+      ask: "When thinking about food, does a color pop into your mind?",
       responses: [],
     },
     {
