@@ -7,28 +7,24 @@ const schema = Joi.object({
   textfield: Joi.string().min(3).max(350).required().label("Answer"),
 });
 
-function verifyInput(evt, setResponded, setValidationError) {
+function verifyInput(evt, setResponse, setValidationError) {
   const input = evt.target.value;
   const { error } = schema.validate({ textfield: input });
   if (!error) {
-    setResponded(true);
+    setResponse(input);
     setValidationError("");
   } else {
-    setResponded(false);
+    setResponse(null);
     setValidationError(error.message);
   }
 }
 
 const FreeResponse = ({ responses, handleResponded }) => {
-  const [responded, setResponded] = useState(false);
+  const [response, setResponse] = useState(null);
   const [validationError, setValidationError] = useState("");
   useEffect(() => {
-    if (responded) {
-      handleResponded(true);
-    } else {
-      handleResponded(false);
-    }
-  }, [handleResponded, responded]);
+    handleResponded(response);
+  }, [handleResponded, response]);
   return (
     <div className="question-fr">
       <textarea
@@ -37,7 +33,7 @@ const FreeResponse = ({ responses, handleResponded }) => {
         placeholder="Write your answer here"
         onTouchEnd={onOpenKB}
         onMouseLeave={onCloseKB}
-        onChange={(evt) => verifyInput(evt, setResponded, setValidationError)}
+        onChange={(evt) => verifyInput(evt, setResponse, setValidationError)}
       />
       <div className="error">{validationError}</div>
     </div>

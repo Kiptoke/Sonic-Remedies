@@ -14,8 +14,8 @@ const MultipleChoice = ({ responses, handleResponded }) => {
   const [choice, setChoice] = useState(-1);
   useEffect(() => {
     if (choice > -1) {
-      handleResponded(true);
-    }
+      handleResponded(choice);
+    } else handleResponded(null);
   }, [handleResponded, choice]);
   return (
     <div className="question-mc">
