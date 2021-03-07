@@ -24,7 +24,6 @@ function Admin() {
   const fetchSets = async () => {
     const res = await fetch("http://localhost:5000/sets");
     const data = await res.json();
-    console.log(data)
     return data;
   };
 
@@ -60,7 +59,6 @@ function Admin() {
   };
 
   const newQuestion = async (title, type, options) => {
-    console.log(type);
     const question = { title: title, input_type: type }
     if (options !== "") {
       const opts_arr = parseOptions(options);

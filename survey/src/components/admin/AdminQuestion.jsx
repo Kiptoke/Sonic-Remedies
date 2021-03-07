@@ -5,15 +5,12 @@ const AdminQuestion = ({ qid, deleteQuestion }) => {
   const [question, setQuestion] = useState({});
 
   useEffect(() => {
-    console.log(qid);
     fetch(`http://localhost:5000/questions/${qid}`)
       .then((response) => response.json())
       .then((json) => {
         setQuestion(json);
       });
   }, [qid]);
-
-  console.log(question);
 
   if (question.input_type === "multiple-choice") {
     return (
@@ -23,7 +20,7 @@ const AdminQuestion = ({ qid, deleteQuestion }) => {
 
         <ul>
           {question.options.map((option) => (
-            <li>{option}</li>
+            <li key={option}>{option}</li>
           ))}
         </ul>
         <button onClick={() => deleteQuestion(question._id)}>
@@ -39,7 +36,7 @@ const AdminQuestion = ({ qid, deleteQuestion }) => {
         <h5>{question.input_type}</h5>
         <ul>
           {question.options.map((option) => (
-            <li>{option}</li>
+            <li key={option}>{option}</li>
           ))}
         </ul>
         <button onClick={() => deleteQuestion(question._id)}>
