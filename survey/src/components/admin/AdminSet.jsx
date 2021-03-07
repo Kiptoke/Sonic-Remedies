@@ -2,10 +2,12 @@ import { useState, useEffect } from "react";
 
 import AdminQuestion from "./AdminQuestion";
 import AddQuestion from "./AddQuestion";
+import ChangeOrder from "./ChangeOrder";
 
 const AdminSet = ({ set, onDelete }) => {
   const [questions, setQuestions] = useState([]);
   const [showAddQuestion, setShowAddQuestion] = useState(false);
+  const [showQuestionOrder, setShowQuestionOrder] = useState(false);
 
   useEffect(() => {
     setQuestions(set.questions);
@@ -14,18 +16,15 @@ const AdminSet = ({ set, onDelete }) => {
   const deleteQuestion = async (question_id) => {
     const init_res = await fetch(`http://localhost:5000/sets/${set._id}`);
     const data = await init_res.json();
-    console.log(question_id);
     const new_questions = data.questions.filter(
       (question) => question !== question_id
     );
-    console.log(new_questions);
     const updatedSet = {
       ...data,
       questions: new_questions,
     };
 
     const stringified = JSON.stringify(updatedSet);
-    console.log(stringified);
 
     const res = await fetch(`http://localhost:5000/sets/${set._id}`, {
       method: "PUT",
@@ -36,26 +35,26 @@ const AdminSet = ({ set, onDelete }) => {
     });
 
     const updated = await res.json();
-    console.log(updated);
 
     setQuestions(updated.questions);
   };
 
   const displayQuestions = () => {
     setShowAddQuestion(!showAddQuestion);
-    console.log(showAddQuestion);
   };
+
+  const displayChangeOrder = () => {
+    setShowQuestionOrder(!showQuestionOrder)
+  }
 
   const onAddQuestions = async (selected) => {
     const init_res = await fetch(`http://localhost:5000/sets/${set._id}`);
     const data = await init_res.json();
     let set_questions = data.questions;
-    console.log(set_questions)
 
     for (let i = 0; i < selected.length; i++) {
       set_questions.push(selected[i]);
     }
-    console.log(set_questions);
 
     const res = await fetch(`http://localhost:5000/sets/${set._id}`, {
       method: "PUT",
@@ -74,7 +73,10 @@ const AdminSet = ({ set, onDelete }) => {
     <div>
       <h1>{set.title}</h1>
       <button onClick={() => onDelete(set._id)}>Delete Set</button>
-      <button>Change Question Order</button>
+      <button onClick={() => displayChangeOrder()}>Change Question Order</button>
+      {showQuestionOrder && (
+        <ChangeOrder set={set} />
+      )}
       {questions.map((question) => (
         <AdminQuestion
           key={question}
