@@ -13,25 +13,34 @@ function App() {
 
   const questions = [
     {
-      type: "color",
-      ask: "When thinking about food, does a color pop into your mind?",
-      responses: [],
-    },
-    {
-      type: "ms",
-      ask: "Which are cute? Select all that apply.",
+      type: "mc",
+      ask: "How are you feeling today?",
       responses: [
-        "Pikachu",
-        "Squirtle",
-        "Charizard",
-        "Mewtwo",
-        "None of the above",
+        "Cheerful",
+        "Reflective",
+        "Gloomy",
+        "Humorous",
+        "Melancholy",
+        "Playful",
+        "Romantic",
+        "Ominous",
+        "Calm",
+        "Hopeful",
+        "Angry",
+        "Fearful",
+        "Tense",
+        "Lonely",
       ],
     },
     {
-      type: "mc",
-      ask: "What is the loudest?",
-      responses: ["Train", "Bus", "Airplane", "Lawn Mower"],
+      type: "ms",
+      ask: "Which are cute?",
+      responses: ["Pikachu", "Squirtle", "Charizard", "Mewtwo"],
+    },
+    {
+      type: "color",
+      ask: "Choose a color?",
+      responses: [],
     },
   ];
 

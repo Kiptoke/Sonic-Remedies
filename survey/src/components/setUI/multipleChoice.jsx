@@ -18,7 +18,7 @@ const MultipleChoice = ({ responses, handleResponded }) => {
     } else handleResponded(null);
   }, [handleResponded, choice]);
   return (
-    <div className="question-mc">
+    <div className="question-mc option-box">
       {responses.map((res, num) => {
         return (
           <div key={num} className="option" onClick={() => setChoice(num)}>
