@@ -1,13 +1,13 @@
 import "../../css/components/question.scss";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import NextButton from "./nextButton";
 import MultipleChoice from "./multipleChoice";
 import MultipleSelect from "./multipleSelect";
 import FreeResponse from "./freeResponse";
 import ColorChoice from "./colorChoice";
 
-function handleNext(handleResponse, setClickedNext) {
-  handleResponse();
+function handleNext(response, handleResponse, setClickedNext) {
+  handleResponse(response);
   setClickedNext(true); //to hide the arrow (avoid double click)
 }
 function renderQuestion(type, responses, handleResponded) {
@@ -18,24 +18,34 @@ function renderQuestion(type, responses, handleResponded) {
   else if (type === "color") return <ColorChoice {...params} />;
 }
 
-function Question({ question, handleResponse, pos }) {
-  const { type, ask, responses } = question;
+function Question({ question, handleResponse }) {
+  const { type, responses } = question;
+  let { ask } = question;
+  ask += type === "ms" ? " Select all that apply." : "";
   const [response, setResponse] = useState(null);
   const [clickedNext, setClickedNext] = useState(false);
+  const q_old = useRef(question);
 
+  useEffect(() => {
+    if (question !== q_old) {
+      setResponse(null);
+      setClickedNext(false);
+    }
+  }, [question, q_old]);
   function handleResponded(response) {
     setResponse(response);
   }
   //Later add logic for if the question.type is not multiple choice
   return (
-    <div className="question" id={"question" + pos}>
+    <div className="question">
       <h1>{ask}</h1>
       {renderQuestion(type, responses, handleResponded)}
       <div className="next">
         <NextButton
           revealNext={(response !== null) & !clickedNext}
-          pos={pos}
-          handleClicked={() => handleNext(handleResponse, setClickedNext)}
+          handleClicked={() =>
+            handleNext(response, handleResponse, setClickedNext)
+          }
         />
       </div>
     </div>

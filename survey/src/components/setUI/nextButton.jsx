@@ -1,21 +1,13 @@
-import { HashLink } from "react-router-hash-link";
-import { ReactComponent as NextButtonChosen } from "../../vectors/arrowDownChosen.svg";
-import scroll from "../../utils/Scroll";
+import { ReactComponent as ArrowDownHighlighted } from "../../vectors/arrowDownHighlighted.svg";
 
-const NextButton = ({ revealNext, pos, handleClicked }) => {
-  const nextPosId = "#question" + (pos + 1);
+const NextButton = ({ revealNext, handleClicked }) => {
   return revealNext ? (
-    <HashLink
-      scroll={scroll}
-      to={nextPosId}
-      className="next-link"
-      onClick={handleClicked}
-    >
+    <button className="next-button" onClick={handleClicked}>
       <div>Next</div>
-      <NextButtonChosen className="next-button" />
-    </HashLink>
+      <ArrowDownHighlighted className="arrow" />
+    </button>
   ) : (
-    "" //<NextButton className="next-button" />
+    ""
   );
 };
 
