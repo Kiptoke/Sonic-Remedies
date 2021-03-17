@@ -5,13 +5,14 @@ import AddQuestion from "./AddQuestion";
 import ChangeOrder from "./ChangeOrder";
 
 const AdminSet = ({ set, onDelete }) => {
+  const [currentSet, setCurrentSet] = useState(set);
   const [questions, setQuestions] = useState([]);
   const [showAddQuestion, setShowAddQuestion] = useState(false);
   const [showQuestionOrder, setShowQuestionOrder] = useState(false);
 
   useEffect(() => {
-    setQuestions(set.questions);
-  }, [set.questions]);
+    setQuestions(currentSet.questions);
+  }, [currentSet]);
 
   const deleteQuestion = async (question_id) => {
     const init_res = await fetch(`http://localhost:5000/sets/${set._id}`);
@@ -47,6 +48,11 @@ const AdminSet = ({ set, onDelete }) => {
     setShowQuestionOrder(!showQuestionOrder)
   }
 
+  const onOrderChanged = (ret) => {
+    //setShowQuestionOrder(!showQuestionOrder)
+    setCurrentSet(ret)
+  }
+
   const onAddQuestions = async (selected) => {
     const init_res = await fetch(`http://localhost:5000/sets/${set._id}`);
     const data = await init_res.json();
@@ -75,7 +81,7 @@ const AdminSet = ({ set, onDelete }) => {
       <button onClick={() => onDelete(set._id)}>Delete Set</button>
       <button onClick={() => displayChangeOrder()}>Change Question Order</button>
       {showQuestionOrder && (
-        <ChangeOrder set={set} />
+        <ChangeOrder set={set} onOrderChanged={onOrderChanged} />
       )}
       {questions.map((question) => (
         <AdminQuestion
