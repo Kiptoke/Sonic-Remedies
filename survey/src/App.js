@@ -1,7 +1,7 @@
 import { Fragment } from "react";
 import { Route, Redirect, Switch, useParams } from "react-router-dom";
 import Survey from "./components/survey";
-import SurveyMap from "./components/surveyMap";
+import SurveyMap from "./components/mapUI/surveyMap";
 import Home from "./components/home";
 import Set from "./components/setUI/set";
 import NotFound from "./components/notFound";
