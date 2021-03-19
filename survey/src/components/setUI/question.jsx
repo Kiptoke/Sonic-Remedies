@@ -5,6 +5,7 @@ import MultipleChoice from "./multipleChoice";
 import MultipleSelect from "./multipleSelect";
 import FreeResponse from "./freeResponse";
 import ColorChoice from "./colorChoice";
+import MusicPlayer from "./musicPlayer";
 
 function handleNext(response, handleResponse, setClickedNext) {
   handleResponse(response);
@@ -23,6 +24,7 @@ function Question({ question, handleResponse }) {
   let { ask } = question;
   ask += type === "ms" ? " Select all that apply." : "";
   const [response, setResponse] = useState(null);
+  const [musicDone, setMusicDone] = useState(false);
   const [clickedNext, setClickedNext] = useState(false);
   const q_old = useRef(question);
 
@@ -36,7 +38,16 @@ function Question({ question, handleResponse }) {
     setResponse(response);
   }
   //Later add logic for if the question.type is not multiple choice
-  return (
+  return !musicDone ? (
+    <div className="musicPage">
+      <MusicPlayer
+        file_path={"../../audio/FG.mp3"}
+        handleMusicDone={() => {
+          setMusicDone(true);
+        }}
+      />
+    </div>
+  ) : (
     <div className="question">
       <h1>{ask}</h1>
       {renderQuestion(type, responses, handleResponded)}
