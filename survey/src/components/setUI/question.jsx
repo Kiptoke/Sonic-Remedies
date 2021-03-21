@@ -5,7 +5,7 @@ import MultipleChoice from "./questionTypes/multipleChoice";
 import MultipleSelect from "./questionTypes/multipleSelect";
 import FreeResponse from "./questionTypes/freeResponse";
 import ColorChoice from "./questionTypes/colorChoice";
-import MusicPlayer from "./musicPlayer/musicPlayer";
+import MusicPage from "./musicPlayer/musicPage";
 
 function handleNext(response, handleResponse, setClickedNext) {
   handleResponse(response);
@@ -40,14 +40,12 @@ function Question({ question, handleResponse }) {
   //Later add logic for if the question.type is not multiple choice
   return !musicDone ? (
     <div className="music-page">
-      <div className="music-player">
-        <MusicPlayer
-          file_path={"../../audio/BNS_BWV538.mp3"}
-          handleMusicDone={() => {
-            setMusicDone(true);
-          }}
-        />
-      </div>
+      <MusicPage
+        file_path={"../../audio/BNS_BWV538.mp3"}
+        handleMusicDone={() => {
+          setMusicDone(true);
+        }}
+      />
     </div>
   ) : (
     <div className="question">
