@@ -1,4 +1,4 @@
-import "../../css/components/colorChoice.scss";
+import "../../../css/components/colorChoice.scss";
 import { useState } from "react";
 import MultipleChoice from "./multipleChoice";
 

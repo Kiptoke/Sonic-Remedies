@@ -16,7 +16,7 @@ const renderCircles = (numCirc, currentPos) => {
 
 const FixedUI = ({ numQuestions: numCirc, currentQuestion: currentPos }) => {
   return (
-    <div className="fixedUI">
+    <div className="fixed-UI">
       <div className="circles">{renderCircles(numCirc, currentPos)}</div>
     </div>
   );

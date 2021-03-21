@@ -1,11 +1,11 @@
 import "../../css/components/question.scss";
 import { useState, useEffect, useRef } from "react";
 import NextButton from "./nextButton";
-import MultipleChoice from "./multipleChoice";
-import MultipleSelect from "./multipleSelect";
-import FreeResponse from "./freeResponse";
-import ColorChoice from "./colorChoice";
-import MusicPlayer from "./musicPlayer";
+import MultipleChoice from "./questionTypes/multipleChoice";
+import MultipleSelect from "./questionTypes/multipleSelect";
+import FreeResponse from "./questionTypes/freeResponse";
+import ColorChoice from "./questionTypes/colorChoice";
+import MusicPlayer from "./musicPlayer/musicPlayer";
 
 function handleNext(response, handleResponse, setClickedNext) {
   handleResponse(response);
@@ -39,13 +39,15 @@ function Question({ question, handleResponse }) {
   }
   //Later add logic for if the question.type is not multiple choice
   return !musicDone ? (
-    <div className="musicPage">
-      <MusicPlayer
-        file_path={"../../audio/FG.mp3"}
-        handleMusicDone={() => {
-          setMusicDone(true);
-        }}
-      />
+    <div className="music-page">
+      <div className="music-player">
+        <MusicPlayer
+          file_path={"../../audio/BNS_BWV538.mp3"}
+          handleMusicDone={() => {
+            setMusicDone(true);
+          }}
+        />
+      </div>
     </div>
   ) : (
     <div className="question">
