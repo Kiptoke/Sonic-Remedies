@@ -4,7 +4,8 @@
   height: 100%;
   background-color: white;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
 .music-player {
   margin-top: 5rem;
@@ -26,4 +27,14 @@
   .play-button {
     margin-left: 0.5rem;
   }
+}
+
+.music-continue {
+  border: none;
+  margin-top: 1rem;
+  background-color: $textBgColor;
+  color: white;
+}
+.music-continue:hover {
+  background-color: $textHovColor;
 }

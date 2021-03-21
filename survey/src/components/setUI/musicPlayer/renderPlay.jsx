@@ -32,7 +32,7 @@ const RenderPlay = ({ playState, setPlayState, audio }) => {
           onClick={() => {
             circleClicked(playState, setPlayState, audio);
           }}
-        />
+        ></Play>
       );
     case "waiting":
       return "";
