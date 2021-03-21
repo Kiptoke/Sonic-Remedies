@@ -25,7 +25,7 @@ const Set = ({ setId, questions }) => {
   });
   return (
     <div className="set">
-      <div className="set_questions">
+      <div className="set-questions">
         {transitions.map(({ item, props, key }) => {
           return (
             <animated.div className="question-animator" style={props} key={key}>

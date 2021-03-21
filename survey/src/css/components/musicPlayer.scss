@@ -1,0 +1,29 @@
+@import "../global.scss";
+.music-page {
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+}
+.music-player {
+  margin-top: 5rem;
+  width: 10rem;
+  height: 10rem;
+  border-radius: 5rem;
+  background-color: $textBgColor;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .player {
+    width: 3rem;
+    height: 3rem;
+    background-color: transparent;
+    border: none;
+    background-size: cover;
+    cursor: pointer;
+  }
+  .play-button {
+    margin-left: 0.5rem;
+  }
+}

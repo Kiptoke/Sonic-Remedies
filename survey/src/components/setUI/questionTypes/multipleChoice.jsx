@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { ReactComponent as RadioChosen } from "../../vectors/circleFilled.svg";
-import { ReactComponent as Radio } from "../../vectors/circleEmpty.svg";
+import { ReactComponent as RadioChosen } from "../../../vectors/circleFilled.svg";
+import { ReactComponent as Radio } from "../../../vectors/circleEmpty.svg";
 
 const renderRadar = (a, b) => {
   return a === b ? (

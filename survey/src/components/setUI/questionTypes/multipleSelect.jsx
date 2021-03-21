@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { ReactComponent as SelectChosen } from "../../vectors/squareFilled.svg";
-import { ReactComponent as SelectNotChosen } from "../../vectors/squareEmpty.svg";
+import { ReactComponent as SelectChosen } from "../../../vectors/squareFilled.svg";
+import { ReactComponent as SelectNotChosen } from "../../../vectors/squareEmpty.svg";
 
 const renderSelect = (selections, i) => {
   return selections[i] === true ? (

@@ -7,16 +7,15 @@
   width: 100%;
 }
 
-.set_questions {
+.set-questions {
   height: 100%;
   width: 100%;
   position: relative;
   overflow: hidden;
-  scroll-snap-type: y mandatory;
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
 
-.set_questions::-webkit-scrollbar {
+.set-questions::-webkit-scrollbar {
   display: none;
 }
