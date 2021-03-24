@@ -49,8 +49,24 @@ const Row = React.memo(function Row(props) {
 }, areEqual);
 
 
-const ChangeOrder = ({ questions, onDragEnd }) => {
+const ChangeOrder = ({ wait, curquestions, onDragEnd }) => {
+    //take in set as a prop
+    //questions state initially = []
+    //in useeffect check if questions/set are equal
+    //if not don't update questions
 
+    //actually the problem might be happening during the fetch
+    //so maybe make a prop to see if it was just changed?
+
+    const [questions, setQuestions] = useState([]);
+
+    console.log(curquestions)
+    useEffect(() => {
+        if (!wait) {
+            setQuestions(curquestions)
+        }
+
+    }, [curquestions, wait])
     return (
 
         //set.questions.map((questionId) => questions.find(() => question._id === questionId))
