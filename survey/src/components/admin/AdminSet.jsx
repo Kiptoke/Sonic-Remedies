@@ -4,11 +4,12 @@ import AdminQuestion from "./AdminQuestion";
 import AddQuestion from "./AddQuestion";
 import ChangeOrder from "./ChangeOrder";
 
-const AdminSet = ({ set, onDelete }) => {
+const AdminSet = ({ set, onDelete, onOrderChanged }) => {
   const [currentSet, setCurrentSet] = useState(set);
   const [questions, setQuestions] = useState([]);
   const [showAddQuestion, setShowAddQuestion] = useState(false);
   const [showQuestionOrder, setShowQuestionOrder] = useState(false);
+  const [wait, setWait] = useState(false);
 
   useEffect(() => {
     let mounted = true;
@@ -32,10 +33,11 @@ const AdminSet = ({ set, onDelete }) => {
             }
           }
           setQuestions(sorted);
+          //setWait(false);
         })
     }
     return () => mounted = false;
-  }, [currentSet]);
+  }, [currentSet.questions]);
 
   const deleteQuestion = async (question_id) => {
     const init_res = await fetch(`http://localhost:5000/sets/${set._id}`);
@@ -93,57 +95,8 @@ const AdminSet = ({ set, onDelete }) => {
     setShowAddQuestion(!showAddQuestion);
   };
 
-  function reorder(list, startIndex, endIndex) {
-    console.log(list)
-    const result = list.map((list_item) => { return list_item._id })
-    //const result = Array.from(list);
-    const [removed] = result.splice(startIndex, 1);
-    result.splice(endIndex, 0, removed);
-    console.log(result)
-
-    return result;
-  }
-
-
-  //TODO: Move to Admin instead of doing all this weird state stuff
-  async function onDragEnd(result) {
-    console.log(result)
-    if (!result.destination) {
-      return;
-    }
-    if (result.source.index === result.destination.index) {
-      return;
-    }
-
-    console.log(currentSet)
-    console.log(questions)
-
-    const newItems = reorder(
-      questions,
-      result.source.index,
-      result.destination.index
-    );
-
-    const updatedSet = {
-      questions: newItems,
-    };
-
-    const stringified = JSON.stringify(updatedSet);
-
-    fetch(`http://localhost:5000/sets/${currentSet._id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: stringified,
-    })
-      .then((response) => {
-        if (!response.ok) throw Error(response.statusText);
-        return response.json();
-      })
-      .then((updated) => {
-        setCurrentSet(updated)
-      })
+  const onDragEnd = (result) => {
+    onOrderChanged(result, set._id)
   }
 
 
@@ -154,7 +107,7 @@ const AdminSet = ({ set, onDelete }) => {
       <button onClick={() => onDelete(set._id)}>Delete Set</button>
       <button onClick={() => displayChangeOrder()}>Change Question Order</button>
       {showQuestionOrder && (
-        <ChangeOrder questions={questions} onDragEnd={onDragEnd} />
+        <ChangeOrder wait={wait} curquestions={questions} onDragEnd={onDragEnd} />
       )}
       {questions.map((question) => (
         <AdminQuestion
