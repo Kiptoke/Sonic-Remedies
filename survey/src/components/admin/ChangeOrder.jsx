@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { FixedSizeList, areEqual } from "react-window";
 import "../../css/components/changeOrder.css";
@@ -49,56 +49,79 @@ const Row = React.memo(function Row(props) {
 }, areEqual);
 
 
-const ChangeOrder = ({ wait, curquestions, onDragEnd }) => {
-    //take in set as a prop
-    //questions state initially = []
-    //in useeffect check if questions/set are equal
-    //if not don't update questions
+const ChangeOrder = ({ curquestions, onChangeOrder }) => {
 
-    //actually the problem might be happening during the fetch
-    //so maybe make a prop to see if it was just changed?
+    const [questions, setQuestions] = useState(curquestions);
 
-    const [questions, setQuestions] = useState([]);
 
-    console.log(curquestions)
-    useEffect(() => {
-        if (!wait) {
-            setQuestions(curquestions)
+    // useEffect(() => {
+    //     setQuestions(onDragEnd())
+    // }, [onDragEnd])
+
+    function reorder(startIndex, endIndex) {
+        const result = questions.map((list_item) => { return list_item })
+        const [removed] = result.splice(startIndex, 1);
+        result.splice(endIndex, 0, removed);
+               
+        return result;
+      }
+    
+    
+      //TODO: Move to Admin instead of doing all this weird state stuff
+      const onDragEnd = (result) => {
+        console.log(result)
+        if (!result.destination) {
+          return;
         }
-
-    }, [curquestions, wait])
+        if (result.source.index === result.destination.index) {
+          return;
+        }
+    
+        const newItems = reorder(
+          result.source.index,
+          result.destination.index
+        );
+        
+        setQuestions(newItems);
+    
+      };
+    
     return (
 
         //set.questions.map((questionId) => questions.find(() => question._id === questionId))
-        <DragDropContext onDragEnd={onDragEnd}>
-            <div className="dnd">
-                <Droppable
-                    droppableId="droppable"
-                    mode="virtual"
-                    renderClone={(provided, snapshot, rubric) => (
-                        <Item
-                            provided={provided}
-                            isDragging={snapshot.isDragging}
-                            item={questions[rubric.source.index]}
-                        />
-                    )}
-                >
-                    {provided => (
-                        <FixedSizeList
-                            height={100 * questions.length}
-                            itemCount={questions.length}
-                            itemSize={80}
-                            width={300}
-                            outerRef={provided.innerRef}
-                            itemData={questions}
-                        >
-                            {Row}
-                        </FixedSizeList>
-                    )}
-                </Droppable>
-            </div>
-        </DragDropContext>
+        <div>
+            <DragDropContext onDragEnd={(result) => onDragEnd(result)} >
+                <div className="dnd">
+                    <Droppable
+                        droppableId="droppable"
+                        mode="virtual"
+                        renderClone={(provided, snapshot, rubric) => (
+                            <Item
+                                provided={provided}
+                                isDragging={snapshot.isDragging}
+                                item={questions[rubric.source.index]}
+                            />
+                        )}
+                    >
+                        {provided => (
+                            <FixedSizeList
+                                height={100 * questions.length}
+                                itemCount={questions.length}
+                                itemSize={80}
+                                width={300}
+                                outerRef={provided.innerRef}
+                                itemData={questions}
+                            >
+                                {Row}
+                            </FixedSizeList>
+                        )}
+                    </Droppable>
+                </div>
+            </DragDropContext>
 
+            <button onClick={() => onChangeOrder(questions)}>Done</button>
+        </div>
+        
     );
 }
 
