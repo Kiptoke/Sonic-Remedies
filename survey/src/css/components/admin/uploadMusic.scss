@@ -1,0 +1,28 @@
+@import "../../global.scss";
+.upload-music {
+  height: vh(100);
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  color: white;
+  justify-content: center;
+  align-items: center;
+  background-color: $textBgColor;
+  padding-left: 1rem;
+  h1 {
+    font-size: $huge;
+    padding-top: 1rem;
+  }
+  h2 {
+    font-size: $large;
+    margin: 0;
+    padding: 1rem;
+  }
+  input {
+    width: 13rem;
+  }
+  p {
+    font-size: $small;
+    color: red;
+  }
+}

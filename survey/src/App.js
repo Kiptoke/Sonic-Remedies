@@ -6,6 +6,7 @@ import Home from "./components/home";
 import Set from "./components/setUI/set";
 import NotFound from "./components/notFound";
 import Admin from "./components/admin/Admin";
+import UploadMusic from "./components/admin/uploadMusic";
 import { initViewHeight } from "./utils/viewHeight";
 
 function App() {
@@ -56,6 +57,7 @@ function App() {
         <Route path="/surveymap" component={SurveyMap} />
         <Route path="/home" component={Home} />
         <Route path="/set/:id" render={() => <SetLoader />} />
+        <Route path="/admin/uploadMusic" component={UploadMusic} />
         <Route path="/admin" component={Admin} />
         <Route path="/not-found" component={NotFound} />
         <Redirect from="/" exact to="/home" />
