@@ -4,12 +4,11 @@ import AdminQuestion from "./AdminQuestion";
 import AddQuestion from "./AddQuestion";
 import ChangeOrder from "./ChangeOrder";
 
-const AdminSet = ({ set, onDelete, onOrderChanged }) => {
+const AdminSet = ({ set, onDelete }) => {
   const [currentSet, setCurrentSet] = useState(set);
   const [questions, setQuestions] = useState([]);
   const [showAddQuestion, setShowAddQuestion] = useState(false);
   const [showQuestionOrder, setShowQuestionOrder] = useState(false);
-  const [wait, setWait] = useState(false);
 
   useEffect(() => {
     let mounted = true;
@@ -95,11 +94,37 @@ const AdminSet = ({ set, onDelete, onOrderChanged }) => {
     setShowAddQuestion(!showAddQuestion);
   };
 
-  const onDragEnd = (result) => {
-    onOrderChanged(result, set._id)
+  const onChangeOrder = async (quest) => {
+    console.log(quest);
+    setShowQuestionOrder(false);
+    console.log(questions);
+    const qids = quest.map((q) => q._id);
+
+    const updatedSet = {
+      _id: currentSet._id,
+      questions: qids,
+    };
+      
+    const stringified = JSON.stringify(updatedSet);
+      
+    fetch(`http://localhost:5000/sets/${currentSet._id}`, {
+      method: "PATCH",
+      headers: {
+      "Content-type": "application/json",
+      },
+      body: stringified,
+      })
+      .then((response) => {
+        if (!response.ok) throw Error(response.statusText);
+          return response.json();
+        })
+      .then((data) => {
+        setCurrentSet(data);
+    })
+      
   }
 
-
+  
 
   return (
     <div>
@@ -107,7 +132,7 @@ const AdminSet = ({ set, onDelete, onOrderChanged }) => {
       <button onClick={() => onDelete(set._id)}>Delete Set</button>
       <button onClick={() => displayChangeOrder()}>Change Question Order</button>
       {showQuestionOrder && (
-        <ChangeOrder wait={wait} curquestions={questions} onDragEnd={onDragEnd} />
+        <ChangeOrder curquestions={questions} onChangeOrder={onChangeOrder} />
       )}
       {questions.map((question) => (
         <AdminQuestion

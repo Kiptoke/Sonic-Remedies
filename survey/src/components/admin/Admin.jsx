@@ -102,68 +102,7 @@ function Admin() {
     return arr;
   }
 
-  function reorder(list, startIndex, endIndex) {
-    const result = list.map((list_item) => { return list_item })
-    const [removed] = result.splice(startIndex, 1);
-    result.splice(endIndex, 0, removed);
-
-    return result;
-  }
-
-
-  //TODO: Move to Admin instead of doing all this weird state stuff
-  const onOrderChanged = async (result, id) => {
-    console.log(result)
-    if (!result.destination) {
-      return;
-    }
-    if (result.source.index === result.destination.index) {
-      return;
-    }
-
-    let currentSet = {};
-    let sets_copy = sets.map((set) => {
-      return set;
-    });
-    let index = -1;
-
-    for (let i = 0; i < sets.length; i++) {
-      if (sets[i]._id === id) {
-        index = i;
-        currentSet = sets[i];
-        break;
-      }
-    }
-
-    const newItems = reorder(
-      currentSet.questions,
-      result.source.index,
-      result.destination.index
-    );
-
-    const updatedSet = {
-      questions: newItems,
-    };
-
-    const stringified = JSON.stringify(updatedSet);
-
-    fetch(`http://localhost:5000/sets/${id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: stringified,
-    })
-      .then((response) => {
-        if (!response.ok) throw Error(response.statusText);
-        return response.json();
-      })
-      .then((data) => {
-        sets_copy[index] = data;
-        setSets(sets_copy);
-      })
-
-  }
+  
 
   return (
     <div>
@@ -172,10 +111,60 @@ function Admin() {
         onDelete={deleteSet}
         onAddSet={addSet}
         onNewQuestion={newQuestion}
-        onOrderChanged={onOrderChanged}
       />
     </div>
   );
 }
 
 export default Admin;
+
+
+// function reorder(list, startIndex, endIndex) {
+//     const result = list.map((list_item) => { return list_item })
+//     const [removed] = result.splice(startIndex, 1);
+//     result.splice(endIndex, 0, removed);
+
+//     return result;
+//   }
+
+
+//   //TODO: Move to Admin instead of doing all this weird state stuff
+//   const onOrderChanged = (result) => {
+//     console.log(result)
+//     if (!result.destination) {
+//       return;
+//     }
+//     if (result.source.index === result.destination.index) {
+//       return;
+//     }
+
+//     const newItems = reorder(
+//       currentSet.questions,
+//       result.source.index,
+//       result.destination.index
+//     );
+
+//     const updatedSet = {
+//       _id: currentSet._id,
+//       questions: newItems,
+//     };
+
+//     const stringified = JSON.stringify(updatedSet);
+//     //setCurrentSet(updatedSet);
+
+//     // fetch(`http://localhost:5000/sets/${currentSet._id}`, {
+//     //   method: "PATCH",
+//     //   headers: {
+//     //     "Content-type": "application/json",
+//     //   },
+//     //   body: stringified,
+//     // })
+//     //   .then((response) => {
+//     //     if (!response.ok) throw Error(response.statusText);
+//     //     return response.json();
+//     //   })
+//     //   .then((data) => {
+//     //     setCurrentSet(data);
+//     //   })
+
+//   }
