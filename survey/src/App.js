@@ -6,6 +6,8 @@ import Home from "./components/home";
 import Set from "./components/setUI/set";
 import NotFound from "./components/notFound";
 import Admin from "./components/admin/Admin";
+import AdminLogin from "./components/admin/AdminLogin";
+import ProtectedRoute from "./components/admin/ProtectedRoute";
 import UploadMusic from "./components/admin/uploadMusic";
 import { initViewHeight } from "./utils/viewHeight";
 
@@ -58,7 +60,7 @@ function App() {
         <Route path="/home" component={Home} />
         <Route path="/set/:id" render={() => <SetLoader />} />
         <Route path="/admin/uploadMusic" component={UploadMusic} />
-        <Route path="/admin" component={Admin} />
+        <Route path="/admin" component={ProtectedRoute} />
         <Route path="/not-found" component={NotFound} />
         <Redirect from="/" exact to="/home" />
         <Redirect from="/set" exact to="/set/0" />
