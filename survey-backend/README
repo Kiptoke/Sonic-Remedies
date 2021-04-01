@@ -1,0 +1,19 @@
+To access the server: start a terminal in the survey-backend folder and run 'npm run devStart'
+The server will be started up on localhost:5000
+
+There are two endpoints: /sets and /questions
+
+/sets:
+GET will return all sets currently in the database
+GET/:id will return the set with the specific id passed
+POST will make a new set (id is created by the db, so just pass a JSON object with title and a questions array)
+PUT/:id will replace a set's information (must pass an object with id, title, and questions array)
+PATCH/:id will replace specific parts of a set's information - if you pass a JSON object with just a title, the id and questions array will not change
+DELETE/:id deletes the set with the id passed
+
+/questions: 
+GET will return all questions currently in the database
+GET/:id will return the question with the specific id passed
+POST will make a new question (pass a JSON object with title, question type, and an options array if multiple choice or checkbox)
+
+Look in Admin.jsx and AdminSet.jsx for examples
