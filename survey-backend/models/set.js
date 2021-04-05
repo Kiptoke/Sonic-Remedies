@@ -8,6 +8,9 @@ const setSchema = new mongoose.Schema({
     questions: {
         type: [String],
         required: true,
+    },
+    music: {
+        type: Boolean
     }
 })
 

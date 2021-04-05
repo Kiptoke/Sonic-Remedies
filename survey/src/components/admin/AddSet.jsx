@@ -2,6 +2,7 @@ import { useState } from "react";
 
 const AddSet = ({ onAddSet, setShowAddSet }) => {
   const [title, setTitle] = useState("");
+  const [musicBool, setMusicBool] = useState(false)
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -13,7 +14,7 @@ const AddSet = ({ onAddSet, setShowAddSet }) => {
       return;
     }
 
-    onAddSet(title);
+    onAddSet(title, musicBool);
     setTitle("");
   };
   return (
@@ -26,7 +27,22 @@ const AddSet = ({ onAddSet, setShowAddSet }) => {
         value={title}
         onChange={(e) => setTitle(e.target.value)}
       />
-      <input type="submit" value="Save Set" />
+      <div>
+        <label><b>Is there music associated with this set?</b></label>
+        <div onChange={(e) => {
+          if(e.target.value === "yes") {
+            setMusicBool(true)
+          }
+          else {
+            setMusicBool(false)
+          }
+        }}>
+          <input type="radio" value="yes" name="option" /> Yes
+          <input type="radio" value="No" name="option" /> No
+        </div>
+      </div>
+      
+      <input className="submit" type="submit" value="Save Set" />
     </form>
   );
 };

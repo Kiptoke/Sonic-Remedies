@@ -69,9 +69,9 @@ function Admin() {
     setSets([...sets, data]);
   }
 
-  const addSet = async (title) => {
+  const addSet = async (title, music) => {
     const questions = [];
-    const set = { title: title, questions: questions };
+    const set = { title: title, questions: questions, music: music };
 
     const res = await fetch("http://localhost:5000/sets", {
       method: "POST",
