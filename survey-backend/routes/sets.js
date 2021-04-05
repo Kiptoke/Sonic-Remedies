@@ -30,7 +30,8 @@ router.get('/:id', async (req, res) => {
 router.post('/', async (req, res) => {
     const set = new Set({
         title: req.body.title,
-        questions: req.body.questions
+        questions: req.body.questions,
+        music: req.body.music
     })
     try {
         const newSet = await set.save()
@@ -53,6 +54,9 @@ router.patch('/:id', async (req, res) => {
         }
         if (req.body.questions != null) {
             set.questions = req.body.questions
+        }
+        if(req.body.music != null) {
+            set.music = req.body.music
         }
         const updatedSet = await set.save()
         res.json(updatedSet)

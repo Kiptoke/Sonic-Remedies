@@ -131,12 +131,16 @@ const AdminSet = ({ set, onDelete, onDuplicate }) => {
   return (
     <div>
       <h1 className="set-title"><b>{set.title}</b></h1>
+      {currentSet.music && (
+        <h3><i>Set will contain music</i></h3>
+      )}
       <button onClick={() => onDelete(set._id)}>Delete Set</button>
       <button onClick={() => onDuplicate(currentSet)}>Duplicate Set</button>
       <button onClick={() => displayChangeOrder()}>Change Question Order</button>
       {showQuestionOrder && (
         <ChangeOrder curquestions={questions} onChangeOrder={onChangeOrder} />
       )}
+      
       <h2>Questions in Set:</h2>
       <ol>
           {questions.map((question) => (

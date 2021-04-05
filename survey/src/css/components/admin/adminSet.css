@@ -23,6 +23,10 @@ h2 {
     margin: 5px;
 }
 
+.add-set-form .submit {
+    margin: 10px;
+}
+
 .new-question-form {
     margin: 10px;
 }
