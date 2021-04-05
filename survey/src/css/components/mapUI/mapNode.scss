@@ -1,0 +1,24 @@
+@import "../../global.scss";
+.map-node {
+  cursor: pointer;
+  height: 4rem;
+  width: 8rem;
+  background-color: $textBgColor;
+  color: white;
+  border-radius: 2rem;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  margin: 4rem;
+  pointer-events: none;
+
+  p {
+    margin: 0;
+  }
+}
+.map-node-active {
+  pointer-events: auto;
+  background-color: $textHovColor;
+}

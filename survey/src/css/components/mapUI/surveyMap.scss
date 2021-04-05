@@ -1,0 +1,12 @@
+@import "../../global.scss";
+.survey-map {
+  display: flex;
+  justify-content: space-around;
+  width: 50%;
+  margin: 0 auto;
+  flex-wrap: wrap;
+
+  .path-animator {
+    position: absolute;
+  }
+}
