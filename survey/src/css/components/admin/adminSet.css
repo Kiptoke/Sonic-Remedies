@@ -1,0 +1,36 @@
+.set-title {
+    background-color: lightsteelblue;
+}
+
+button {
+    margin: 5px;
+    font-size: 20px;
+}
+
+li {
+    font-size: 20px;
+}
+
+h2 {
+    margin-top: 15px;
+}
+
+.add-set-form {
+    margin: 10px
+}
+
+.add-set-form label {
+    margin: 5px;
+}
+
+.new-question-form {
+    margin: 10px;
+}
+
+.new-question-form .submit {
+    margin: 10px;
+}
+
+.new-question-form label {
+    margin: 5px;
+}

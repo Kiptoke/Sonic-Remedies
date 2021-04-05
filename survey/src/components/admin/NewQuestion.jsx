@@ -1,12 +1,13 @@
 import { useState } from "react";
 
-const NewQuestion = ({ onNewQuestion }) => {
+const NewQuestion = ({ onNewQuestion, setShowAddQuestion }) => {
     const [title, setTitle] = useState("");
     const [type, setType] = useState("");
     const [options, setOptions] = useState("");
 
     const onSubmit = (e) => {
         e.preventDefault();
+        setShowAddQuestion(false)
         if (!title) {
             alert('Please add a title');
             return;
@@ -23,8 +24,9 @@ const NewQuestion = ({ onNewQuestion }) => {
     };
 
     return (
-        <form onSubmit={onSubmit}>
-            <label>Title</label>
+        <form className="new-question-form" onSubmit={onSubmit}>
+            <h4>New Question</h4>
+            <label><b>Title: </b></label>
             <input
                 type="text"
                 placeholder="Add Title"
@@ -32,7 +34,7 @@ const NewQuestion = ({ onNewQuestion }) => {
                 onChange={(e) => setTitle(e.target.value)}
             />
             <br></br>
-            <label>Question Type</label>
+            <label><b>Question Type: </b></label>
             <div onChange={(e) => setType(e.target.value)}>
                 <input type="radio" value="multiple-choice" name="option" /> Multiple Choice
                 <input type="radio" value="check-box" name="option" /> Checkbox
@@ -50,7 +52,7 @@ const NewQuestion = ({ onNewQuestion }) => {
                     onChange={(e) => setOptions(e.target.value)}
                 />
             )}
-            <input type="submit" value="New Question" />
+            <input className="submit" type="submit" value="Create New Question" />
         </form>
     );
 };

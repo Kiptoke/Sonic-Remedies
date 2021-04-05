@@ -3,6 +3,9 @@ import { useState, useEffect } from "react";
 
 import AdminSets from "./AdminSets";
 
+import "../../css/components/admin/admin.css";
+
+
 function Admin() {
   const [sets, setSets] = useState([]);
   const [questions, setQuestions] = useState([]);
@@ -42,11 +45,29 @@ function Admin() {
   }
 
   const deleteSet = async (id) => {
-    await fetch(`http://localhost:5000/sets/${id}`, {
-      method: "DELETE",
-    });
-    setSets(sets.filter((set) => set._id !== id));
+    var retval = window.confirm("Delete this set?");
+    if(retval === true) {
+      await fetch(`http://localhost:5000/sets/${id}`, {
+        method: "DELETE",
+      });
+      setSets(sets.filter((set) => set._id !== id));
+    }
+    
   };
+
+  const duplicateSet = async (set) => {
+    const dupeSet = {title: set.title, questions: set.questions}
+    const res = await fetch("http://localhost:5000/sets", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(dupeSet),
+    });
+
+    const data = await res.json();
+    setSets([...sets, data]);
+  }
 
   const addSet = async (title) => {
     const questions = [];
@@ -108,10 +129,13 @@ function Admin() {
 
 
   return (
-    <div>
+    <div className="outer-div">
+      <h1>Sets Currently in Database:</h1>
+      <hr></hr>
       <AdminSets
         sets={sets}
         onDelete={deleteSet}
+        onDuplicate={duplicateSet}
         onAddSet={addSet}
         onNewQuestion={newQuestion}
       />
@@ -122,52 +146,3 @@ function Admin() {
 export default Admin;
 
 
-// function reorder(list, startIndex, endIndex) {
-//     const result = list.map((list_item) => { return list_item })
-//     const [removed] = result.splice(startIndex, 1);
-//     result.splice(endIndex, 0, removed);
-
-//     return result;
-//   }
-
-
-//   //TODO: Move to Admin instead of doing all this weird state stuff
-//   const onOrderChanged = (result) => {
-//     console.log(result)
-//     if (!result.destination) {
-//       return;
-//     }
-//     if (result.source.index === result.destination.index) {
-//       return;
-//     }
-
-//     const newItems = reorder(
-//       currentSet.questions,
-//       result.source.index,
-//       result.destination.index
-//     );
-
-//     const updatedSet = {
-//       _id: currentSet._id,
-//       questions: newItems,
-//     };
-
-//     const stringified = JSON.stringify(updatedSet);
-//     //setCurrentSet(updatedSet);
-
-//     // fetch(`http://localhost:5000/sets/${currentSet._id}`, {
-//     //   method: "PATCH",
-//     //   headers: {
-//     //     "Content-type": "application/json",
-//     //   },
-//     //   body: stringified,
-//     // })
-//     //   .then((response) => {
-//     //     if (!response.ok) throw Error(response.statusText);
-//     //     return response.json();
-//     //   })
-//     //   .then((data) => {
-//     //     setCurrentSet(data);
-//     //   })
-
-//   }

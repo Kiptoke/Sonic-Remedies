@@ -43,7 +43,7 @@ const AddQuestion = ({ onAddQuestions, currentQuestions }) => {
   };
 
   return (
-    <form onSubmit={onSubmit}>
+    <form className="add-question-form" onSubmit={onSubmit}>
       {questions.map(
         (question) =>
           !currentQuestions.includes(question) && (

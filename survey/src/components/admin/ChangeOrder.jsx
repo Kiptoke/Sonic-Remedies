@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { FixedSizeList, areEqual } from "react-window";
-import "../../css/components/changeOrder.css";
+import "../../css/components/admin/changeOrder.css";
 
 
 
@@ -105,7 +105,7 @@ const ChangeOrder = ({ curquestions, onChangeOrder }) => {
                     >
                         {provided => (
                             <FixedSizeList
-                                height={100 * questions.length}
+                                height={80 * questions.length}
                                 itemCount={questions.length}
                                 itemSize={80}
                                 width={300}

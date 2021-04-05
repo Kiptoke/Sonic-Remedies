@@ -1,10 +1,12 @@
 import { useState } from "react";
 
-const AddSet = ({ onAddSet }) => {
+const AddSet = ({ onAddSet, setShowAddSet }) => {
   const [title, setTitle] = useState("");
 
   const onSubmit = (e) => {
     e.preventDefault();
+
+    setShowAddSet(false)
 
     if (!title) {
       alert("Please add a title");
@@ -16,7 +18,8 @@ const AddSet = ({ onAddSet }) => {
   };
   return (
     <form className="add-set-form" onSubmit={onSubmit}>
-      <label>Title</label>
+      <h4>New Set</h4>
+      <label><b>Title: </b></label>
       <input
         type="text"
         placeholder="Add Title"
