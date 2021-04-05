@@ -58,16 +58,16 @@ const AdminQuestion = ({ qid, deleteQuestion }) => {
       </div>
     );
   }
-  if (question.input_type === "long-answer") {
-    return (
+  if (question.input_type === "color") {
+    return(
       <div>
-        <h4>{question.title}</h4>
+        <h3>{question.title}</h3>
         <h5>{question.input_type}</h5>
         <button className="small-btn" onClick={() => deleteQuestion(question._id)}>
           Remove From Set
         </button>
       </div>
-    );
+    )
   }
   return <h3>Error: invalid input type</h3>;
 };

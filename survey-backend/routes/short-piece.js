@@ -28,7 +28,8 @@ router.get('/:id', async (req, res) => {
 router.post('/', async (req, res) => {
     const piece = new ShortPiece({
         title: req.body.title,
-        duration: req.body.duration
+        duration: req.body.duration,
+        filepath: req.body.filepath
     })
     try {
         const newPiece = await piece.save()
