@@ -1,6 +1,8 @@
 import React from "react";
 import { useState, useEffect } from "react";
 
+import "../../css/components/admin/adminQuestion.css";
+
 const AdminQuestion = ({ qid, deleteQuestion }) => {
   const [question, setQuestion] = useState({});
 
@@ -23,8 +25,8 @@ const AdminQuestion = ({ qid, deleteQuestion }) => {
             <li key={option}>{option}</li>
           ))}
         </ul>
-        <button onClick={() => deleteQuestion(question._id)}>
-          Delete Question
+        <button className="small-btn" onClick={() => deleteQuestion(question._id)}>
+          Remove From Set
         </button>
       </div>
     );
@@ -39,8 +41,8 @@ const AdminQuestion = ({ qid, deleteQuestion }) => {
             <li key={option}>{option}</li>
           ))}
         </ul>
-        <button onClick={() => deleteQuestion(question._id)}>
-          Delete Question
+        <button className="small-btn" onClick={() => deleteQuestion(question._id)}>
+          Remove From Set
         </button>
       </div>
     );
@@ -50,8 +52,8 @@ const AdminQuestion = ({ qid, deleteQuestion }) => {
       <div>
         <h3>{question.title}</h3>
         <h5>{question.input_type}</h5>
-        <button onClick={() => deleteQuestion(question._id)}>
-          Delete Question
+        <button className="small-btn" onClick={() => deleteQuestion(question._id)}>
+          Remove From Set
         </button>
       </div>
     );
@@ -59,10 +61,10 @@ const AdminQuestion = ({ qid, deleteQuestion }) => {
   if (question.input_type === "long-answer") {
     return (
       <div>
-        <h3>{question.title}</h3>
+        <h4>{question.title}</h4>
         <h5>{question.input_type}</h5>
-        <button onClick={() => deleteQuestion(question._id)}>
-          Delete Question
+        <button className="small-btn" onClick={() => deleteQuestion(question._id)}>
+          Remove From Set
         </button>
       </div>
     );

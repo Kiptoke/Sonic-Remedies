@@ -3,7 +3,9 @@ import AdminSet from "./AdminSet";
 import AddSet from "./AddSet";
 import NewQuestion from "./NewQuestion";
 
-const AdminSets = ({ sets, onDelete, onAddSet, onNewQuestion, onOrderChanged }) => {
+import "../../css/components/admin/adminSets.css";
+
+const AdminSets = ({ sets, onDelete, onDuplicate, onAddSet, onNewQuestion, onOrderChanged }) => {
   const [showAddSet, setShowAddSet] = useState(false);
   const [showAddQuestion, setShowAddQuestion] = useState(false);
 
@@ -18,12 +20,13 @@ const AdminSets = ({ sets, onDelete, onAddSet, onNewQuestion, onOrderChanged }) 
   return (
     <div>
       {sets.map((set) => (
-        <AdminSet qid={set._id} key={set._id} set={set} onDelete={onDelete} onOrderChanged={onOrderChanged} />
+        <AdminSet qid={set._id} key={set._id} set={set} onDelete={onDelete} onDuplicate={onDuplicate} 
+          onOrderChanged={onOrderChanged} />
       ))}
-      <button onClick={() => handleClick()}>Add Set</button>
-      <button onClick={() => handleManageQuestions()}>Manage Questions</button>
-      {showAddSet && <AddSet onAddSet={onAddSet} />}
-      {showAddQuestion && <NewQuestion onNewQuestion={onNewQuestion} />}
+      <button className="big-btn" onClick={() => handleClick()}>Add Set</button>
+      <button className="big-btn" onClick={() => handleManageQuestions()}>Manage Questions</button>
+      {showAddSet && <AddSet onAddSet={onAddSet} setShowAddSet={setShowAddSet}/>}
+      {showAddQuestion && <NewQuestion onNewQuestion={onNewQuestion} setShowAddQuestion={setShowAddQuestion}/>}
     </div>
   );
 };

@@ -4,7 +4,9 @@ import AdminQuestion from "./AdminQuestion";
 import AddQuestion from "./AddQuestion";
 import ChangeOrder from "./ChangeOrder";
 
-const AdminSet = ({ set, onDelete }) => {
+import "../../css/components/admin/adminSet.css";
+
+const AdminSet = ({ set, onDelete, onDuplicate }) => {
   const [currentSet, setCurrentSet] = useState(set);
   const [questions, setQuestions] = useState([]);
   const [showAddQuestion, setShowAddQuestion] = useState(false);
@@ -128,22 +130,31 @@ const AdminSet = ({ set, onDelete }) => {
 
   return (
     <div>
-      <h1 className="set-title">{set.title}</h1>
+      <h1 className="set-title"><b>{set.title}</b></h1>
       <button onClick={() => onDelete(set._id)}>Delete Set</button>
+      <button onClick={() => onDuplicate(currentSet)}>Duplicate Set</button>
       <button onClick={() => displayChangeOrder()}>Change Question Order</button>
       {showQuestionOrder && (
         <ChangeOrder curquestions={questions} onChangeOrder={onChangeOrder} />
       )}
-      {questions.map((question) => (
-        <AdminQuestion
-          key={question._id}
-          qid={question._id}
-          deleteQuestion={deleteQuestion}
-        />
-      ))}
+      <h2>Questions in Set:</h2>
+      <ol>
+          {questions.map((question) => (
+            <li>
+              <AdminQuestion
+                key={question._id}
+                qid={question._id}
+                deleteQuestion={deleteQuestion}
+              />
+            </li>
+            
+          ))}
+      </ol>
+      
       <button onClick={() => displayQuestions()}>Add Questions to Set</button>
       {showAddQuestion && (
         <AddQuestion
+          className="addQuestion"
           onAddQuestions={onAddQuestions}
           currentQuestions={currentSet.questions}
         />

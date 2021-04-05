@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Route, Redirect } from 'react-router-dom'
+import { Route } from 'react-router-dom'
 import GoogleLogin from 'react-google-login';
 import Admin from "./Admin";
 
