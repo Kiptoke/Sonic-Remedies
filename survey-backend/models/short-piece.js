@@ -9,6 +9,10 @@ const shortPieceSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  filepath: {
+    type: String,
+    required: true,
+  },
 });
 
 module.exports = mongoose.model('ShortPiece', shortPieceSchema)
