@@ -3,20 +3,13 @@ import { ReactComponent as Pause } from "../../../vectors/pause.svg";
 
 const circleClicked = (playState, setPlayState, audio) => {
   switch (playState) {
-    case "init":
+    case "paused":
       audio.play();
-      setPlayState("waiting");
-      setTimeout(() => {
-        setPlayState("can_pause");
-      }, 5000);
+      setPlayState("playing");
       return;
-    case "can_pause":
+    case "playing":
       audio.pause();
-      setPlayState("can_play");
-      return;
-    case "can_play":
-      audio.play();
-      setPlayState("can_pause");
+      setPlayState("paused");
       return;
     default:
       return;
@@ -25,7 +18,7 @@ const circleClicked = (playState, setPlayState, audio) => {
 
 const RenderPlay = ({ playState, setPlayState, audio }) => {
   switch (playState) {
-    case "init":
+    case "paused":
       return (
         <Play
           className={"player play-button"}
@@ -34,21 +27,10 @@ const RenderPlay = ({ playState, setPlayState, audio }) => {
           }}
         ></Play>
       );
-    case "waiting":
-      return "";
-    case "can_pause":
+    case "playing":
       return (
         <Pause
-          className={"player pause-button"}
-          onClick={() => {
-            circleClicked(playState, setPlayState, audio);
-          }}
-        />
-      );
-    case "can_play":
-      return (
-        <Play
-          className={"player play-button"}
+          className={"player pause-buton"}
           onClick={() => {
             circleClicked(playState, setPlayState, audio);
           }}
