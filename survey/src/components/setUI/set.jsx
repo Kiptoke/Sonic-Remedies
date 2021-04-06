@@ -4,14 +4,23 @@ import { useState } from "react";
 import { useTransition, animated } from "react-spring";
 import Question from "./question";
 import FixedUI from "./fixedUI";
+import MusicPage from "./musicPlayer/musicPage";
 
-const Set = ({ setId, questions }) => {
+const Set = ({ setId, set, setCurrentSet }) => {
+  const questions = set.questions;
   const [currentQuestion, updateCurrentQuestion] = useState(0);
   const [savedResponses, updateSavedResponses] = useState([]);
+  const [musicDone, setMusicDone] = useState(set.hasMusic ? false : true);
   const handleResponse = (response) => {
     const updatedResponses = [...savedResponses, response];
     updateSavedResponses(updatedResponses);
-    updateCurrentQuestion(currentQuestion + 1);
+    if (currentQuestion === questions.length - 1) {
+      updateCurrentQuestion(0);
+      setCurrentSet(setId + 1);
+      setMusicDone(set.hasMusic ? false : true);
+    } else {
+      updateCurrentQuestion(currentQuestion + 1);
+    }
   };
   const transitions = useTransition(questions[currentQuestion], (q) => q.ask, {
     from: {
@@ -25,6 +34,14 @@ const Set = ({ setId, questions }) => {
   });
   return (
     <div className="set">
+      <div className="music-page" style={musicDone ? { display: "none" } : {}}>
+        <MusicPage
+          file_path={"../../audio/BNS_BWV538.mp3"}
+          handleMusicDone={() => {
+            setMusicDone(true);
+          }}
+        />
+      </div>
       <div className="set-questions">
         {transitions.map(({ item, props, key }) => {
           return (

@@ -1,18 +1,7 @@
-const pressedContinue = (audio, handleMusicDone) => {
-  audio.unload();
-  handleMusicDone();
-};
-
-const RenderContinue = ({ playState, audio, handleMusicDone }) => {
+const RenderContinue = ({ canContinue, handleContinueClicked }) => {
   return (
-    playState !== "init" &&
-    playState !== "waiting" && (
-      <button
-        className={"music-continue"}
-        onClick={() => {
-          pressedContinue(audio, handleMusicDone);
-        }}
-      >
+    canContinue && (
+      <button className={"music-continue"} onClick={handleContinueClicked}>
         Continue to questions
       </button>
     )
