@@ -10,7 +10,11 @@ const ProtectedRoute = ({ component: Component, ...rest }) => {
         console.log(response);
         console.log(response.profileObj);
         if (response.profileObj.email === "maryketa@umich.edu" || response.profileObj.email === "sronning@umich.edu") {
+            console.log("yes")
             setLoggedIn(true);
+        }
+        else {
+            console.log("no")
         }
 
     }
@@ -29,6 +33,7 @@ const ProtectedRoute = ({ component: Component, ...rest }) => {
                     onSuccess={responseGoogle}
                     onFailure={responseFailure}
                     cookiePolicy={'single_host_origin'}
+                    isSignedIn={true}
                 />
             </div>}
 

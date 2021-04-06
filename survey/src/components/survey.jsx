@@ -1,5 +1,6 @@
 import Set from "./setUI/set";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import getSets from "../utils/getSets";
 const sets = [
   {
     questions: [
@@ -34,7 +35,7 @@ const sets = [
         responses: [],
       },
     ],
-    hasMusic: true,
+    music: true,
   },
   {
     questions: [
@@ -45,11 +46,17 @@ const sets = [
       },
       { type: "mc", ask: "Sup?", responses: ["NON", "BAH", "HOH"] },
     ],
-    hasMusic: true,
+    music: true,
   },
 ];
 const Survey = () => {
   const [currentSet, setCurrentSet] = useState(0);
+  const [_sets, setSets] = useState(null);
+
+  useEffect(() => {
+    setSets(getSets())
+  }, [])
+  
   return (
     <Set
       setId={currentSet}
@@ -60,3 +67,11 @@ const Survey = () => {
 };
 
 export default Survey;
+
+{
+  id: (automatically generated),
+  music_arr: [],
+  //sets_arr: [],
+  questions: [[]], //these will not die today. or andy day
+  responses: [[]]
+}
