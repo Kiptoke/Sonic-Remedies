@@ -17,7 +17,7 @@ const Set = ({ setId, set, setCurrentSet }) => {
     if (currentQuestion === questions.length - 1) {
       updateCurrentQuestion(0);
       setCurrentSet(setId + 1);
-      setMusicDone(set.hasMusic ? false : true);
+      setMusicDone(set.music ? false : true);
     } else {
       updateCurrentQuestion(currentQuestion + 1);
     }
