@@ -12,16 +12,16 @@ function handleNext(response, handleResponse, setClickedNext) {
 }
 function renderQuestion(type, responses, handleResponded) {
   const params = { responses: responses, handleResponded: handleResponded };
-  if (type === "mc") return <MultipleChoice {...params} />;
-  else if (type === "ms") return <MultipleSelect {...params} />;
-  else if (type === "fr") return <FreeResponse {...params} />;
+  if (type === "multiple-choice") return <MultipleChoice {...params} />;
+  else if (type === "check-box") return <MultipleSelect {...params} />;
+  else if (type === "short-answer") return <FreeResponse {...params} />;
   else if (type === "color") return <ColorChoice {...params} />;
 }
 
 function Question({ question, handleResponse }) {
   const { type, responses } = question;
   let { ask } = question;
-  ask += type === "ms" ? " Select all that apply." : "";
+  ask += type === "check-box" ? " Select all that apply." : "";
   const [response, setResponse] = useState(null);
   const [clickedNext, setClickedNext] = useState(false);
   const q_old = useRef(question);
