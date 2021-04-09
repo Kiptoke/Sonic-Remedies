@@ -16,13 +16,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
   .player {
     width: 3rem;
     height: 3rem;
     background-color: transparent;
     border: none;
     background-size: cover;
-    cursor: pointer;
   }
   .play-button {
     margin-left: 0.5rem;
