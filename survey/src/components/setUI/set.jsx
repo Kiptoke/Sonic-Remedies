@@ -10,7 +10,7 @@ const Set = ({ setId, set, setCurrentSet }) => {
   const questions = set.questions;
   const [currentQuestion, updateCurrentQuestion] = useState(0);
   const [savedResponses, updateSavedResponses] = useState([]);
-  const [musicDone, setMusicDone] = useState(set.hasMusic ? false : true);
+  const [musicDone, setMusicDone] = useState(set.music ? false : true);
   const handleResponse = (response) => {
     const updatedResponses = [...savedResponses, response];
     updateSavedResponses(updatedResponses);
