@@ -4,6 +4,7 @@ import { useState, useEffect, Fragment } from "react";
 import audiofile from "../../../audio/AE.mp3";
 import RenderPlay from "./renderPlay";
 import RenderContinue from "./renderContinue";
+import togglePlayer from "./togglePlayer";
 
 const MusicPlayer = ({ file_path, handleMusicDone }) => {
   const [playState, setPlayState] = useState("paused");
@@ -26,12 +27,11 @@ const MusicPlayer = ({ file_path, handleMusicDone }) => {
 
   return (
     <Fragment>
-      <div className="music-player">
-        <RenderPlay
-          playState={playState}
-          audio={audio}
-          setPlayState={setPlayState}
-        />
+      <div
+        className="music-player"
+        onClick={() => togglePlayer(playState, setPlayState, audio)}
+      >
+        <RenderPlay playState={playState} />
       </div>
       <RenderContinue
         canContinue={canContinue}
