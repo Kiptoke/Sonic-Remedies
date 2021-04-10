@@ -26,23 +26,17 @@ const MusicPlayer = ({ file_path, handleMusicDone }) => {
 
   useEffect(() => {
     const checkHalfwayInterval = setInterval(checkHalfway, 1000);
+    const setProgressInterval = setInterval(updateProgress, 100);
     audio.on("end", () => {
       audio.seek(0);
       setPlayState("paused");
     });
+
     return () => {
       clearInterval(checkHalfwayInterval);
+      clearInterval(setProgressInterval);
     };
-  }, [checkHalfway, audio]);
-
-  useEffect(() => {
-    audio.on("play", () => {
-      setInterval(updateProgress, 100);
-    });
-    return () => {
-      clearInterval(updateProgress);
-    };
-  }, [audio, updateProgress]);
+  }, [checkHalfway, updateProgress, audio]);
 
   return (
     <Fragment>
