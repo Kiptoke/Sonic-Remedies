@@ -26,7 +26,7 @@ const MusicPlayer = ({ file_path, handleMusicDone }) => {
 
   useEffect(() => {
     const checkHalfwayInterval = setInterval(checkHalfway, 1000);
-    const setProgressInterval = setInterval(updateProgress, 100);
+    const setProgressInterval = setInterval(updateProgress, 300);
     audio.on("end", () => {
       audio.seek(0);
       setPlayState("paused");

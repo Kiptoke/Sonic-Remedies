@@ -15,7 +15,7 @@ const ProgressBar = (props) => {
     const progressOffset = ((100 - progress) / 100) * circumference;
     setOffset(progressOffset);
 
-    circleRef.current.style = "transition: stroke-dashoffset 100ms ease";
+    circleRef.current.style = "transition: stroke-dashoffset 300ms linear";
   }, [setOffset, progress, circumference, offset]);
 
   return (
