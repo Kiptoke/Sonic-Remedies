@@ -5,6 +5,7 @@ import audiofile from "../../../audio/AE.mp3";
 import RenderPlay from "./renderPlay";
 import RenderContinue from "./renderContinue";
 import togglePlayer from "./togglePlayer";
+import ProgressBar from "./progressBar";
 
 const MusicPlayer = ({ file_path, handleMusicDone }) => {
   const [playState, setPlayState] = useState("paused");
@@ -12,11 +13,15 @@ const MusicPlayer = ({ file_path, handleMusicDone }) => {
   const [audio] = useState(
     new Howl({ src: audiofile, volume: 0.2, html5: true })
   );
+  const [progress, setProgress] = useState(0);
   const checkHalfway = useCallback(() => {
     if (audio.seek() > audio.duration() / 2) {
       clearInterval(checkHalfway);
       setCanContinue(true);
     }
+  }, [audio]);
+  const updateProgress = useCallback(() => {
+    setProgress((audio.seek() / audio.duration()) * 100);
   }, [audio]);
 
   useEffect(() => {
@@ -30,12 +35,22 @@ const MusicPlayer = ({ file_path, handleMusicDone }) => {
     };
   }, [checkHalfway, audio]);
 
+  useEffect(() => {
+    audio.on("play", () => {
+      setInterval(updateProgress, 100);
+    });
+    return () => {
+      clearInterval(updateProgress);
+    };
+  }, [audio, updateProgress]);
+
   return (
     <Fragment>
       <div
         className="music-player"
         onClick={() => togglePlayer(playState, setPlayState, audio)}
       >
+        <ProgressBar size={180} progress={progress} strokeWidth={6} />
         <RenderPlay playState={playState} />
       </div>
       <RenderContinue

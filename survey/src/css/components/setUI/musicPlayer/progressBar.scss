@@ -1,0 +1,19 @@
+@import "../../../global.scss";
+.progress-bar {
+  position: absolute;
+  background-color: transparent;
+  .svg {
+    max-width: 100%;
+  }
+
+  .svg-circle-bg {
+    display: block;
+    fill: none;
+  }
+
+  .svg-circle {
+    stroke: $textBgColor;
+    display: block;
+    fill: none;
+  }
+}
