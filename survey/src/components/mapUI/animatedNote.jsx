@@ -1,40 +1,19 @@
 import { ReactComponent as QuarterNote } from "../../vectors/quarterNote.svg";
 import { useSpring, animated, config } from "react-spring";
 
-const finalPosGen = () => {
-  const randDir = Math.floor(Math.random() * 2) === 0 ? 1 : -1;
-  const rand = Math.floor(Math.random() * 130 + 30);
-  return randDir * rand;
-};
-
-const randColor = () => {
-  const colors = [
-    "red",
-    "orange",
-    "yellow",
-    "green",
-    "blue",
-    "indigo",
-    "violet",
-  ];
-  return colors[Math.floor(Math.random() * colors.length)];
-};
-
-const AnimatedNote = ({ delay }) => {
-  const randTop = finalPosGen() - 50;
-  const randRight = finalPosGen();
+const AnimatedNote = ({ delay, noteColor, finalPosition }) => {
   const props = useSpring({
-    config: config.slow,
+    config: config.molasses,
     display: "flex",
     delay: delay,
-    top: randTop,
-    right: randRight,
+    top: finalPosition.y,
+    right: finalPosition.x - 40,
     opacity: 0,
     from: {
       display: "none",
       opacity: 1,
-      top: randTop / 4,
-      right: randRight / 4,
+      top: 0,
+      right: -40,
     },
   });
 
@@ -43,11 +22,13 @@ const AnimatedNote = ({ delay }) => {
       <animated.div
         style={{
           position: "relative",
+          width: "7rem",
+          height: "7rem",
           pointerEvents: "none",
           ...props,
         }}
       >
-        <QuarterNote fill={randColor()} />
+        <QuarterNote fill={noteColor} />
       </animated.div>
     </div>
   );

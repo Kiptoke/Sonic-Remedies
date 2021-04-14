@@ -20,6 +20,7 @@ const Survey = () => {
         set={sets[currentSet]}
         nextSet={sets[currentSet + 1]}
         setCurrentSet={setCurrentSet}
+        totalSets={sets.length}
       />
     );
   }

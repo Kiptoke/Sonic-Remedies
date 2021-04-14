@@ -3,52 +3,78 @@ import { useState } from "react";
 import AnimatedQuestions from "./animatedQuestions";
 import FixedUI from "./fixedUI";
 import MusicPage from "./musicPlayer/musicPage";
+import OrientationPage from "./orientationPage";
+import CompletePage from "./completePage";
 
-const Set = ({ setId, set, nextSet, setCurrentSet }) => {
+const Set = ({ setId, set, setCurrentSet, totalSets }) => {
   const questions = set.questions;
   const [currentQuestion, updateCurrentQuestion] = useState(0);
+  const [page, setPage] = useState("orientation");
   const [savedResponses, updateSavedResponses] = useState([]);
-  const [musicDone, setMusicDone] = useState(set.music ? false : true);
   const handleResponse = (response) => {
     const updatedResponses = [...savedResponses, response];
     updateSavedResponses(updatedResponses);
     if (currentQuestion === questions.length - 1) {
-      //End of set
-      if (nextSet) {
+      //End of questions
+      if (setId !== totalSets - 1) {
         updateCurrentQuestion(0);
         setCurrentSet(setId + 1);
-        setMusicDone(nextSet.music ? false : true);
+        setPage("orientation");
       } else {
-        console.log("Survey complete!");
+        //We are at the end of the survey
+        setPage("complete");
       }
     } else {
       updateCurrentQuestion(currentQuestion + 1);
     }
   };
 
-  return (
-    <div className="set global-container">
-      <div className="music-page" style={musicDone ? { display: "none" } : {}}>
-        <MusicPage
-          file_path={"../../audio/BNS_BWV538.mp3"}
-          handleMusicDone={() => {
-            setMusicDone(true);
+  switch (page) {
+    case "orientation":
+      return (
+        <OrientationPage
+          setId={setId}
+          totalSets={totalSets}
+          clickContinue={() => {
+            if (set.music) setPage("music");
+            else {
+              setPage("questions");
+            }
           }}
         />
-      </div>
-      <div className="set-questions">
-        <AnimatedQuestions
-          questions={questions}
-          currentQuestion={currentQuestion}
-          handleResponse={handleResponse}
-        />
-      </div>
-      <FixedUI
-        numQuestions={questions.length}
-        currentQuestion={currentQuestion}
-      />
-    </div>
-  );
+      );
+    case "music":
+      return (
+        <div className="music-page global-container">
+          <MusicPage
+            file_path={"../../audio/BNS_BWV538.mp3"}
+            handleMusicDone={() => {
+              setPage("questions");
+            }}
+          />
+        </div>
+      );
+    case "questions":
+      return (
+        <div className="set global-container">
+          <div className="set-questions">
+            <AnimatedQuestions
+              questions={questions}
+              currentQuestion={currentQuestion}
+              handleResponse={handleResponse}
+            />
+          </div>
+          <FixedUI
+            numQuestions={questions.length}
+            currentQuestion={currentQuestion}
+          />
+        </div>
+      );
+    case "complete":
+      return <CompletePage />;
+    default:
+      return null;
+  }
 };
 
 export default Set;
