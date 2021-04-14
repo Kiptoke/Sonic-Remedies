@@ -1,5 +1,4 @@
 import "../../css/components/set.scss";
-import "../../css/components/set_DT.css";
 import { useState } from "react";
 import { useTransition, animated } from "react-spring";
 import Question from "./question";
@@ -33,7 +32,7 @@ const Set = ({ setId, set, setCurrentSet }) => {
     leave: { transform: "translate3d(0, -100%, 0)" },
   });
   return (
-    <div className="set">
+    <div className="set global-container">
       <div className="music-page" style={musicDone ? { display: "none" } : {}}>
         <MusicPage
           file_path={"../../audio/BNS_BWV538.mp3"}

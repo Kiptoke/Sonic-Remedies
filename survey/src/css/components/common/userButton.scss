@@ -1,0 +1,9 @@
+@import "../../global.scss";
+.user-button {
+  background-color: $textBgColor;
+  color: white;
+  border: none;
+}
+.user-button:hover {
+  background-color: $textHovColor;
+}
