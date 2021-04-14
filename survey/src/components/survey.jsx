@@ -18,6 +18,7 @@ const Survey = () => {
       <Set
         setId={currentSet}
         set={sets[currentSet]}
+        nextSet={sets[currentSet + 1]}
         setCurrentSet={setCurrentSet}
       />
     );

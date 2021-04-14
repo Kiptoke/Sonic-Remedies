@@ -1,11 +1,10 @@
 import "../../css/components/set.scss";
 import { useState } from "react";
-import { useTransition, animated } from "react-spring";
-import Question from "./question";
+import AnimatedQuestions from "./animatedQuestions";
 import FixedUI from "./fixedUI";
 import MusicPage from "./musicPlayer/musicPage";
 
-const Set = ({ setId, set, setCurrentSet }) => {
+const Set = ({ setId, set, nextSet, setCurrentSet }) => {
   const questions = set.questions;
   const [currentQuestion, updateCurrentQuestion] = useState(0);
   const [savedResponses, updateSavedResponses] = useState([]);
@@ -14,23 +13,19 @@ const Set = ({ setId, set, setCurrentSet }) => {
     const updatedResponses = [...savedResponses, response];
     updateSavedResponses(updatedResponses);
     if (currentQuestion === questions.length - 1) {
-      updateCurrentQuestion(0);
-      setCurrentSet(setId + 1);
-      setMusicDone(set.music ? false : true);
+      //End of set
+      if (nextSet) {
+        updateCurrentQuestion(0);
+        setCurrentSet(setId + 1);
+        setMusicDone(nextSet.music ? false : true);
+      } else {
+        console.log("Survey complete!");
+      }
     } else {
       updateCurrentQuestion(currentQuestion + 1);
     }
   };
-  const transitions = useTransition(questions[currentQuestion], (q) => q.ask, {
-    from: {
-      transform:
-        currentQuestion === 0
-          ? "translate3d(0, 0%, 0)"
-          : "translate3d(0, 100%, 0)",
-    },
-    enter: { transform: "translate3d(0, 0, 0)" },
-    leave: { transform: "translate3d(0, -100%, 0)" },
-  });
+
   return (
     <div className="set global-container">
       <div className="music-page" style={musicDone ? { display: "none" } : {}}>
@@ -42,13 +37,11 @@ const Set = ({ setId, set, setCurrentSet }) => {
         />
       </div>
       <div className="set-questions">
-        {transitions.map(({ item, props, key }) => {
-          return (
-            <animated.div className="question-animator" style={props} key={key}>
-              <Question question={item} handleResponse={handleResponse} />
-            </animated.div>
-          );
-        })}
+        <AnimatedQuestions
+          questions={questions}
+          currentQuestion={currentQuestion}
+          handleResponse={handleResponse}
+        />
       </div>
       <FixedUI
         numQuestions={questions.length}
