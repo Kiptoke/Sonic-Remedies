@@ -21,3 +21,20 @@ body,
   margin: 0;
   padding: 0;
 }
+
+//The bounding box for the app
+.global-container {
+  background-color: $mainBgColor;
+  background-image: url("../images/bg-arc.jpg");
+  background-size: cover;
+  height: vh(100);
+  width: 100%;
+}
+
+@media (min-width: 960px) {
+  .global-container {
+    width: 50vw;
+    margin: 0 auto;
+    background-size: cover;
+  }
+}

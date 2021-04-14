@@ -1,6 +1,7 @@
 import "../../../css/components/colorChoice.scss";
 import { useState } from "react";
 import MultipleChoice from "./multipleChoice";
+import UserButton from "../../common/userButton";
 
 function ShowColor(response, handleResponded, setChoseYes, setChoseNo) {
   if (response === 0) {
@@ -36,13 +37,12 @@ const ColorChoice = ({ responses, handleResponded }) => {
     <div className="question-color">
       <p>Select the color: </p>
       <input type="color" />
-      <button
+      <UserButton
+        text={"Go Back"}
         onClick={() => {
           setChoseYes(false);
         }}
-      >
-        Go Back
-      </button>
+      />
     </div>
   );
 };
