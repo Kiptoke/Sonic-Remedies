@@ -38,3 +38,10 @@ body,
     background-size: cover;
   }
 }
+
+.global-h1 {
+  color: white;
+  background-color: $textBgColor;
+  font-size: $large;
+  padding: 1rem;
+}
