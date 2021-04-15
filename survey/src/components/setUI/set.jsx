@@ -1,61 +1,80 @@
 import "../../css/components/set.scss";
 import { useState } from "react";
-import { useTransition, animated } from "react-spring";
-import Question from "./question";
+import AnimatedQuestions from "./animatedQuestions";
 import FixedUI from "./fixedUI";
 import MusicPage from "./musicPlayer/musicPage";
+import OrientationPage from "./orientationPage";
+import CompletePage from "./completePage";
 
-const Set = ({ setId, set, setCurrentSet }) => {
+const Set = ({ setId, set, setCurrentSet, totalSets }) => {
   const questions = set.questions;
   const [currentQuestion, updateCurrentQuestion] = useState(0);
+  const [page, setPage] = useState("orientation");
   const [savedResponses, updateSavedResponses] = useState([]);
-  const [musicDone, setMusicDone] = useState(set.music ? false : true);
   const handleResponse = (response) => {
     const updatedResponses = [...savedResponses, response];
     updateSavedResponses(updatedResponses);
     if (currentQuestion === questions.length - 1) {
-      updateCurrentQuestion(0);
-      setCurrentSet(setId + 1);
-      setMusicDone(set.music ? false : true);
+      //End of questions
+      if (setId !== totalSets - 1) {
+        updateCurrentQuestion(0);
+        setCurrentSet(setId + 1);
+        setPage("orientation");
+      } else {
+        //We are at the end of the survey
+        setPage("complete");
+      }
     } else {
       updateCurrentQuestion(currentQuestion + 1);
     }
   };
-  const transitions = useTransition(questions[currentQuestion], (q) => q.ask, {
-    from: {
-      transform:
-        currentQuestion === 0
-          ? "translate3d(0, 0%, 0)"
-          : "translate3d(0, 100%, 0)",
-    },
-    enter: { transform: "translate3d(0, 0, 0)" },
-    leave: { transform: "translate3d(0, -100%, 0)" },
-  });
-  return (
-    <div className="set global-container">
-      <div className="music-page" style={musicDone ? { display: "none" } : {}}>
-        <MusicPage
-          file_path={"../../audio/BNS_BWV538.mp3"}
-          handleMusicDone={() => {
-            setMusicDone(true);
+
+  switch (page) {
+    case "orientation":
+      return (
+        <OrientationPage
+          setId={setId}
+          totalSets={totalSets}
+          clickContinue={() => {
+            if (set.music) setPage("music");
+            else {
+              setPage("questions");
+            }
           }}
         />
-      </div>
-      <div className="set-questions">
-        {transitions.map(({ item, props, key }) => {
-          return (
-            <animated.div className="question-animator" style={props} key={key}>
-              <Question question={item} handleResponse={handleResponse} />
-            </animated.div>
-          );
-        })}
-      </div>
-      <FixedUI
-        numQuestions={questions.length}
-        currentQuestion={currentQuestion}
-      />
-    </div>
-  );
+      );
+    case "music":
+      return (
+        <div className="music-page global-container">
+          <MusicPage
+            file_path={"../../audio/BNS_BWV538.mp3"}
+            handleMusicDone={() => {
+              setPage("questions");
+            }}
+          />
+        </div>
+      );
+    case "questions":
+      return (
+        <div className="set global-container">
+          <div className="set-questions">
+            <AnimatedQuestions
+              questions={questions}
+              currentQuestion={currentQuestion}
+              handleResponse={handleResponse}
+            />
+          </div>
+          <FixedUI
+            numQuestions={questions.length}
+            currentQuestion={currentQuestion}
+          />
+        </div>
+      );
+    case "complete":
+      return <CompletePage />;
+    default:
+      return null;
+  }
 };
 
 export default Set;
