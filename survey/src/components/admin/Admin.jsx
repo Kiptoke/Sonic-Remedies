@@ -7,6 +7,7 @@ import "../../css/components/admin/admin.css";
 
 
 function Admin() {
+  const [setOrder, setSetOrder] = useState([]);
   const [sets, setSets] = useState([]);
   const [questions, setQuestions] = useState([]);
 
@@ -16,8 +17,46 @@ function Admin() {
 
     const getSets = async () => {
       const serverSets = await fetchSets();
-      setSets(serverSets);
-      console.log(serverSets);
+      const res = await fetch("http://localhost:5000/set-order");
+      const orderData = await res.json();
+
+
+      if (orderData.length === 0) {
+        let order = []
+        for (let i = 0; i < serverSets.length; i++) {
+          order.push(serverSets[i]._id)
+        }
+        const orderObj = {
+          sets: order
+        }
+        fetch("http://localhost:5000/set-order", {
+          method: "POST",
+          headers: {
+            "Content-type": "application/json",
+          },
+          body: JSON.stringify(orderObj),
+        })
+          .then((res) => {
+            res.json()
+          })
+          .then((data) => {
+            setSetOrder(data)
+          })
+        setSets(serverSets)
+      }
+      else {
+        setSetOrder(orderData[0].sets)
+        const orderedSets = []
+        for (let i = 0; i < orderData[0].sets.length; i++) {
+          for (let j = 0; j < serverSets.length; j++) {
+            if (orderData[0].sets[i] === serverSets[j]._id) {
+              orderedSets.push(serverSets[j]);
+              break;
+            }
+          }
+        }
+        setSets(orderedSets);
+      }
     };
     const getQuestions = async () => {
       const serverQuestions = await fetchQuestions();
@@ -46,17 +85,29 @@ function Admin() {
 
   const deleteSet = async (id) => {
     var retval = window.confirm("Delete this set?");
-    if(retval === true) {
+    if (retval === true) {
       await fetch(`http://localhost:5000/sets/${id}`, {
         method: "DELETE",
       });
       setSets(sets.filter((set) => set._id !== id));
+      const curSetOrder = setOrder.filter((set) => set !== id)
+      const orderObj = { sets: curSetOrder }
+      const res = await fetch('http://localhost:5000/set-order/', {
+        method: "PATCH",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify(orderObj)
+      });
+
+      const orderData = await res.json();
+      setSetOrder(orderData.sets)
     }
-    
+
   };
 
   const duplicateSet = async (set) => {
-    const dupeSet = {title: set.title, questions: set.questions}
+    const dupeSet = { title: set.title, questions: set.questions }
     const res = await fetch("http://localhost:5000/sets", {
       method: "POST",
       headers: {
@@ -67,6 +118,23 @@ function Admin() {
 
     const data = await res.json();
     setSets([...sets, data]);
+
+    //set order
+    const curSetOrder = setOrder
+    curSetOrder.push(data._id)
+
+    const orderObj = { sets: curSetOrder }
+    console.log(orderObj)
+    const orderRes = await fetch('http://localhost:5000/set-order/', {
+      method: "PATCH",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(orderObj)
+    });
+
+    const orderData = await orderRes.json();
+    setSetOrder(orderData.sets)
   }
 
   const addSet = async (title, music) => {
@@ -83,6 +151,23 @@ function Admin() {
 
     const data = await res.json();
     setSets([...sets, data]);
+
+    //set order
+    const curSetOrder = setOrder
+    curSetOrder.push(data._id)
+
+    const orderObj = { sets: curSetOrder }
+    console.log(orderObj)
+    const orderRes = await fetch('http://localhost:5000/set-order/', {
+      method: "PATCH",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(orderObj)
+    });
+
+    const orderData = await orderRes.json();
+    setSetOrder(orderData.sets)
   };
 
   const newQuestion = async (title, type, options) => {
@@ -125,7 +210,39 @@ function Admin() {
   }
 
 
+  const changeSetOrder = (sets) => {
 
+    const updatedSet = {
+      sets: sets,
+    };
+
+    const stringified = JSON.stringify(updatedSet);
+
+    fetch(`http://localhost:5000/set-order`, {
+      method: "PATCH",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: stringified,
+    })
+      .then((response) => {
+        if (!response.ok) throw Error(response.statusText);
+        return response.json();
+      })
+      .then((data) => {
+        setSetOrder(data.sets)
+        const orderedSets = []
+        for (let i = 0; i < data.sets.length; i++) {
+          for (let j = 0; j < sets.length; j++) {
+            if (data.sets[i] === sets[j]._id) {
+              orderedSets.push(sets[j]);
+              break;
+            }
+          }
+        }
+        setSets(orderedSets);
+      })
+  }
 
 
   return (
@@ -138,6 +255,7 @@ function Admin() {
         onDuplicate={duplicateSet}
         onAddSet={addSet}
         onNewQuestion={newQuestion}
+        onOrderChanged={changeSetOrder}
       />
     </div>
   );

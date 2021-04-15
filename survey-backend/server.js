@@ -36,6 +36,9 @@ app.use('/sets', setsRouter)
 const questionsRouter = require('./routes/questions')
 app.use('/questions', questionsRouter)
 
+const setOrderRouter = require('./routes/set-order')
+app.use('/set-order', setOrderRouter)
+
 
 //listener (this always comes last)
 app.listen(port, () => {
