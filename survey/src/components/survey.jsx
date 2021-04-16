@@ -12,7 +12,7 @@ const Survey = () => {
     });
   }, []);
 
-  if (surveyData !== null) {
+  if (surveyData !== null && surveyData !== undefined) {
     const { sets } = surveyData;
     return (
       <Set

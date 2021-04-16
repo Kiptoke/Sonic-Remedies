@@ -4,7 +4,7 @@ import Survey from "./components/survey";
 import Home from "./components/home";
 import NotFound from "./components/notFound";
 import ProtectedRoute from "./components/admin/ProtectedRoute";
-import UploadMusic from "./components/admin/uploadMusic";
+import UploadMusic from "./components/admin/uploadMusic/uploadMusic";
 import { initViewHeight } from "./utils/viewHeight";
 
 function App() {

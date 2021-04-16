@@ -1,7 +1,7 @@
 import "../../../css/components/musicPage.scss";
 import { Howl } from "howler";
 import { useState, useEffect, useCallback, Fragment } from "react";
-import audiofile from "../../../audio/AE.mp3";
+import audiofile from "../../../audio/1.mp3";
 import RenderPlay from "./renderPlay";
 import RenderContinue from "./renderContinue";
 import togglePlayer from "./togglePlayer";
@@ -10,7 +10,7 @@ import ProgressBar from "./progressBar";
 const MusicPlayer = ({ file_path, handleMusicDone }) => {
   const [playState, setPlayState] = useState("paused");
   const [canContinue, setCanContinue] = useState(false);
-  const [audio] = useState(
+  const [audio, setAudio] = useState(
     new Howl({ src: audiofile, volume: 0.2, html5: true })
   );
   const [progress, setProgress] = useState(0);
@@ -35,6 +35,7 @@ const MusicPlayer = ({ file_path, handleMusicDone }) => {
     return () => {
       clearInterval(checkHalfwayInterval);
       clearInterval(setProgressInterval);
+      audio.unload();
     };
   }, [checkHalfway, updateProgress, audio]);
 
