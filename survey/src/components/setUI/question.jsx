@@ -1,5 +1,5 @@
 import "../../css/components/question.scss";
-import { useState, useEffect, useRef } from "react";
+import { useState } from "react";
 import NextButton from "./nextButton";
 import MultipleChoice from "./questionTypes/multipleChoice";
 import MultipleSelect from "./questionTypes/multipleSelect";
@@ -24,14 +24,14 @@ function Question({ question, handleResponse }) {
   ask += type === "check-box" ? " Select all that apply." : "";
   const [response, setResponse] = useState(null);
   const [clickedNext, setClickedNext] = useState(false);
-  const q_old = useRef(question);
+  // const q_old = useRef(question);
 
-  useEffect(() => {
-    if (question !== q_old) {
-      setResponse(null);
-      setClickedNext(false);
-    }
-  }, [question, q_old]);
+  // useEffect(() => {
+  //   if (question !== q_old) {
+  //     setResponse(null);
+  //     setClickedNext(false);
+  //   }
+  // }, [question, q_old]);
   function handleResponded(response) {
     setResponse(response);
   }

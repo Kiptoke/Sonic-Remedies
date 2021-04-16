@@ -47,7 +47,7 @@ const Set = ({ setId, set, setCurrentSet, totalSets }) => {
       return (
         <div className="music-page global-container">
           <MusicPage
-            file_path={"../../audio/BNS_BWV538.mp3"}
+            file_path={"/2.mp3"}
             handleMusicDone={() => {
               setPage("questions");
             }}

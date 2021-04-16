@@ -5,7 +5,6 @@
   display: flex;
   flex-direction: column;
   color: white;
-  justify-content: center;
   align-items: center;
   background-color: $textBgColor;
   padding-left: 1rem;
@@ -24,5 +23,42 @@
   p {
     font-size: $small;
     color: red;
+  }
+  .improvisation-field {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    .improvisation-option {
+      margin: 1rem;
+      display: flex;
+      flex-direction: row;
+      label {
+        flex-shrink: 1;
+      }
+      input {
+        margin: 0 1rem;
+        width: 1rem;
+        height: 1rem;
+        flex-shrink: 1;
+      }
+    }
+  }
+  .text-fields {
+    display: flex;
+    flex-direction: column;
+    .text-field {
+      margin-top: 1rem;
+      width: 100%;
+      display: flex;
+      label {
+        flex-shrink: 1;
+        flex-grow: 1;
+      }
+      input {
+        max-width: 60%;
+        flex-shrink: 1;
+        flex-grow: 1;
+      }
+    }
   }
 }

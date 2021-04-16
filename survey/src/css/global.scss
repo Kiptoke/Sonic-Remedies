@@ -22,6 +22,10 @@ body,
   padding: 0;
 }
 
+::placeholder {
+  font-style: italic;
+}
+
 //The bounding box for the app
 .global-container {
   background-color: $mainBgColor;
