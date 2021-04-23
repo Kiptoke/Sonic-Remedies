@@ -36,21 +36,24 @@ const MultipleSelect = ({ responses, handleResponded }) => {
   }, [selections, handleResponded]);
 
   return (
-    <div className="question-ms option-box">
-      {responses.map((res, num) => {
-        return (
-          <div
-            key={num}
-            className="option"
-            onClick={() => {
-              setSelections(Select([...selections], num));
-            }}
-          >
-            <div className="response">{res}</div>
-            {renderSelect(selections, num)}
-          </div>
-        );
-      })}
+    <div>
+      <h2>Select all that apply.</h2>
+      <div className="question-ms option-box">
+        {responses.map((res, num) => {
+          return (
+            <div
+              key={num}
+              className="option"
+              onClick={() => {
+                setSelections(Select([...selections], num));
+              }}
+            >
+              <div className="response">{res}</div>
+              {renderSelect(selections, num)}
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 };
