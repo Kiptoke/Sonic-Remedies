@@ -1,8 +1,0 @@
----
-deployment:
-  tasks:
-    - export DEPLOYPATH=/home/sonicrem/repositories/Sonic-Remedies/
-    - /public $DEPLOYPATH
-    - /src $DEPLOYPATH
-    - .npmrc $DEPLOYPATH
-    - package.json $DEPLOYPATH
