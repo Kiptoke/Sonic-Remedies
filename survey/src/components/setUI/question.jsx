@@ -23,7 +23,6 @@ function renderQuestion(type, responses, handleResponded) {
 function Question({ question, handleResponse }) {
   const { type, responses } = question;
   let { ask } = question;
-  ask += type === "check-box" ? " Select all that apply." : "";
   const [response, setResponse] = useState(null);
   const [clickedNext, setClickedNext] = useState(false);
   // const q_old = useRef(question);
