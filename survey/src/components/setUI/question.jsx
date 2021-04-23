@@ -5,6 +5,7 @@ import MultipleChoice from "./questionTypes/multipleChoice";
 import MultipleSelect from "./questionTypes/multipleSelect";
 import FreeResponse from "./questionTypes/freeResponse";
 import ColorChoice from "./questionTypes/colorChoice";
+import Slider from "./questionTypes/slider";
 
 function handleNext(response, handleResponse, setClickedNext) {
   handleResponse(response);
@@ -16,6 +17,7 @@ function renderQuestion(type, responses, handleResponded) {
   else if (type === "check-box") return <MultipleSelect {...params} />;
   else if (type === "short-answer") return <FreeResponse {...params} />;
   else if (type === "color") return <ColorChoice {...params} />;
+  else if (type === "slider") return <Slider {...params} />;
 }
 
 function Question({ question, handleResponse }) {
