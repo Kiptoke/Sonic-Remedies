@@ -4,10 +4,10 @@
 $mainBgColor: #eadbec;
 $textBgColor: #2f4858;
 $textHovColor: #662485;
-$small: 11px;
-$medium: 15px;
-$large: 18px;
-$huge: 24px;
+$small: 18px;
+$medium: 20px;
+$large: 28px;
+$huge: 36px;
 
 //Function for getting the propper height for mobile
 @function vh($quantity) {
