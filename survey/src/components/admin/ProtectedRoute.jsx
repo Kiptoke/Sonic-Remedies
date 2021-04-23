@@ -4,7 +4,7 @@ import GoogleLogin from "react-google-login";
 import Admin from "./Admin";
 
 const ProtectedRoute = ({ component: Component, ...rest }) => {
-  const [loggedIn, setLoggedIn] = useState(true);
+  const [loggedIn, setLoggedIn] = useState(false);
 
   function responseGoogle(response) {
     console.log(response);
