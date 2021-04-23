@@ -2,5 +2,4 @@
 deployment:
   tasks:
     - export DEPLOYPATH=/home/sonicrem/public_html/
-    - /survey -R build $DEPLOYPATH
-    - /.htaccess $DEPLOYPATH
+    - /bin/cp build -R $DEPLOYPATH
