@@ -2,7 +2,7 @@
 deployment:
   tasks:
     - export DEPLOYPATH=/home/sonicrem/repositories/Sonic-Remedies/
-    - /survey/public $DEPLOYPATH
-    - /survey/src $DEPLOYPATH
+    - /survey -R public $DEPLOYPATH
+    - /survey -R src $DEPLOYPATH
     - /survey/.npmrc $DEPLOYPATH
     - /survey/package.json $DEPLOYPATH
