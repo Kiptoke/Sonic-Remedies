@@ -1,8 +1,6 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/sonicrem/survey/
-    - /survey -R public $DEPLOYPATH
-    - /survey -R src $DEPLOYPATH
-    - /survey/.npmrc $DEPLOYPATH
-    - /survey/package.json $DEPLOYPATH
+    - export DEPLOYPATH=/home/sonicrem/public_html/
+    - /survey -R build $DEPLOYPATH
+    - /.htaccess $DEPLOYPATH
