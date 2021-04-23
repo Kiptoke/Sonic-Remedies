@@ -19,7 +19,7 @@ function verifyInput(evt, setResponse, setValidationError) {
   }
 }
 
-const FreeResponse = ({ responses, handleResponded }) => {
+const FreeResponse = ({ handleResponded }) => {
   const [response, setResponse] = useState(null);
   const [validationError, setValidationError] = useState("");
   useEffect(() => {
