@@ -1,34 +1,30 @@
 import { useState, useEffect } from "react";
-
+import API from "../../services/api-client";
 
 import AdminSets from "./AdminSets";
 
 import "../../css/components/admin/admin.css";
-
 
 function Admin() {
   const [setOrder, setSetOrder] = useState([]);
   const [sets, setSets] = useState([]);
   const [questions, setQuestions] = useState([]);
 
-
   //get sets
   useEffect(() => {
-
     const getSets = async () => {
       const serverSets = await fetchSets();
       const res = await fetch("http://localhost:5000/set-order");
       const orderData = await res.json();
 
-
       if (orderData.length === 0) {
-        let order = []
+        let order = [];
         for (let i = 0; i < serverSets.length; i++) {
-          order.push(serverSets[i]._id)
+          order.push(serverSets[i]._id);
         }
         const orderObj = {
-          sets: order
-        }
+          sets: order,
+        };
         fetch("http://localhost:5000/set-order", {
           method: "POST",
           headers: {
@@ -37,16 +33,15 @@ function Admin() {
           body: JSON.stringify(orderObj),
         })
           .then((res) => {
-            res.json()
+            res.json();
           })
           .then((data) => {
-            setSetOrder(data)
-          })
-        setSets(serverSets)
-      }
-      else {
-        setSetOrder(orderData[0].sets)
-        const orderedSets = []
+            setSetOrder(data);
+          });
+        setSets(serverSets);
+      } else {
+        setSetOrder(orderData[0].sets);
+        const orderedSets = [];
         for (let i = 0; i < orderData[0].sets.length; i++) {
           for (let j = 0; j < serverSets.length; j++) {
             if (orderData[0].sets[i] === serverSets[j]._id) {
@@ -61,12 +56,10 @@ function Admin() {
     const getQuestions = async () => {
       const serverQuestions = await fetchQuestions();
       setQuestions(serverQuestions);
-    }
+    };
     getSets();
     getQuestions();
   }, []);
-
-
 
   //fetch sets
   const fetchSets = async () => {
@@ -81,7 +74,7 @@ function Admin() {
     const data = await res.json();
 
     return data;
-  }
+  };
 
   const deleteSet = async (id) => {
     var retval = window.confirm("Delete this set?");
@@ -90,24 +83,23 @@ function Admin() {
         method: "DELETE",
       });
       setSets(sets.filter((set) => set._id !== id));
-      const curSetOrder = setOrder.filter((set) => set !== id)
-      const orderObj = { sets: curSetOrder }
-      const res = await fetch('http://localhost:5000/set-order/', {
+      const curSetOrder = setOrder.filter((set) => set !== id);
+      const orderObj = { sets: curSetOrder };
+      const res = await fetch("http://localhost:5000/set-order/", {
         method: "PATCH",
         headers: {
           "Content-type": "application/json",
         },
-        body: JSON.stringify(orderObj)
+        body: JSON.stringify(orderObj),
       });
 
       const orderData = await res.json();
-      setSetOrder(orderData.sets)
+      setSetOrder(orderData.sets);
     }
-
   };
 
   const duplicateSet = async (set) => {
-    const dupeSet = { title: set.title, questions: set.questions }
+    const dupeSet = { title: set.title, questions: set.questions };
     const res = await fetch("http://localhost:5000/sets", {
       method: "POST",
       headers: {
@@ -120,22 +112,22 @@ function Admin() {
     setSets([...sets, data]);
 
     //set order
-    const curSetOrder = setOrder
-    curSetOrder.push(data._id)
+    const curSetOrder = setOrder;
+    curSetOrder.push(data._id);
 
-    const orderObj = { sets: curSetOrder }
-    console.log(orderObj)
-    const orderRes = await fetch('http://localhost:5000/set-order/', {
+    const orderObj = { sets: curSetOrder };
+    console.log(orderObj);
+    const orderRes = await fetch("http://localhost:5000/set-order/", {
       method: "PATCH",
       headers: {
         "Content-type": "application/json",
       },
-      body: JSON.stringify(orderObj)
+      body: JSON.stringify(orderObj),
     });
 
     const orderData = await orderRes.json();
-    setSetOrder(orderData.sets)
-  }
+    setSetOrder(orderData.sets);
+  };
 
   const addSet = async (title, music) => {
     const questions = [];
@@ -153,25 +145,25 @@ function Admin() {
     setSets([...sets, data]);
 
     //set order
-    const curSetOrder = setOrder
-    curSetOrder.push(data._id)
+    const curSetOrder = setOrder;
+    curSetOrder.push(data._id);
 
-    const orderObj = { sets: curSetOrder }
-    console.log(orderObj)
-    const orderRes = await fetch('http://localhost:5000/set-order/', {
+    const orderObj = { sets: curSetOrder };
+    console.log(orderObj);
+    const orderRes = await fetch("http://localhost:5000/set-order/", {
       method: "PATCH",
       headers: {
         "Content-type": "application/json",
       },
-      body: JSON.stringify(orderObj)
+      body: JSON.stringify(orderObj),
     });
 
     const orderData = await orderRes.json();
-    setSetOrder(orderData.sets)
+    setSetOrder(orderData.sets);
   };
 
   const newQuestion = async (title, type, options) => {
-    const question = { title: title, input_type: type }
+    const question = { title: title, input_type: type };
     if (options !== "") {
       const opts_arr = parseOptions(options);
       question.options = opts_arr;
@@ -193,7 +185,7 @@ function Admin() {
     let start_of_opt = 0;
     for (let i = 0; i < options.length; i++) {
       let current = options.charAt(i);
-      if (current === ';') {
+      if (current === ";") {
         let sub = options.substring(start_of_opt, i);
         let trimmed = sub.trim();
         arr.push(trimmed);
@@ -209,9 +201,7 @@ function Admin() {
     return arr;
   }
 
-
   const changeSetOrder = (sets) => {
-
     const updatedSet = {
       sets: sets,
     };
@@ -230,8 +220,8 @@ function Admin() {
         return response.json();
       })
       .then((data) => {
-        setSetOrder(data.sets)
-        const orderedSets = []
+        setSetOrder(data.sets);
+        const orderedSets = [];
         for (let i = 0; i < data.sets.length; i++) {
           for (let j = 0; j < sets.length; j++) {
             if (data.sets[i] === sets[j]._id) {
@@ -241,9 +231,8 @@ function Admin() {
           }
         }
         setSets(orderedSets);
-      })
-  }
-
+      });
+  };
 
   return (
     <div className="outer-div">
@@ -262,5 +251,3 @@ function Admin() {
 }
 
 export default Admin;
-
-
