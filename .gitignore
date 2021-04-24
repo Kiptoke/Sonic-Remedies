@@ -1,3 +1,7 @@
+#passwords
+passwords.txt
+*.jar
+
 # Logs
 logs
 *.log
