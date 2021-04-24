@@ -9,7 +9,7 @@ class Home extends Component {
   render() {
     return (
       <div className="home global-container">
-        <h1>Welcome to the survey</h1>
+        <h1>Welcome to the survey!</h1>
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin
           fringilla quis purus eu rhoncus. Duis ornare odio nec dolor aliquet
