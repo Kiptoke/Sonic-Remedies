@@ -12,16 +12,16 @@ app.use(express.json());
 app.use(cors());
 
 //db connection (mongoose)
+const connection_string = process.env.SONICREM_NET
+  ? "mongodb+srv://cluster0.mz4hd.mongodb.net/SonicRemediesDB?authSource=%24external&authMechanism=MONGODB-X509&retryWrites=true&w=majority"
+  : `mongodb+srv://${process.env.SONICREM_DATABASE_AUTH}@cluster0.mz4hd.mongodb.net/SonicRemediesDB?retryWrites=true&w=majority`;
 mongoose
-  .connect(
-    `mongodb+srv://${process.env.SONICREM_DATABASE_AUTH}@cluster0.mz4hd.mongodb.net/music-app?retryWrites=true&w=majority`,
-    {
-      useNewUrlParser: true,
-      useCreateIndex: true,
-      useUnifiedTopology: true,
-    }
-  )
-  .catch((error) => console.log(error));
+  .connect(connection_string, {
+    useNewUrlParser: true,
+    useCreateIndex: true,
+    useUnifiedTopology: true,
+  })
+  .catch((error) => console.log(connection_string));
 
 const db = mongoose.connection;
 db.on("error", (error) => {
