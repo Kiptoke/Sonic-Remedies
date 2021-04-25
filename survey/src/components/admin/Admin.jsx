@@ -62,11 +62,10 @@ function Admin() {
   };
 
   const duplicateSet = async (set) => {
-    addSet(set.title, set.music);
+    addSet(set.title, set.music, set.questions);
   };
 
-  const addSet = async (title, music) => {
-    const questions = [];
+  const addSet = async (title, music, questions = []) => {
     const set = { title: title, questions: questions, music: music };
     const data = await API.post("sets", set);
     setSets([...sets, data]);
