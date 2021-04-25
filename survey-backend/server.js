@@ -13,11 +13,12 @@ app.use(express.json());
 app.use(cors());
 
 //db connection (mongoose)
-const certificate = fs.readFileSync(
-  process.env.SONICREM_NET
-    ? "../ssl/certs/sonicremedies_net_ee2f8_ed3d3_1626739199_99492aa2cd009eb466f472b351714a04.crt"
-    : null
-);
+let certificate = "";
+if (process.env.SONICREM_NET)
+  certificate = fs.readFileSync(
+    "../ssl/certs/sonicremedies_net_ee2f8_ed3d3_1626739199_99492aa2cd009eb466f472b351714a04.crt"
+  );
+console.log(certificate);
 const connection_string = process.env.SONICREM_NET
   ? "mongodb+srv://cluster0.mz4hd.mongodb.net/music-app?authSource=%24external&authMechanism=MONGODB-X509&retryWrites=true&w=majority"
   : `mongodb+srv://${process.env.SONICREM_DB_AUTH}@cluster0.mz4hd.mongodb.net/music-app?retryWrites=true&w=majority`;
@@ -46,6 +47,7 @@ const questionsRouter = require("./routes/questions");
 app.use("/questions", questionsRouter);
 
 const setOrderRouter = require("./routes/set-order");
+const { Certificate } = require("crypto");
 app.use("/set-order", setOrderRouter);
 
 //listener (this always comes last)
