@@ -26,6 +26,7 @@ mongoose
     useNewUrlParser: true,
     useCreateIndex: true,
     useUnifiedTopology: true,
+    sslKey: certificate,
     sslCert: certificate,
   })
   .catch((error) => console.log(connection_string));
