@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import AdminQCheckbox from "./AdminQCheckbox";
+import API from "../../services/api-client";
 
 const AddQuestion = ({ onAddQuestions, currentQuestions }) => {
   const [questions, setQuestions] = useState([]);
@@ -8,21 +9,18 @@ const AddQuestion = ({ onAddQuestions, currentQuestions }) => {
   //get questions
   useEffect(() => {
     let mounted = true;
-    if (mounted) {
-      fetch("http://localhost:5000/questions")
-        .then((response) => {
-          if (!response.ok) throw Error(response.statusText);
-          return response.json();
-        })
-        .then((data) => {
-          const filtered = data.filter(
-            (question) => !currentQuestions.includes(question._id)
-          )
-          setQuestions(filtered);
-        })
-    }
-    return () => mounted = false;
+    const fetchQuestions = async () => {
+      const data = await API.getAll("questions");
+      const filtered = data.filter(
+        (question) => !currentQuestions.includes(question._id)
+      );
+      setQuestions(filtered);
+    };
 
+    if (mounted) {
+      fetchQuestions();
+    }
+    return () => (mounted = false);
   }, [currentQuestions]);
 
   const onSubmit = (e) => {
@@ -47,7 +45,11 @@ const AddQuestion = ({ onAddQuestions, currentQuestions }) => {
       {questions.map(
         (question) =>
           !currentQuestions.includes(question) && (
-            <AdminQCheckbox question={question} addToSelected={addToSelected} key={question._id} />
+            <AdminQCheckbox
+              question={question}
+              addToSelected={addToSelected}
+              key={question._id}
+            />
           )
       )}
       <input type="submit" value="Add Questions" />

@@ -42,5 +42,17 @@ const API = {
       .then((res) => res.data)
       .catch(onError);
   },
+  patchOne(resource, id, data) {
+    return axios
+      .patch(endpoint + "/" + resource + "/" + id, data)
+      .then((res) => res.data)
+      .catch(onError);
+  },
+  putOne(resource, id, data) {
+    return axios
+      .put(endpoint + "/" + resource + "/" + id, data)
+      .then((res) => res.data)
+      .catch(onError);
+  },
 };
 export default API;
