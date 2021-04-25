@@ -12,7 +12,10 @@ const API = {
   getAll(resource) {
     return axios
       .get(endpoint + "/" + resource)
-      .then((res) => res.data)
+      .then((res) => {
+        console.log(res.data);
+        return res.data;
+      })
       .catch(onError);
   },
   getOne(resource, id) {
@@ -21,6 +24,23 @@ const API = {
       .then((res) => res.data)
       .catch(onError);
   },
+  post(resource, data) {
+    return axios
+      .post(endpoint + "/" + resource, data)
+      .then((res) => res.data)
+      .catch(onError);
+  },
+  deleteOne(resource, id) {
+    return axios
+      .delete(endpoint + "/" + resource + "/" + id)
+      .then((res) => res.data)
+      .catch(onError);
+  },
+  patch(resource, data) {
+    return axios
+      .patch(endpoint + "/" + resource, data)
+      .then((res) => res.data)
+      .catch(onError);
+  },
 };
-
 export default API;

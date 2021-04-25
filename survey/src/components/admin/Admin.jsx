@@ -13,9 +13,8 @@ function Admin() {
   //get sets
   useEffect(() => {
     const getSets = async () => {
-      const serverSets = await fetchSets();
-      const res = await fetch("http://localhost:5000/set-order");
-      const orderData = await res.json();
+      const serverSets = await API.getAll("sets");
+      const orderData = await API.getAll("set-order");
 
       if (orderData.length === 0) {
         let order = [];
@@ -25,19 +24,8 @@ function Admin() {
         const orderObj = {
           sets: order,
         };
-        fetch("http://localhost:5000/set-order", {
-          method: "POST",
-          headers: {
-            "Content-type": "application/json",
-          },
-          body: JSON.stringify(orderObj),
-        })
-          .then((res) => {
-            res.json();
-          })
-          .then((data) => {
-            setSetOrder(data);
-          });
+        const newSetOrder = await API.post("set-order", orderObj);
+        setSetOrder(newSetOrder);
         setSets(serverSets);
       } else {
         setSetOrder(orderData[0].sets);
@@ -54,94 +42,33 @@ function Admin() {
       }
     };
     const getQuestions = async () => {
-      const serverQuestions = await fetchQuestions();
+      const serverQuestions = await API.getAll("questions");
       setQuestions(serverQuestions);
     };
     getSets();
     getQuestions();
   }, []);
 
-  //fetch sets
-  const fetchSets = async () => {
-    const res = await fetch("http://localhost:5000/sets");
-    const data = await res.json();
-    return data;
-  };
-
-  //fetch questions
-  const fetchQuestions = async () => {
-    const res = await fetch("http://localhost:5000/questions");
-    const data = await res.json();
-
-    return data;
-  };
-
   const deleteSet = async (id) => {
     var retval = window.confirm("Delete this set?");
     if (retval === true) {
-      await fetch(`http://localhost:5000/sets/${id}`, {
-        method: "DELETE",
-      });
+      API.deleteOne("sets", id);
       setSets(sets.filter((set) => set._id !== id));
       const curSetOrder = setOrder.filter((set) => set !== id);
       const orderObj = { sets: curSetOrder };
-      const res = await fetch("http://localhost:5000/set-order/", {
-        method: "PATCH",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify(orderObj),
-      });
-
-      const orderData = await res.json();
+      const orderData = await API.patch("set-order", orderObj);
       setSetOrder(orderData.sets);
     }
   };
 
   const duplicateSet = async (set) => {
-    const dupeSet = { title: set.title, questions: set.questions };
-    const res = await fetch("http://localhost:5000/sets", {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify(dupeSet),
-    });
-
-    const data = await res.json();
-    setSets([...sets, data]);
-
-    //set order
-    const curSetOrder = setOrder;
-    curSetOrder.push(data._id);
-
-    const orderObj = { sets: curSetOrder };
-    console.log(orderObj);
-    const orderRes = await fetch("http://localhost:5000/set-order/", {
-      method: "PATCH",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify(orderObj),
-    });
-
-    const orderData = await orderRes.json();
-    setSetOrder(orderData.sets);
+    addSet(set.title, set.music);
   };
 
   const addSet = async (title, music) => {
     const questions = [];
     const set = { title: title, questions: questions, music: music };
-
-    const res = await fetch("http://localhost:5000/sets", {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify(set),
-    });
-
-    const data = await res.json();
+    const data = await API.post("sets", set);
     setSets([...sets, data]);
 
     //set order
@@ -149,16 +76,7 @@ function Admin() {
     curSetOrder.push(data._id);
 
     const orderObj = { sets: curSetOrder };
-    console.log(orderObj);
-    const orderRes = await fetch("http://localhost:5000/set-order/", {
-      method: "PATCH",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify(orderObj),
-    });
-
-    const orderData = await orderRes.json();
+    const orderData = await API.patch("set-order", orderObj);
     setSetOrder(orderData.sets);
   };
 
@@ -168,15 +86,7 @@ function Admin() {
       const opts_arr = parseOptions(options);
       question.options = opts_arr;
     }
-
-    const res = await fetch("http://localhost:5000/questions", {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify(question),
-    });
-    const data = await res.json();
+    const data = await API.post("questions", question);
     setQuestions([...questions, data]);
   };
 
@@ -201,37 +111,22 @@ function Admin() {
     return arr;
   }
 
-  const changeSetOrder = (sets) => {
+  const changeSetOrder = async (sets) => {
     const updatedSet = {
       sets: sets,
     };
-
-    const stringified = JSON.stringify(updatedSet);
-
-    fetch(`http://localhost:5000/set-order`, {
-      method: "PATCH",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: stringified,
-    })
-      .then((response) => {
-        if (!response.ok) throw Error(response.statusText);
-        return response.json();
-      })
-      .then((data) => {
-        setSetOrder(data.sets);
-        const orderedSets = [];
-        for (let i = 0; i < data.sets.length; i++) {
-          for (let j = 0; j < sets.length; j++) {
-            if (data.sets[i] === sets[j]._id) {
-              orderedSets.push(sets[j]);
-              break;
-            }
-          }
+    const data = await API.patch("set-order", updatedSet);
+    setSetOrder(data.sets);
+    const orderedSets = [];
+    for (let i = 0; i < data.sets.length; i++) {
+      for (let j = 0; j < sets.length; j++) {
+        if (data.sets[i] === sets[j]._id) {
+          orderedSets.push(sets[j]);
+          break;
         }
-        setSets(orderedSets);
-      });
+      }
+    }
+    setSets(orderedSets);
   };
 
   return (
