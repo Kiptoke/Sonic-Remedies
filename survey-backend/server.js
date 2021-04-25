@@ -15,7 +15,7 @@ app.use(cors());
 //db connection (mongoose)
 const certificate = fs.readFileSync(
   process.env.SONICREM_NET
-    ? "~/ssl/certs/sonicremedies_net_ee2f8_ed3d3_1626739199_99492aa2cd009eb466f472b351714a04.crt"
+    ? "../ssl/certs/sonicremedies_net_ee2f8_ed3d3_1626739199_99492aa2cd009eb466f472b351714a04.crt"
     : null
 );
 const connection_string = process.env.SONICREM_NET
