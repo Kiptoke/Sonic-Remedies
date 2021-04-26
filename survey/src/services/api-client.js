@@ -1,8 +1,5 @@
 import axios from "axios";
 
-// const endpoint = process.env.SONICREM_DB_URI
-//   ? process.env.SONICREM_DB_URI
-//   : "http://localhost:5000";
 const endpoint = "https://api.sonicremedies.net:31313";
 
 const onError = (err) => {

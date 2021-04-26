@@ -26,18 +26,12 @@ if (process.env.SONICREM_NET) {
   );
 }
 
-//db connection (mongoose)
-// const connection_string = process.env.SONICREM_NET
-//   ? "mongodb+srv://cluster0.mz4hd.mongodb.net/music-app?authSource=%24external&authMechanism=MONGODB-X509&retryWrites=true&w=majority"
-//   : `mongodb+srv://${process.env.SONICREM_DB_AUTH}@cluster0.mz4hd.mongodb.net/music-app?retryWrites=true&w=majority`;
 const connection_string = `mongodb+srv://${process.env.SONICREM_DB_AUTH}@cluster0.mz4hd.mongodb.net/music-app?retryWrites=true&w=majority`;
 mongoose
   .connect(connection_string, {
     useNewUrlParser: true,
     useCreateIndex: true,
     useUnifiedTopology: true,
-    // sslKey: prikey,
-    // sslCert: certificate,
   })
   .catch((error) => console.log(connection_string));
 
@@ -56,19 +50,25 @@ const questionsRouter = require("./routes/questions");
 app.use("/questions", questionsRouter);
 
 const setOrderRouter = require("./routes/set-order");
-// const { Certificate } = require("crypto");
+
 app.use("/set-order", setOrderRouter);
 
 //listener (this always comes last)
-https
-  .createServer(
-    {
-      key: privateKey,
-      cert: certificate,
-    },
-    app
-  )
-  .listen(port);
-// app.listen(port, () => {
-//   console.log(`listening on localhost: ${port}`);
-// });
+
+//Host
+if (process.env.SONICREM_NET) {
+  https
+    .createServer(
+      {
+        key: privateKey,
+        cert: certificate,
+      },
+      app
+    )
+    .listen(port, () => console.log(`listening on localhost: ${port}`));
+  //Local
+} else {
+  app.listen(port, () => {
+    console.log(`listening on localhost: ${port}`);
+  });
+}
