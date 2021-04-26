@@ -1,16 +1,18 @@
 import { useState } from "react";
 import { checkFileInput, checkTextInput } from "./musicInputValidation";
 import TextFields from "./textFields";
-import ImprovisationField from "./improvisationField";
+import YesNoFields from "./yesNoFields";
+import SliderFields from "./sliderFields";
+import PrevailKeyField from "./prevailKeyField";
 
 const MusicFileForm = () => {
   const [fileReadyToUpload, setFileReadyToUpload] = useState(false);
   const [fieldsFilled, setFieldsFilled] = useState(false);
-  const [boxTicked, setBoxTicked] = useState(false);
   const [fileValidationError, setFileValidationError] = useState("");
   return (
     <form>
       <input
+        required={true}
         type="file"
         onInput={(e) => {
           checkFileInput(e, setFileValidationError, setFileReadyToUpload);
@@ -21,14 +23,12 @@ const MusicFileForm = () => {
         validator={checkTextInput}
         setFieldsFilled={setFieldsFilled}
       />
-      <ImprovisationField setBoxTicked={setBoxTicked} />
+      <PrevailKeyField />
+      <SliderFields />
+      <YesNoFields />
       <input
         type="submit"
-        style={
-          fileReadyToUpload && fieldsFilled && boxTicked
-            ? {}
-            : { display: "none" }
-        }
+        style={fileReadyToUpload && fieldsFilled ? {} : { display: "none" }}
       ></input>
     </form>
   );

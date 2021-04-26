@@ -5,27 +5,20 @@ const inputFields = [
   { name: "Album", example: "Chromatica" },
   { name: "Genre", example: "Pop" },
   { name: "Tempo (bpm)", example: "118" },
-  { name: "Prevailing Key", example: "Ab Major" },
-  { name: "Consistent Vibe", example: "Dance Party" },
 ];
 
 const TextFields = ({ validator, setFieldsFilled }) => {
-  const [errorMessages, setErrorMessages] = useState([
-    undefined,
-    undefined,
-    undefined,
-    undefined,
-    undefined,
-    undefined,
-    undefined,
-  ]);
+  const initErrors = [];
+  inputFields.forEach(() => initErrors.push(undefined));
+  const [errorMessages, setErrorMessages] = useState(initErrors);
   return (
-    <div className="text-fields">
+    <div>
       {inputFields.map((field, i) => (
-        <div>
-          <div className="text-field">
-            <label for={field.name}>{field.name}</label>
+        <div key={field.name} className="field-container">
+          <div className="fc-main">
+            <label htmlFor={field.name}>{field.name}</label>
             <input
+              required={true}
               type="text"
               name={field.name}
               placeholder={"Ex. " + field.example}
@@ -40,7 +33,7 @@ const TextFields = ({ validator, setFieldsFilled }) => {
               }}
             ></input>
           </div>
-          <p>{errorMessages[i]}</p>
+          <p className="fc-err">{errorMessages[i]}</p>
         </div>
       ))}
     </div>

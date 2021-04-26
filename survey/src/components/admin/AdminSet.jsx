@@ -111,7 +111,7 @@ const AdminSet = ({ set, onDelete, onDuplicate }) => {
       <h2>Questions in Set:</h2>
       <ol>
         {questions.map((question) => (
-          <li>
+          <li key={question._id}>
             <AdminQuestion
               key={question._id}
               question={question}

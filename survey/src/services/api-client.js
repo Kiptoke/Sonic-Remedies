@@ -11,7 +11,6 @@ const API = {
     return axios
       .get(endpoint + "/" + resource)
       .then((res) => {
-        console.log(res.data);
         return res.data;
       })
       .catch(onError);
