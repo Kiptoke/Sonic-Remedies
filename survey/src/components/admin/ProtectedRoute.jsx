@@ -3,7 +3,7 @@ import { Route } from "react-router-dom";
 import GoogleLogin from "react-google-login";
 
 const ProtectedRoute = ({ component: Component, ...rest }) => {
-  const [loggedIn, setLoggedIn] = useState(true);
+  const [loggedIn, setLoggedIn] = useState(false);
 
   function responseGoogle(response) {
     console.log(response);
