@@ -65,7 +65,7 @@ if (process.env.SONICREM_NET) {
       },
       app
     )
-    .listen(port, "localhost", () =>
+    .listen(port, "https://sonicremedies.net", () =>
       console.log(`listening on localhost: ${port}`)
     );
   //Local
