@@ -29,7 +29,7 @@ const ProtectedRoute = ({ component: Component, ...rest }) => {
         <div>
           <h3>Please log in to continue</h3>
           <GoogleLogin
-            clientId="445603256435-u551v2vd72660dfs8em9mtgmbd6sg4rt.apps.googleusercontent.com"
+            clientId="445603256435-vggfssfjijfmmie75f0k7if4mjlvtp8b.apps.googleusercontent.com"
             buttonText="Login"
             onSuccess={(res) => responseGoogle(res)}
             onFailure={(res) => responseFailure(res)}
