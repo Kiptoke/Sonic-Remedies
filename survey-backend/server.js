@@ -65,10 +65,12 @@ if (process.env.SONICREM_NET) {
       },
       app
     )
-    .listen(port, () => console.log(`listening on localhost: ${port}`));
+    .listen(port, "localhost", () =>
+      console.log(`listening on localhost: ${port}`)
+    );
   //Local
 } else {
-  app.listen(port, () => {
+  app.listen(port, "localhost", () => {
     console.log(`listening on localhost: ${port}`);
   });
 }
