@@ -5,6 +5,7 @@ import Home from "./components/home";
 import NotFound from "./components/notFound";
 import ProtectedRoute from "./components/admin/ProtectedRoute";
 import UploadMusic from "./components/admin/uploadMusic/uploadMusic";
+import Admin from "./components/admin/Admin";
 import { initViewHeight } from "./utils/viewHeight";
 
 function App() {
@@ -15,8 +16,8 @@ function App() {
       <Switch>
         <Route path="/survey" component={Survey} />
         <Route path="/home" component={Home} />
-        <Route path="/admin/uploadMusic" component={UploadMusic} />
-        <Route path="/admin" component={ProtectedRoute} />
+        <ProtectedRoute path="/admin/uploadMusic" component={UploadMusic} />
+        <ProtectedRoute path="/admin" component={Admin} />
         <Route path="/not-found" component={NotFound} />
         <Redirect from="/" exact to="/home" />
         <Redirect to="/not-found" />

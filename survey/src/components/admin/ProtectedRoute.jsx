@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Route } from "react-router-dom";
 import GoogleLogin from "react-google-login";
-import Admin from "./Admin";
 
 const ProtectedRoute = ({ component: Component, ...rest }) => {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -32,8 +31,8 @@ const ProtectedRoute = ({ component: Component, ...rest }) => {
           <GoogleLogin
             clientId="445603256435-u551v2vd72660dfs8em9mtgmbd6sg4rt.apps.googleusercontent.com"
             buttonText="Login"
-            onSuccess={responseGoogle}
-            onFailure={responseFailure}
+            onSuccess={(res) => responseGoogle(res)}
+            onFailure={(res) => responseFailure(res)}
             cookiePolicy={"single_host_origin"}
             isSignedIn={true}
           />
@@ -44,7 +43,7 @@ const ProtectedRoute = ({ component: Component, ...rest }) => {
         {...rest}
         render={(props) => {
           if (loggedIn === true) {
-            return <Admin {...props} />;
+            return <Component {...props} />;
           }
         }}
       />
