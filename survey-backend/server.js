@@ -11,7 +11,7 @@ const https = require("https");
 const app = express();
 const port = process.env.SONICREM_API_PORT || 5000;
 const origin = process.env.SONICREM_NET
-  ? `https://sonicremedies.net:${process.env.SONICREM_CLIENT_PORT}`
+  ? `https://sonicremedies.net`
   : "http://localhost:3000";
 //middlewares
 app.use(express.json());
