@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const endpoint = "https://api.sonicremedies.net:31313";
+const endpoint = "https://sonicremedies.net/api:31313";
 
 const onError = (err) => {
   console.error(err.message);
