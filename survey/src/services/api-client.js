@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const endpoint = process.env.LOCALHOST
+const { REACT_APP_LOCALHOST } = process.env;
+const endpoint = REACT_APP_LOCALHOST
   ? "http://localhost:5000"
   : "https://sonicremedies.net:31313";
 
