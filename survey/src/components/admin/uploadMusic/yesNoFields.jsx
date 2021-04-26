@@ -2,8 +2,8 @@ const fields = [{ name: "Consistent Vibe" }];
 
 const YesNoFields = () => {
   return fields.map((field) => (
-    <div className="field-container">
-      <div className="fc-main" key={field.name}>
+    <div className="field-container" key={field.name}>
+      <div className="fc-main">
         <label htmlFor={field.name}>{field.name}</label>
         <div
           style={{

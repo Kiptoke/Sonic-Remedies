@@ -12,6 +12,8 @@ const keyQualities = [
 
 const PrevailKeyField = () => {
   const [keySelected, setKeySelected] = useState(false);
+  const [flatChecked, setFlatChecked] = useState(false);
+  const [sharpChecked, setSharpChecked] = useState(false);
   return (
     <div className="field-container">
       <div className="fc-main">
@@ -55,11 +57,23 @@ const PrevailKeyField = () => {
                 }}
               >
                 <label htmlFor="♯">♯</label>
-                <input style={{ width: "1rem" }} type="checkbox" name="♯" />
+                <input
+                  style={{ width: "1rem" }}
+                  type="checkbox"
+                  name="♯"
+                  disabled={flatChecked}
+                  onChange={() => setSharpChecked(!sharpChecked)}
+                />
               </div>
               <div style={{ marginRight: "0.5rem" }}>
                 <label htmlFor="♭">♭</label>
-                <input style={{ width: "1rem" }} type="checkbox" name="♭" />
+                <input
+                  style={{ width: "1rem" }}
+                  type="checkbox"
+                  name="♭"
+                  disabled={sharpChecked}
+                  onClick={() => setFlatChecked(!flatChecked)}
+                />
               </div>
               <select>
                 {keyQualities.map((quality) => (

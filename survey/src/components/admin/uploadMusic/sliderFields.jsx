@@ -4,8 +4,8 @@ const SliderFields = ({ setFields }) => {
   const fields = ["Improvisation"];
   const vals = ["0%", "25%", "50%", "75%", "100%"];
   return fields.map((field) => (
-    <div className="field-container">
-      <div key={field} className="fc-main">
+    <div className="field-container" key={field}>
+      <div className="fc-main">
         <label htmlFor={field}>{field}</label>
         <div
           style={{ display: "flex", flexDirection: "column", minWidth: "55%" }}
