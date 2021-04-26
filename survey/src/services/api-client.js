@@ -1,6 +1,8 @@
 import axios from "axios";
 
-const endpoint = "https://sonicremedies.net:31313";
+const endpoint = process.env.LOCALHOST
+  ? "http://localhost:5000"
+  : "https://sonicremedies.net:31313";
 
 const onError = (err) => {
   console.error(err.message);
