@@ -2,6 +2,8 @@ import { useState } from "react";
 import { Route } from "react-router-dom";
 import GoogleLogin from "react-google-login";
 
+const { REACT_APP_LOCALHOST } = process.env;
+
 const ProtectedRoute = ({ component: Component, ...rest }) => {
   const [loggedIn, setLoggedIn] = useState(false);
 
@@ -20,6 +22,7 @@ const ProtectedRoute = ({ component: Component, ...rest }) => {
   }
   function responseFailure(response) {
     console.log(response);
+    console.log(REACT_APP_LOCALHOST)
     console.log("Login failed");
   }
 
@@ -28,8 +31,9 @@ const ProtectedRoute = ({ component: Component, ...rest }) => {
       {!loggedIn && (
         <div>
           <h3>Please log in to continue</h3>
+          {/* {REACT_APP_LOCALHOST ? "445603256435-u551v2vd72660dfs8em9mtgmbd6sg4rt.apps.googleusercontent.com" : "445603256435-vggfssfjijfmmie75f0k7if4mjlvtp8b.apps.googleusercontent.com"} */}
           <GoogleLogin
-            clientId="445603256435-vggfssfjijfmmie75f0k7if4mjlvtp8b.apps.googleusercontent.com"
+            clientId={REACT_APP_LOCALHOST === "true" ? "445603256435-u551v2vd72660dfs8em9mtgmbd6sg4rt.apps.googleusercontent.com" : "445603256435-vggfssfjijfmmie75f0k7if4mjlvtp8b.apps.googleusercontent.com"}
             buttonText="Login"
             onSuccess={(res) => responseGoogle(res)}
             onFailure={(res) => responseFailure(res)}
