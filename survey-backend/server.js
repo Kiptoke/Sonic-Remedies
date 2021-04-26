@@ -2,17 +2,21 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const helmet = require("helmet");
 const fs = require("fs");
 const https = require("https");
 //const fs = require("fs");
 
 //app config
 const app = express();
-const port = process.env.SONICREM_DB_PORT || 5000;
-
+const port = process.env.SONICREM_API_PORT || 5000;
+const origin = process.env.SONICREM_NET
+  ? `https://sonicremedies.net:${process.env.SONICREM_CLIENT_PORT}`
+  : "http://localhost:3000";
 //middlewares
 app.use(express.json());
-app.use(cors());
+app.use(cors({ origin: origin }));
+app.use(helmet());
 
 //certificatation
 let certificate = "";
@@ -65,9 +69,7 @@ if (process.env.SONICREM_NET) {
       },
       app
     )
-    .listen(port, "https://sonicremedies.net", () =>
-      console.log(`listening on localhost: ${port}`)
-    );
+    .listen(port, () => console.log(`listening on localhost: ${port}`));
   //Local
 } else {
   app.listen(port, "localhost", () => {
