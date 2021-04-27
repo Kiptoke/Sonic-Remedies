@@ -2,7 +2,6 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
-const ipfilter = require("express-ipfilter").IpFilter;
 const helmet = require("helmet");
 const fs = require("fs");
 const https = require("https");
@@ -14,10 +13,8 @@ const port = process.env.SONICREM_API_PORT || 5000;
 const origin = process.env.SONICREM_NET
   ? `https://sonicremedies.net`
   : "http://localhost:3000";
-const ips = ["70.32.23.89"];
 //middlewares
 app.use(express.json());
-if (process.env.SONICREM_NET) app.use(ipfilter(ips, { mode: "allow" }));
 app.use(cors({ origin: origin }));
 app.use(helmet());
 
