@@ -1,6 +1,8 @@
 <IfModule mod_rewrite.c>
 
   RewriteEngine On
+  RewriteCond %{HTTP_HOST} !^survey\.sonicremedies\.net$ [NC]
+  RewriteRule ^(.*)$ https://survey\.sonicremedies\.net/$1 [R=301,L]
   RewriteBase /
   RewriteRule ^index\.html$ - [L]
   RewriteCond %{REQUEST_FILENAME} !-f
