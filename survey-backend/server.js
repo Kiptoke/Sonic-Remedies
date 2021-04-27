@@ -23,10 +23,10 @@ let certificate = "";
 let privateKey = "";
 if (process.env.SONICREM_NET) {
   certificate = fs.readFileSync(
-    "../ssl/certs/sonicremedies_net_ee2f8_ed3d3_1626739199_99492aa2cd009eb466f472b351714a04.crt"
+    "/ssl/certs/api_sonicremedies_net_e024d_1b403_1627171199_4c90dea0e9816e576d416d354406b2c8.crt"
   );
   privateKey = fs.readFileSync(
-    "../ssl/keys/ee2f8_ed3d3_15f84329f0cb1ba91733cf1284c67bde.key"
+    "/ssl/keys/e024d_1b403_c522c69f5c39fc8f310041575d15524a.key"
   );
 }
 
