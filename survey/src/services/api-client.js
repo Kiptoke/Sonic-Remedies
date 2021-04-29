@@ -1,10 +1,9 @@
 import axios from "axios";
 
-// const { REACT_APP_LOCALHOST, REACT_APP_API_PORT } = process.env;
-// const endpoint = REACT_APP_LOCALHOST
-//   ? `http://localhost`
-//   : `https://sonicremedies.net`;
-const endpoint = "http://localhost:3001";
+const { REACT_APP_LOCALHOST, REACT_APP_API_PORT } = process.env;
+const endpoint = REACT_APP_LOCALHOST
+  ? `http://localhost:${REACT_APP_API_PORT}`
+  : `https://sonicremedies.net:${REACT_APP_API_PORT}`;
 
 const onError = (err) => {
   console.error(err.message);
