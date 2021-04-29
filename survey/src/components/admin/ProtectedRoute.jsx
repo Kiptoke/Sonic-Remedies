@@ -12,7 +12,8 @@ const ProtectedRoute = ({ component: Component, ...rest }) => {
     console.log(response.profileObj);
     if (
       response.profileObj.email === "maryketa@umich.edu" ||
-      response.profileObj.email === "sronning@umich.edu"
+      response.profileObj.email === "sronning@umich.edu" ||
+      response.profileObj.email === "milnea@umich.edu"
     ) {
       console.log("yes");
       setLoggedIn(true);
