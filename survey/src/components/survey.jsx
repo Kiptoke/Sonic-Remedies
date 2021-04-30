@@ -13,6 +13,7 @@ const Survey = () => {
     });
   }, []);
 
+  //make post request with user responses
   const postResponse = (answers) => {
     console.log(surveyData)
 

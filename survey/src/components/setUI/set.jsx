@@ -5,7 +5,6 @@ import FixedUI from "./fixedUI";
 import MusicPage from "./musicPlayer/musicPage";
 import OrientationPage from "./orientationPage";
 import CompletePage from "./completePage";
-import API from "../../services/api-client";
 
 const Set = ({ setId, set, setCurrentSet, totalSets, postResponse }) => {
   const questions = set.questions;
