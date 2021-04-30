@@ -5,8 +5,9 @@ import FixedUI from "./fixedUI";
 import MusicPage from "./musicPlayer/musicPage";
 import OrientationPage from "./orientationPage";
 import CompletePage from "./completePage";
+import API from "../../services/api-client";
 
-const Set = ({ setId, set, setCurrentSet, totalSets }) => {
+const Set = ({ setId, set, setCurrentSet, totalSets, postResponse }) => {
   const questions = set.questions;
   const [currentQuestion, updateCurrentQuestion] = useState(0);
   const [page, setPage] = useState("orientation");
@@ -16,6 +17,7 @@ const Set = ({ setId, set, setCurrentSet, totalSets }) => {
     updateSavedResponses(updatedResponses);
     if (currentQuestion === questions.length - 1) {
       //End of questions
+
       if (setId !== totalSets - 1) {
         updateCurrentQuestion(0);
         setCurrentSet(setId + 1);
@@ -23,6 +25,7 @@ const Set = ({ setId, set, setCurrentSet, totalSets }) => {
       } else {
         //We are at the end of the survey
         setPage("complete");
+        postResponse(updatedResponses)
       }
     } else {
       updateCurrentQuestion(currentQuestion + 1);

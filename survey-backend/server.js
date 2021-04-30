@@ -52,9 +52,13 @@ app.use("/sets", setsRouter);
 const questionsRouter = require("./routes/questions");
 app.use("/questions", questionsRouter);
 
+//set order router
 const setOrderRouter = require("./routes/set-order");
-
 app.use("/set-order", setOrderRouter);
+
+//response router
+const responseRouter = require('./routes/response');
+app.use("/responses", responseRouter)
 
 //listener (this always comes last)
 
