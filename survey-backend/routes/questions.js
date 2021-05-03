@@ -51,4 +51,19 @@ router.post("/", async (req, res) => {
   }
 });
 
+//Delete one
+router.delete('/:id', async (req, res) => {
+  try {
+      const question = await Question.findById(req.params.id)
+      if (question == null) {
+          return res.status(404).json({ message: 'Cannot find question' })
+      }
+      question.remove()
+      res.json({ message: 'Deleted question' })
+  }
+  catch (err) {
+      return res.status(500).json({ message: err.message })
+  }
+})
+
 module.exports = router;

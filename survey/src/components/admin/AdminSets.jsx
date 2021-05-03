@@ -3,6 +3,7 @@ import AdminSet from "./AdminSet";
 import AddSet from "./AddSet";
 import NewQuestion from "./NewQuestion";
 import ChangeOrder from "./ChangeOrder";
+import DeleteQuestion from "./DeleteQuestion";
 
 import "../../css/components/admin/adminSets.css";
 
@@ -30,7 +31,7 @@ const AdminSets = ({ sets, onDelete, onDuplicate, onAddSet, onNewQuestion, onOrd
   }
 
   const handleDeleteQuestion = () => {
-    setDeleteQuestions(!setDeleteQuestions)
+    setDeleteQuestions(!deleteQuestions)
   }
 
 
@@ -47,6 +48,7 @@ const AdminSets = ({ sets, onDelete, onDuplicate, onAddSet, onNewQuestion, onOrd
       {showAddSet && <AddSet onAddSet={onAddSet} setShowAddSet={setShowAddSet} />}
       {showAddQuestion && <NewQuestion onNewQuestion={onNewQuestion} setShowAddQuestion={setShowAddQuestion} />}
       {showChangeOrder && <ChangeOrder curquestions={sets} onChangeOrder={onChangeOrder} />}
+      {deleteQuestions && <DeleteQuestion handleDeleteQuestion={handleDeleteQuestion}/>}
     </div>
   );
 };

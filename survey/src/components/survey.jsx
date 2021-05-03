@@ -71,7 +71,7 @@ const Survey = () => {
     }
     console.log(response)
     const posted = API.post("responses", response)
-  }
+  } //postResponse
 
   if (surveyData !== null && surveyData !== undefined) {
     const { sets } = surveyData;
