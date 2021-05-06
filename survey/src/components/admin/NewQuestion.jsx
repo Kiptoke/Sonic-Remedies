@@ -40,7 +40,7 @@ const NewQuestion = ({ onNewQuestion, setShowAddQuestion }) => {
                 <input type="radio" value="check-box" name="option" /> Checkbox
                 <input type="radio" value="short-answer" name="option" /> Short Answer
                 <input type="radio" value="color" name="option" /> Color
-      </div>
+            </div>
             {(type === "multiple-choice" || type === "check-box") && (
                 <label>Options (please separate each option with a semicolon)</label>
             )}

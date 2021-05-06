@@ -10,6 +10,7 @@ const convertSurveyData = (sets, questions) => {
         ask: my_q.title,
         responses: my_q.options,
         type: my_q.input_type,
+        id: my_q._id
       });
     });
     new_sets.push({ questions: new_questions, music: set.music });
