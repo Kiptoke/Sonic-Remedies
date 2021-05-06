@@ -8,12 +8,23 @@ const keyQualities = [
   "Lydian",
   "Mixolydian",
   "Locrian",
+  "N/A",
 ];
 
-const PrevailKeyField = () => {
+const buildPKString = (letter, flatChecked, sharpChecked, quality) => {
+  const mark = flatChecked ? "f" : sharpChecked ? "s" : "";
+  if (letter === "N/A") return "N/A";
+  else {
+    return letter + mark + (quality !== "N/A" ? quality : "");
+  }
+};
+
+const PrevailKeyField = ({ setPrevailingKey }) => {
   const [keySelected, setKeySelected] = useState(false);
   const [flatChecked, setFlatChecked] = useState(false);
   const [sharpChecked, setSharpChecked] = useState(false);
+  const [letter, setLetter] = useState("N/A");
+  const [quality, setQuality] = useState("Major");
   return (
     <div className="field-container">
       <div className="fc-main">
@@ -31,9 +42,23 @@ const PrevailKeyField = () => {
             defaultValue={"N/A"}
             name="Prevailing Key"
             onChange={(e) => {
-              e.target.value !== "N/A"
-                ? setKeySelected(true)
-                : setKeySelected(false);
+              if (e.target.value === "N/A") {
+                setKeySelected(false);
+                setFlatChecked(false);
+                setSharpChecked(false);
+                setQuality("Major");
+              } else {
+                setKeySelected(true);
+              }
+              setLetter(e.target.value);
+              setPrevailingKey(
+                buildPKString(
+                  e.target.value,
+                  flatChecked,
+                  sharpChecked,
+                  quality
+                )
+              );
             }}
           >
             {keyNames.map((keyName) => (
@@ -62,7 +87,12 @@ const PrevailKeyField = () => {
                   type="checkbox"
                   name="♯"
                   disabled={flatChecked}
-                  onChange={() => setSharpChecked(!sharpChecked)}
+                  onChange={() => {
+                    setPrevailingKey(
+                      buildPKString(letter, flatChecked, !sharpChecked, quality)
+                    );
+                    setSharpChecked(!sharpChecked);
+                  }}
                 />
               </div>
               <div style={{ marginRight: "0.5rem" }}>
@@ -72,10 +102,29 @@ const PrevailKeyField = () => {
                   type="checkbox"
                   name="♭"
                   disabled={sharpChecked}
-                  onClick={() => setFlatChecked(!flatChecked)}
+                  onClick={() => {
+                    setPrevailingKey(
+                      buildPKString(letter, !flatChecked, sharpChecked, quality)
+                    );
+                    setFlatChecked(!flatChecked);
+                  }}
                 />
               </div>
-              <select>
+              <select
+                name="Key Quality"
+                onChange={(e) => {
+                  setQuality(e.target.value);
+                  setPrevailingKey(
+                    buildPKString(
+                      letter,
+                      flatChecked,
+                      sharpChecked,
+                      e.target.value
+                    )
+                  );
+                }}
+                defaultValue="Major"
+              >
                 {keyQualities.map((quality) => (
                   <option value={quality} key={quality}>
                     {quality}

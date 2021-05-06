@@ -1,9 +1,7 @@
-import { ValidationError } from "joi";
-
-const SliderFields = ({ setFields }) => {
-  const fields = ["Improvisation"];
+const SliderFields = ({ setField }) => {
+  const field = "Improvisation";
   const vals = ["0%", "25%", "50%", "75%", "100%"];
-  return fields.map((field) => (
+  return (
     <div className="field-container" key={field}>
       <div className="fc-main">
         <label htmlFor={field}>{field}</label>
@@ -31,11 +29,12 @@ const SliderFields = ({ setFields }) => {
             max="100"
             step="25"
             defaultValue="0"
+            onChange={(e) => setField(e.target.value)}
           ></input>
         </div>
       </div>
     </div>
-  ));
+  );
 };
 
 export default SliderFields;

@@ -1,5 +1,6 @@
 import axios from "axios";
 
+axios.defaults.headers.common["authorization"] = localStorage.getItem("token");
 const { REACT_APP_LOCALHOST, REACT_APP_API_PORT } = process.env;
 const endpoint = REACT_APP_LOCALHOST
   ? `http://localhost:${REACT_APP_API_PORT}`
@@ -8,7 +9,6 @@ const endpoint = REACT_APP_LOCALHOST
 const onError = (err) => {
   console.error(err.message);
 };
-
 const API = {
   getAll(resource) {
     return axios

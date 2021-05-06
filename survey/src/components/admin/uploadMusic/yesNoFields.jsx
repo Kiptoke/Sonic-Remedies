@@ -1,10 +1,10 @@
-const fields = [{ name: "Consistent Vibe" }];
+const field = "Consistent Vibe";
 
-const YesNoFields = () => {
-  return fields.map((field) => (
-    <div className="field-container" key={field.name}>
+const YesNoFields = ({ setField }) => {
+  return (
+    <div className="field-container" key={field}>
       <div className="fc-main">
-        <label htmlFor={field.name}>{field.name}</label>
+        <label htmlFor={field}>{field}</label>
         <div
           style={{
             minWidth: "55%",
@@ -14,22 +14,29 @@ const YesNoFields = () => {
         >
           <div className="yes-no-option">
             <label htmlFor="yes">Yes</label>
-            <input type="radio" id="yes" name={field.name} value={true} />
+            <input
+              type="radio"
+              id="yes"
+              name={field}
+              value={true}
+              onChange={(e) => setField(e.target.value)}
+            />
           </div>
           <div className="yes-no-option">
             <label htmlFor="no">No</label>
             <input
               type="radio"
               id="no"
-              name={field.name}
+              name={field}
               value={false}
               defaultChecked={true}
+              onChange={(e) => setField(!e.target.value)}
             />
           </div>
         </div>
       </div>
     </div>
-  ));
+  );
 };
 
 export default YesNoFields;

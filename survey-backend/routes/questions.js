@@ -1,6 +1,18 @@
 const express = require("express");
 const router = express.Router();
 const Question = require("../models/question");
+const verifyUser = require("../verifyUser");
+
+router.use(async (req, res, next) => {
+  if (req.method === "GET") next();
+  else {
+    const user = await verifyUser(req);
+    if (user === "admin") next();
+    else {
+      res.sendStatus(403);
+    }
+  }
+});
 
 router.get("/", async (req, res) => {
   try {

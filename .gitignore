@@ -1,3 +1,7 @@
+#passwords
+*.key
+password.txt
+
 # Logs
 logs
 *.log

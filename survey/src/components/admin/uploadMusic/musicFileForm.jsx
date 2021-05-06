@@ -9,6 +9,21 @@ const MusicFileForm = () => {
   const [fileReadyToUpload, setFileReadyToUpload] = useState(false);
   const [fieldsFilled, setFieldsFilled] = useState(false);
   const [fileValidationError, setFileValidationError] = useState("");
+  const [submission, setSubmission] = useState({
+    prevailingKey: "N/A",
+    improvisation: 0,
+    consistent_vibe: false,
+  });
+  const updateSubParam = (pairs) => {
+    let temp_submission = { ...submission };
+    for (const [key, value] of Object.entries(pairs)) {
+      temp_submission[key] = value;
+    }
+    setSubmission(temp_submission);
+  };
+  const submitForm = () => {
+    console.log(submission);
+  };
   return (
     <form>
       <input
@@ -22,14 +37,26 @@ const MusicFileForm = () => {
       <TextFields
         validator={checkTextInput}
         setFieldsFilled={setFieldsFilled}
+        sendFields={(value) => updateSubParam(value)}
       />
-      <PrevailKeyField />
-      <SliderFields />
-      <YesNoFields />
-      <input
-        type="submit"
+      <PrevailKeyField
+        setPrevailingKey={(value) => updateSubParam({ prevailingKey: value })}
+      />
+      <SliderFields
+        setField={(value) => updateSubParam({ improvisation: value })}
+      />
+      <YesNoFields
+        setField={(value) => updateSubParam({ consistent_vibe: value })}
+      />
+      <button
+        onClick={(e) => {
+          e.preventDefault();
+          submitForm();
+        }}
         style={fileReadyToUpload && fieldsFilled ? {} : { display: "none" }}
-      ></input>
+      >
+        Submit
+      </button>
     </form>
   );
 };
