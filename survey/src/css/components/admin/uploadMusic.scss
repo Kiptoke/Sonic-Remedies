@@ -34,6 +34,12 @@
     }
   }
 
+  .err {
+    margin: 0;
+    font-size: $tiny;
+    color: red;
+  }
+
   .yes-no-option {
     display: flex;
     flex-direction: row;

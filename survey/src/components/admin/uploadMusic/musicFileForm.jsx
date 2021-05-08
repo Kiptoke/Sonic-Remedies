@@ -1,14 +1,17 @@
 import { useState } from "react";
-import { checkFileInput, checkTextInput } from "./musicInputValidation";
+import { checkTextInput } from "./musicInputValidation";
 import TextFields from "./textFields";
 import YesNoFields from "./yesNoFields";
 import SliderFields from "./sliderFields";
 import PrevailKeyField from "./prevailKeyField";
+import submitMusic from "./submitMusic";
+import getDuration from "./getDuration";
 
 const MusicFileForm = () => {
   const [fileReadyToUpload, setFileReadyToUpload] = useState(false);
   const [fieldsFilled, setFieldsFilled] = useState(false);
   const [fileValidationError, setFileValidationError] = useState("");
+  const [file, setFile] = useState(null);
   const [submission, setSubmission] = useState({
     prevailingKey: "N/A",
     improvisation: 0,
@@ -21,19 +24,23 @@ const MusicFileForm = () => {
     }
     setSubmission(temp_submission);
   };
-  const submitForm = () => {
-    console.log(submission);
-  };
   return (
     <form>
       <input
         required={true}
         type="file"
         onInput={(e) => {
-          checkFileInput(e, setFileValidationError, setFileReadyToUpload);
+          getDuration(
+            e,
+            (value) => updateSubParam({ duration: value }),
+            setFileValidationError,
+            setFileReadyToUpload,
+            setFile
+          );
         }}
+        accept={"audio/mp3"}
       />
-      <p>{fileValidationError}</p>
+      <p className="err">{fileValidationError}</p>
       <TextFields
         validator={checkTextInput}
         setFieldsFilled={setFieldsFilled}
@@ -51,7 +58,9 @@ const MusicFileForm = () => {
       <button
         onClick={(e) => {
           e.preventDefault();
-          submitForm();
+          if (window.confirm("Are you sure you want to submit this?")) {
+            submitMusic(submission, file);
+          }
         }}
         style={fileReadyToUpload && fieldsFilled ? {} : { display: "none" }}
       >

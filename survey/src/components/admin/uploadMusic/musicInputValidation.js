@@ -3,6 +3,7 @@ import Joi from "joi";
 const schema = Joi.object({
   filename: Joi.string().pattern(/.+.(mp3)$/),
   textfield: Joi.string().max(30),
+  number: Joi.number().max(1000).min(1),
 });
 const checkFileInput = (input, setValidationError, setReadyToUpload) => {
   const files = input.target.files;
@@ -32,11 +33,15 @@ const checkTextInput = (
   input,
   setValidationError,
   setFieldsFilled,
-  i
+  i,
+  type
 ) => {
   const temp_errors = [...errors];
   const text = input.target.value;
-  const { error } = schema.validate({ textfield: text });
+  const { error } =
+    type === "number"
+      ? schema.validate({ number: text })
+      : schema.validate({ textfield: text });
   if (!error) {
     temp_errors[i] = "";
     setValidationError(temp_errors);
@@ -47,8 +52,7 @@ const checkTextInput = (
     setFieldsFilled(complete);
   }
   if (error) {
-    temp_errors[i] =
-      input.target.name + " " + error.message.split('"textfield"')[1];
+    temp_errors[i] = input.target.name + " " + error.message.split('"')[2];
     setValidationError(temp_errors);
     setFieldsFilled(false);
   }

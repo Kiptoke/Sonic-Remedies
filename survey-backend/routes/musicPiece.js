@@ -26,9 +26,20 @@ router.get("/", async (req, res) => {
 router.post("/", async (req, res) => {
   const piece = new musicPiece(req.body);
   try {
-    const newPiece = await piece.save();
-    res.status(201).json(newPiece);
+    const alreadyExists = await musicPiece.find({
+      title: req.body.title,
+      artist: req.body.artist,
+    });
+    if (alreadyExists.length === 0) {
+      const newPiece = await piece.save();
+      res.status(201).json(newPiece);
+    } else {
+      res.send({
+        error: "Failure: Already have a piece with that title and artist",
+      });
+    }
   } catch (err) {
+    console.log(err.message);
     res.status(400).json({ message: err.message });
   }
 });

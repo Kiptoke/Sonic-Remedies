@@ -21,7 +21,7 @@ const musicPieceSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  key: {
+  prevailingKey: {
     type: String,
     required: true,
   },
