@@ -2,6 +2,8 @@ const express = require("express");
 const router = express.Router();
 const musicPiece = require("../models/musicPiece");
 const verifyUser = require("../verifyUser");
+const fs = require("fs");
+const formidable = require("formidable");
 
 router.use(async (req, res, next) => {
   if (req.method === "GET") next();
@@ -42,6 +44,29 @@ router.post("/", async (req, res) => {
     console.log(err.message);
     res.status(400).json({ message: err.message });
   }
+});
+
+router.post("/files", async (req, res) => {
+  let form = new formidable.IncomingForm();
+  form.parse(req, (err, fields, files) => {
+    if (err) console.log(err.message);
+    else {
+      let oldPath = files.file.path;
+      let newPath = "./files/" + fields["filename"] + ".mp3";
+      fs.rename(oldPath, newPath, (err) => {
+        if (err) console.log(err.message);
+      });
+    }
+  });
+});
+
+router.get("/files/:id", async (req, res) => {
+  fs.readFile("./files/" + req.params.id, (err, data) => {
+    if (err) console.log(err.message);
+    else {
+      res.send(data);
+    }
+  });
 });
 
 module.exports = router;

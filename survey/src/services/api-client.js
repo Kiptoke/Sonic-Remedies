@@ -30,6 +30,16 @@ const API = {
       .then((res) => res.data)
       .catch(onError);
   },
+  postForm(resource, data) {
+    return axios({
+      method: "post",
+      url: endpoint + "/" + resource,
+      data: data,
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+  },
   deleteOne(resource, id) {
     return axios
       .delete(endpoint + "/" + resource + "/" + id)

@@ -13,7 +13,7 @@ const origin = process.env.SONICREM_NET
   ? `https://sonicremedies.net`
   : "http://localhost:3000";
 //middlewares
-app.use(express.json());
+app.use(express.json({ limit: "25mb" }));
 app.use(cors({ origin: origin }));
 app.use(helmet());
 

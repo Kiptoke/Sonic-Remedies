@@ -6,7 +6,10 @@ const submitMusic = async (submission, file) => {
     if (res) {
       if (res.error) alert(res.error);
       else {
-        API.post("uploadMusic", { filename: res._id, file: file });
+        let formData = new FormData();
+        formData.append("filename", res._id);
+        formData.append("file", file);
+        API.postForm("music/files", formData);
         alert("Success!");
       }
     } else {
