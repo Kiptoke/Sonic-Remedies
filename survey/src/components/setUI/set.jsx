@@ -6,7 +6,14 @@ import MusicPage from "./musicPlayer/musicPage";
 import OrientationPage from "./orientationPage";
 import CompletePage from "./completePage";
 
-const Set = ({ setId, set, setCurrentSet, totalSets, postResponse }) => {
+const Set = ({
+  musicFilename,
+  setId,
+  set,
+  setCurrentSet,
+  totalSets,
+  postResponse,
+}) => {
   const questions = set.questions;
   const [currentQuestion, updateCurrentQuestion] = useState(0);
   const [page, setPage] = useState("orientation");
@@ -24,7 +31,7 @@ const Set = ({ setId, set, setCurrentSet, totalSets, postResponse }) => {
       } else {
         //We are at the end of the survey
         setPage("complete");
-        postResponse(updatedResponses)
+        postResponse(updatedResponses);
       }
     } else {
       updateCurrentQuestion(currentQuestion + 1);
@@ -49,7 +56,7 @@ const Set = ({ setId, set, setCurrentSet, totalSets, postResponse }) => {
       return (
         <div className="music-page global-container">
           <MusicPage
-            file_path={"/2.mp3"}
+            filename={musicFilename}
             handleMusicDone={() => {
               setPage("questions");
             }}

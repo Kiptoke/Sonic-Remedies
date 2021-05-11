@@ -24,6 +24,15 @@ const API = {
       .then((res) => res.data)
       .catch(onError);
   },
+  getOneFile(resource, id) {
+    return axios({
+      method: "GET",
+      url: endpoint + "/" + resource + "/" + id,
+      responseType: "blob",
+    })
+      .then((res) => res.data)
+      .catch(onError);
+  },
   post(resource, data) {
     return axios
       .post(endpoint + "/" + resource, data)
