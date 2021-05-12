@@ -1,12 +1,5 @@
 @import "../../global.scss";
 .upload-music {
-  height: vh(100);
-  width: 100vw;
-  display: flex;
-  flex-direction: column;
-  color: white;
-  align-items: center;
-  background-color: $textBgColor;
   h1 {
     font-size: $huge;
     padding-top: 1rem;

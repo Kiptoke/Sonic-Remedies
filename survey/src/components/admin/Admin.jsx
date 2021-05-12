@@ -3,7 +3,7 @@ import API from "../../services/api-client";
 
 import AdminSets from "./AdminSets";
 
-import "../../css/components/admin/admin.css";
+import "../../css/components/admin/admin.scss";
 
 function Admin() {
   const [setOrder, setSetOrder] = useState([]);
@@ -129,7 +129,7 @@ function Admin() {
   };
 
   return (
-    <div className="outer-div">
+    <div className="outer-div admin-container">
       <h1>Sets Currently in Database:</h1>
       <hr></hr>
       <AdminSets

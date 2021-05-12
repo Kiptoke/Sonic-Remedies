@@ -2,7 +2,6 @@ import "../../../css/components/musicPage.scss";
 import { Howl } from "howler";
 import { useState, useEffect, useCallback, Fragment } from "react";
 import RenderPlay from "./renderPlay";
-import myfile from "../../../audio/1.mp3";
 import RenderContinue from "./renderContinue";
 import togglePlayer from "./togglePlayer";
 import ProgressBar from "./progressBar";
@@ -40,7 +39,7 @@ const MusicPlayer = ({ filename, handleMusicDone }) => {
     if (!audio && filename) {
       getMusicFile(filename + ".mp3", setAudio);
     }
-  }, [audio]);
+  }, [audio, filename]);
   useEffect(() => {
     if (audio) {
       const checkHalfwayInterval = setInterval(checkHalfway, 1000);

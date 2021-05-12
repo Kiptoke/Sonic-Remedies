@@ -129,7 +129,6 @@ const AdminSet = ({ set, onDelete, onDuplicate }) => {
           currentQuestions={currentSet.questions}
         />
       )}
-      <hr></hr>
     </div>
   );
 };

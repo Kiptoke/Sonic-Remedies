@@ -18,36 +18,38 @@ const Login = ({ setLoggedIn }) => {
   });
 
   return (
-    <form>
-      <label>Username</label>
-      <input
-        defaultValue="admin"
-        onChange={(e) =>
-          setCredentials({
-            username: e.target.value,
-            password: credentials.password,
-          })
-        }
-      ></input>
-      <label>Password</label>
-      <input
-        type="password"
-        onChange={(e) =>
-          setCredentials({
-            username: credentials.username,
-            password: e.target.value,
-          })
-        }
-      ></input>
-      <button
-        onClick={(e) => {
-          e.preventDefault();
-          doLogin(credentials, setLoggedIn);
-        }}
-      >
-        Login
-      </button>
-    </form>
+    <div className="admin-container">
+      <form>
+        <label>Username</label>
+        <input
+          defaultValue="admin"
+          onChange={(e) =>
+            setCredentials({
+              username: e.target.value,
+              password: credentials.password,
+            })
+          }
+        ></input>
+        <label>Password</label>
+        <input
+          type="password"
+          onChange={(e) =>
+            setCredentials({
+              username: credentials.username,
+              password: e.target.value,
+            })
+          }
+        ></input>
+        <button
+          onClick={(e) => {
+            e.preventDefault();
+            doLogin(credentials, setLoggedIn);
+          }}
+        >
+          Login
+        </button>
+      </form>
+    </div>
   );
 };
 
