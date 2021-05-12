@@ -53,7 +53,7 @@ router.post("/files", async (req, res) => {
     else {
       let oldPath = files.file.path;
       let newPath = "./files/" + fields["filename"] + ".mp3";
-      fs.rename(oldPath, newPath, (err) => {
+      fs.copyFile(oldPath, newPath, (err) => {
         if (err) console.log(err.message);
       });
     }
