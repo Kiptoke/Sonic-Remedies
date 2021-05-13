@@ -9,18 +9,30 @@ class Home extends Component {
   render() {
     return (
       <div className="home global-container">
-        <h1>Welcome to the survey!</h1>
+        <h1>Welcome to Sonic Remedies!</h1>
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin
-          fringilla quis purus eu rhoncus. Duis ornare odio nec dolor aliquet
-          fermentum. In tortor urna, placerat vel lorem at, dapibus elementum
-          mi. Phasellus mi ex, malesuada quis tellus in, molestie vulputate
-          enim. Vestibulum sed tempor mi, eu dictum tortor. Fusce nec mauris
-          lorem. Nam pellentesque orci purus, at gravida turpis cursus sed.
-          Fusce feugiat mauris sed iaculis ornare. Vestibulum sapien urna,
-          consectetur quis sem sit amet, vestibulum hendrerit sem.
+          The purpose of this site is to support research which investigates the
+          relationship our minds and bodies have with music.
         </p>
-        <Link to="survey">
+        <p>
+          In particular, the Sonic Remedies team seeks to identify specific
+          elements of musical construction and expression for the purpose of
+          prescribing remedies for healing.
+        </p>
+        <p>
+          Your participation here is entirely voluntary and without
+          compensation. Your responses are anonymous and utilized strictly to
+          support research. You won’t be asked to pay for anything or offered
+          products and services for sale.{" "}
+        </p>
+        <p>
+          For this survey, you will be asked a series of questions and presented
+          with approximately five short musical excerpts, for which you will
+          need to share both mental and physical responses. The survey will take
+          approximately 15 minutes. We appreciate your involvement in this study
+          and hope you enjoy the journey.
+        </p>
+        <Link to="/survey">
           <Button text={"Begin"} />
         </Link>
       </div>

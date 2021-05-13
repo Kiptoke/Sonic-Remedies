@@ -19,6 +19,7 @@ const Login = ({ setLoggedIn }) => {
 
   return (
     <div className="admin-container">
+      <h1>Please login as admin to continue</h1>
       <form>
         <label>Username</label>
         <input

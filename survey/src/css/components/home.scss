@@ -5,4 +5,15 @@
   flex-direction: column;
   align-items: center;
   padding: 1rem;
+
+  p {
+    width: 30rem;
+    font-size: $medium;
+  }
+
+  .admin-button {
+    position: absolute;
+    top: 0;
+    right: 25%;
+  }
 }

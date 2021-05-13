@@ -54,7 +54,8 @@ const Survey = () => {
     for (let i = 0; i < answers.length; i++) {
       if (
         question_types_arr[i] === "multiple-choice" ||
-        question_types_arr[i] === "color"
+        question_types_arr[i] === "color" ||
+        question_types_arr[i] === "slider"
       ) {
         formatted_answers.push(answers[i].toString());
       } else if (question_types_arr[i] === "short-answer") {
@@ -79,7 +80,7 @@ const Survey = () => {
       answers: formatted_answers,
     };
     console.log(response);
-    const posted = API.post("responses", response);
+    API.post("responses", response);
   }; //postResponse
 
   if (surveyData !== null && surveyData !== undefined) {
@@ -100,11 +101,3 @@ const Survey = () => {
 };
 
 export default Survey;
-
-// {
-//   id: (automatically generated),
-//   music_arr: [],
-//   //sets_arr: [],
-//   questions: [[]], //these will not die today. or andy day
-//   responses: [[]]
-// }

@@ -25,18 +25,11 @@ function Question({ question, handleResponse }) {
   let { ask } = question;
   const [response, setResponse] = useState(null);
   const [clickedNext, setClickedNext] = useState(false);
-  // const q_old = useRef(question);
 
-  // useEffect(() => {
-  //   if (question !== q_old) {
-  //     setResponse(null);
-  //     setClickedNext(false);
-  //   }
-  // }, [question, q_old]);
   function handleResponded(response) {
     setResponse(response);
   }
-  //Later add logic for if the question.type is not multiple choice
+
   return (
     <div className="question">
       <h1>{ask}</h1>
