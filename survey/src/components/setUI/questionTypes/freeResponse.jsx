@@ -4,7 +4,7 @@ import Joi from "joi";
 import { onOpenKB, onCloseKB } from "../../../utils/mobileKeyboard";
 
 const schema = Joi.object({
-  textfield: Joi.string().min(3).max(350).required().label("Answer"),
+  textfield: Joi.string().min(2).max(350).required().label("Answer"),
 });
 
 function verifyInput(evt, setResponse, setValidationError) {
