@@ -1,9 +1,9 @@
 import "../../../css/components/colorChoice.scss";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import MultipleChoice from "./multipleChoice";
 import UserButton from "../../common/userButton";
 
-function ShowColor(response, handleResponded, setChoseYes, setChoseNo) {
+function ShowColor(response, setChoseYes, setChoseNo) {
   if (response === 0) {
     setChoseYes(true);
     setChoseNo(false);
@@ -11,14 +11,13 @@ function ShowColor(response, handleResponded, setChoseYes, setChoseNo) {
     setChoseNo(true);
     setChoseYes(false);
   }
-  handleResponded(response);
 }
-function renderYesNo(handleResponded, setChoseYes, setChoseNo) {
+function renderYesNo(setChoseYes, setChoseNo) {
   return (
     <MultipleChoice
       responses={["Yes", "No"]}
       handleResponded={(response) => {
-        ShowColor(response, handleResponded, setChoseYes, setChoseNo);
+        ShowColor(response, setChoseYes, setChoseNo);
       }}
     />
   );
@@ -26,7 +25,15 @@ function renderYesNo(handleResponded, setChoseYes, setChoseNo) {
 const ColorChoice = ({ responses, handleResponded }) => {
   const [choseYes, setChoseYes] = useState(false);
   const [choseNo, setChoseNo] = useState(false);
-  const params = [handleResponded, setChoseYes, setChoseNo];
+  const [color, setColor] = useState("#000000");
+  const params = [setChoseYes, setChoseNo];
+
+  useEffect(() => {
+    let response = "No Color";
+    if (choseYes) response = color;
+    if (choseYes || choseNo) handleResponded(response);
+    else handleResponded(null);
+  });
 
   if (choseNo) {
     return renderYesNo(...params);
@@ -36,7 +43,7 @@ const ColorChoice = ({ responses, handleResponded }) => {
   ) : (
     <div className="question-color">
       <p>Select the color: </p>
-      <input type="color" />
+      <input type="color" onChange={(e) => setColor(e.target.value)} />
       <UserButton
         text={"Go Back"}
         onClick={() => {

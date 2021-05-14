@@ -25,8 +25,6 @@ const Survey = () => {
 
   //make post request with user responses
   const postResponse = (answers) => {
-    console.log(surveyData);
-
     let question_arr = [];
     let question_types_arr = [];
     let music_arr = [];
@@ -79,7 +77,6 @@ const Survey = () => {
       questions: question_arr,
       answers: formatted_answers,
     };
-    console.log(response);
     API.post("responses", response);
   }; //postResponse
 
