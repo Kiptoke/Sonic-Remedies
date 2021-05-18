@@ -29,7 +29,7 @@ if (process.env.SONICREM_NET) {
   );
 }
 
-const connection_string = `mongodb+srv://${process.env.DB_AUTH}@cluster0.mz4hd.mongodb.net/music-app?retryWrites=true&w=majority`;
+const connection_string = `mongodb+srv://${process.env.DB_AUTH}@cluster0.rrouq.mongodb.net/music-app?retryWrites=true&w=majority`;
 mongoose
   .connect(connection_string, {
     useNewUrlParser: true,

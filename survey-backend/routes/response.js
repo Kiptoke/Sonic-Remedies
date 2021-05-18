@@ -26,7 +26,7 @@ router.get("/", async (req, res) => {
 //Create one
 router.post("/", async (req, res) => {
   const response = new Response({
-    musicids: req.body.musicid,
+    musicids: req.body.musicids,
     questionGroups: req.body.questionGroups,
     questions: req.body.questions,
     answers: req.body.answers,

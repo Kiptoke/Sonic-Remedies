@@ -27,18 +27,18 @@ const Survey = () => {
   const postResponse = (answers) => {
     let question_arr = [];
     let question_types_arr = [];
-    let music_arr = [];
+    // let music_arr = [];
     let num_questions_arr = [];
     let formatted_answers = [];
 
     for (let i = 0; i < surveyData.sets.length; i++) {
       let cur_set = surveyData.sets[i];
       //array of every piece of music in the survey
-      if (cur_set.music) {
-        music_arr.push("music included");
-      } else {
-        music_arr.push("no music included");
-      }
+      // if (cur_set.music) {
+      //   music_arr.push("music included");
+      // } else {
+      //   music_arr.push("no music included");
+      // }
       //number of questions associated with each piece of music
       num_questions_arr.push(cur_set.questions.length);
       //all questions
@@ -72,7 +72,8 @@ const Survey = () => {
     }
 
     const response = {
-      musicids: music_arr,
+      // musicids: music_arr,
+      musicids: musicList,
       questionGroups: num_questions_arr,
       questions: question_arr,
       answers: formatted_answers,
