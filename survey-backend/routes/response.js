@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Response = require("../models/response");
+const verifyUser = require("../verifyUser");
 
 router.use(async (req, res, next) => {
   if (req.method === "POST") next();
