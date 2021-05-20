@@ -1,6 +1,5 @@
 const Slider = ({ handleResponded }) => {
   const options = [1, 2, 3, 4, 5];
-  handleResponded(3);
   return (
     <div>
       <h2>
@@ -23,7 +22,9 @@ const Slider = ({ handleResponded }) => {
           }}
         >
           {options.map((option) => (
-            <p style={{ fontWeight: "bold" }}>{option}</p>
+            <p key={option} style={{ fontWeight: "bold" }}>
+              {option}
+            </p>
           ))}
         </div>
         <input
@@ -32,7 +33,10 @@ const Slider = ({ handleResponded }) => {
           min="1"
           step="1"
           defaultValue="3"
-          onChange={(e) => handleResponded(e.target.value)}
+          onChange={(e) => {
+            console.log(e.target.value);
+            handleResponded(e.target.value);
+          }}
         ></input>
       </div>
     </div>

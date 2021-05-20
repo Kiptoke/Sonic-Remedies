@@ -1,6 +1,19 @@
 import API from "../services/api-client";
 import formatAnswer from "./formatAnswer";
 import sendCSV from "./sendCSV";
+
+const calculateMusicIndex = (music_i, questionGroups) => {
+  let i = 0;
+  let count = 0;
+  if (questionGroups[i]) count = questionGroups[i];
+  while (music_i >= count) {
+    count += questionGroups[i];
+    i += 1;
+  }
+  console.log(music_i, i);
+  return i;
+};
+
 const dLoadData = async () => {
   const responses = await API.getAll("responses");
   const questions = await API.getAll("questions");
@@ -11,7 +24,10 @@ const dLoadData = async () => {
     const id = response._id;
     for (let i = 0; i < response.questions.length; i++) {
       const piece = pieces.find(
-        (piece) => piece !== null && piece._id === response.musicids[i]
+        (piece) =>
+          piece !== null &&
+          piece._id ===
+            response.musicids[calculateMusicIndex(i, response.questionGroups)]
       );
       const question = questions.find(
         (q) => q !== null && q._id === response.questions[i]
