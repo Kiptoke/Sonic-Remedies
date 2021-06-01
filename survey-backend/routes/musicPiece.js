@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const mongodb = require("mongodb");
 const musicPiece = require("../models/musicPiece");
 const verifyUser = require("../verifyUser");
 const fs = require("fs");
@@ -44,6 +45,17 @@ router.post("/", async (req, res) => {
     console.log(err.message);
     res.status(400).json({ message: err.message });
   }
+});
+
+router.delete("/:id", async (req, res) => {
+  fs.unlink("./files/" + req.params.id + ".mp3", (err) => {
+    if (err) console.log(err);
+    else {
+      musicPiece.deleteOne({ _id: mongodb.ObjectId(req.params.id) }, (err) => {
+        if (err) console.log(err);
+      });
+    }
+  });
 });
 
 router.post("/files", async (req, res) => {

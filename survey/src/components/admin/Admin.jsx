@@ -13,6 +13,9 @@ const Admin = () => {
       <Link to="/admin/downloaddata">
         <button>Download Data</button>
       </Link>
+      <Link to="/admin/viewmusic">
+        <button>View/Delete Music</button>
+      </Link>
     </div>
   );
 };
