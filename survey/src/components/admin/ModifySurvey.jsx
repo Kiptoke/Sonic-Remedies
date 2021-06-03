@@ -134,8 +134,6 @@ function Admin() {
       <Link to="/admin">
         <button>Return to Admin Home</button>
       </Link>
-      <h1>Sets Currently in Database:</h1>
-      <hr></hr>
       <AdminSets
         sets={sets}
         onDelete={deleteSet}

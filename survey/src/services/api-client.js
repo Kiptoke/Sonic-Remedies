@@ -1,6 +1,5 @@
 import axios from "axios";
 
-axios.defaults.headers.common["authorization"] = localStorage.getItem("token");
 const { REACT_APP_LOCALHOST, REACT_APP_API_PORT } = process.env;
 const endpoint = REACT_APP_LOCALHOST
   ? `http://localhost:${REACT_APP_API_PORT}`
@@ -10,6 +9,29 @@ const onError = (err) => {
   console.error(err.message);
 };
 const API = {
+  postToken() {
+    axios.defaults.headers.common["authorization"] = localStorage.getItem(
+      "token"
+    );
+  },
+  refreshLogin() {
+    if (
+      window.confirm(
+        "Your session is about to expire. Would you like to extend it another 30 minutes?"
+      )
+    ) {
+      axios
+        .get(endpoint + "/login/refresh")
+        .then((res) => {
+          console.log(res.data);
+          localStorage.setItem("token", res.data);
+          axios.defaults.headers.common["authorization"] = localStorage.getItem(
+            "token"
+          );
+        })
+        .catch(onError);
+    }
+  },
   getAll(resource) {
     return axios
       .get(endpoint + "/" + resource)

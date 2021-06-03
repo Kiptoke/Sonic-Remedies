@@ -52,7 +52,7 @@ const AddQuestion = ({ onAddQuestions, currentQuestions }) => {
             />
           )
       )}
-      <input type="submit" value="Add Questions" />
+      <input type="submit" value="Confirm" />
     </form>
   );
 };

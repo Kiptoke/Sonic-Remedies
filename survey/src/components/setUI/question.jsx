@@ -27,7 +27,6 @@ function Question({ question, handleResponse }) {
   const [clickedNext, setClickedNext] = useState(false);
 
   function handleResponded(response) {
-    console.log(response);
     setResponse(response);
   }
 
@@ -39,7 +38,6 @@ function Question({ question, handleResponse }) {
         <NextButton
           revealNext={(response !== null) & !clickedNext}
           handleClicked={() => {
-            console.log(response);
             handleNext(response, handleResponse, setClickedNext);
           }}
         />

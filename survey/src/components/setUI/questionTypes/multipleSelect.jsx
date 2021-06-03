@@ -11,7 +11,6 @@ const renderSelect = (selections, i) => {
 };
 
 const Select = (selections, i) => {
-  console.log(selections);
   if (i === selections.length - 1) {
     //Chose none of the above
     for (let j = 0; j < i; j++) selections[j] = false;

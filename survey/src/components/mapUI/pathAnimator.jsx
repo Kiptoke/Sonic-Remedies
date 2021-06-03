@@ -18,7 +18,6 @@ const constructPath = (mapRef) => {
     const { x, y } = node.getBoundingClientRect();
     path += " L " + X(x) + " " + Y(y);
   }
-  console.log(path);
   return path;
 };
 const PathAnimator = ({ mapRef }) => {

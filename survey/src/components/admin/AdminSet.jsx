@@ -75,9 +75,7 @@ const AdminSet = ({ set, onDelete, onDuplicate }) => {
   };
 
   const onChangeOrder = async (quest) => {
-    console.log(quest);
     setShowQuestionOrder(false);
-    console.log(questions);
     const qids = quest.map((q) => q._id);
 
     const updatedSet = {
@@ -108,7 +106,6 @@ const AdminSet = ({ set, onDelete, onDuplicate }) => {
         <ChangeOrder curquestions={questions} onChangeOrder={onChangeOrder} />
       )}
 
-      <h2>Questions in Set:</h2>
       <ol>
         {questions.map((question) => (
           <li key={question._id}>
@@ -121,7 +118,9 @@ const AdminSet = ({ set, onDelete, onDuplicate }) => {
         ))}
       </ol>
 
-      <button onClick={() => displayQuestions()}>Add Questions to Set</button>
+      <button onClick={() => displayQuestions()}>
+        {showAddQuestion ? "Go Back" : "Add Questions to Set"}
+      </button>
       {showAddQuestion && (
         <AddQuestion
           className="addQuestion"

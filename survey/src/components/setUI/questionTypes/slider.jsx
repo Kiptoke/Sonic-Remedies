@@ -34,7 +34,6 @@ const Slider = ({ handleResponded }) => {
           step="1"
           defaultValue="3"
           onChange={(e) => {
-            console.log(e.target.value);
             handleResponded(e.target.value);
           }}
         ></input>

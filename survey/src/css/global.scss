@@ -9,6 +9,7 @@ $small: 14px;
 $medium: 20px;
 $large: 28px;
 $huge: 36px;
+$gigantic: 52px;
 
 //Function for getting the propper height for mobile
 @function vh($quantity) {
@@ -49,4 +50,8 @@ body,
   background-color: $textBgColor;
   font-size: $large;
   padding: 1rem;
+}
+
+input {
+  margin-left: 0.5rem;
 }

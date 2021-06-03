@@ -5,6 +5,8 @@ const doLogin = async (credentials, setLoggedIn) => {
   const res = await API.post("login", credentials);
   if (res) {
     localStorage.setItem("token", res);
+    API.postToken();
+    window.setInterval(API.refreshLogin, 1000 * 60 * 28);
     setLoggedIn(true);
   } else {
     setLoggedIn(false);
