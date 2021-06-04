@@ -4,8 +4,7 @@ import AddSet from "./AddSet";
 import NewQuestion from "./NewQuestion";
 import ChangeOrder from "./ChangeOrder";
 import DeleteQuestion from "./DeleteQuestion";
-
-import "../../css/components/admin/adminSets.css";
+import { Button, Container, ListGroup } from "react-bootstrap";
 
 const AdminSets = ({
   sets,
@@ -42,54 +41,65 @@ const AdminSets = ({
   };
 
   return (
-    <div className="admin-sets">
-      <div className="modify-whole">
-        <h1>Modify as a Whole:</h1>
-        <button className="big-btn" onClick={() => handleClick()}>
-          {showAddSet ? "Go Back" : "Create New Set"}
-        </button>
-        <button className="big-btn" onClick={() => handleChangeOrder()}>
-          {showChangeOrder ? "Go Back" : "Change Set Order"}
-        </button>
-        <button className="big-btn" onClick={() => handleManageQuestions()}>
-          {showAddQuestion ? "Go Back" : "Create New Question"}
-        </button>
-        <button className="big-btn" onClick={() => handleDeleteQuestion()}>
-          {deleteQuestions ? "Go Back" : "Delete a Question"}
-        </button>
-        {showAddSet && (
-          <AddSet onAddSet={onAddSet} setShowAddSet={setShowAddSet} />
-        )}
-        {showAddQuestion && (
-          <NewQuestion
-            onNewQuestion={onNewQuestion}
-            setShowAddQuestion={setShowAddQuestion}
-          />
-        )}
-        {showChangeOrder && (
-          <ChangeOrder curquestions={sets} onChangeOrder={onChangeOrder} />
-        )}
-        {deleteQuestions && (
-          <DeleteQuestion handleDeleteQuestion={handleDeleteQuestion} />
-        )}
-      </div>
-      <div className="modify-parts">
-        <h1>View/Modify Individual Sets:</h1>
-        <div className="sets">
-          {sets.map((set) => (
-            <AdminSet
-              qid={set._id}
-              key={set._id}
-              set={set}
-              onDelete={onDelete}
-              onDuplicate={onDuplicate}
-              onOrderChanged={onOrderChanged}
-            />
-          ))}
-        </div>
-      </div>
-    </div>
+    <Container>
+      <ListGroup>
+        <ListGroup.Item>Hello</ListGroup.Item>
+        <ListGroup.Item>
+          <Container>
+            <Button>+</Button>
+          </Container>
+        </ListGroup.Item>
+      </ListGroup>
+      {/* <Button className="big-btn" onClick={() => handleClick()}>
+          Create New Set
+        </Button>
+        <Button className="big-btn" onClick={() => handleChangeOrder()}>
+          Change Set Order
+        </Button>
+        <Button className="big-btn" onClick={() => handleManageQuestions()}>
+          Create New Question
+        </Button>
+        <Button className="big-btn" onClick={() => handleDeleteQuestion()}>
+          Delete a Question
+        </Button> */}
+    </Container>
   );
+  // <div className="admin-sets">
+  //   <div className="modify-whole">
+  //     <h1>Modify as a Whole:</h1>
+
+  //     {showAddSet && (
+  //       <AddSet onAddSet={onAddSet} setShowAddSet={setShowAddSet} />
+  //     )}
+  //     {showAddQuestion && (
+  //       <NewQuestion
+  //         onNewQuestion={onNewQuestion}
+  //         setShowAddQuestion={setShowAddQuestion}
+  //       />
+  //     )}
+  //     {showChangeOrder && (
+  //       <ChangeOrder curquestions={sets} onChangeOrder={onChangeOrder} />
+  //     )}
+  //     {deleteQuestions && (
+  //       <DeleteQuestion handleDeleteQuestion={handleDeleteQuestion} />
+  //     )}
+  //   </div>
+  //   <div className="modify-parts">
+  //     <h1>View/Modify Individual Sets:</h1>
+  //     <div className="sets">
+  //       {sets.map((set) => (
+  //         <AdminSet
+  //           qid={set._id}
+  //           key={set._id}
+  //           set={set}
+  //           onDelete={onDelete}
+  //           onDuplicate={onDuplicate}
+  //           onOrderChanged={onOrderChanged}
+  //         />
+  //       ))}
+  //     </div>
+  //   </div>
+  // </div>
 };
 
 export default AdminSets;

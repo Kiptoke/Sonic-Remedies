@@ -5,9 +5,8 @@
   width: 100vw;
   display: flex;
   flex-direction: column;
-  color: white;
+  color: black;
   align-items: center;
-  background-color: $textBgColor;
 }
 
 .outer-div {
@@ -17,10 +16,18 @@
 .admin-sets {
   h1 {
     font-weight: bold;
-    font-size: $huge;
+    font-size: $gigantic;
   }
 }
 .sets h1 {
-  font-weight: lighter;
-  font-size: $large;
+  font-weight: bold;
+  font-size: $huge;
+}
+
+.sets div {
+  margin-left: 2rem;
+}
+
+.set-questions {
+  margin-left: 4rem;
 }

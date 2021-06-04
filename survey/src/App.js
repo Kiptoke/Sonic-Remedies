@@ -10,6 +10,7 @@ import ModifySurvey from "./components/admin/ModifySurvey";
 import DownloadData from "./components/admin/downloadData/downloadData";
 import Admin from "./components/admin/Admin";
 import { initViewHeight } from "./utils/viewHeight";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   initViewHeight();

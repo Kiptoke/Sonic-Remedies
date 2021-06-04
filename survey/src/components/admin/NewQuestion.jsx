@@ -30,11 +30,11 @@ const NewQuestion = ({ onNewQuestion, setShowAddQuestion }) => {
     <form className="new-question-form" onSubmit={onSubmit}>
       <h4>New Question</h4>
       <label>
-        <b>Title: </b>
+        <b>Enter Question: </b>
       </label>
       <input
         type="text"
-        placeholder="Add Title"
+        placeholder="Ask Here..."
         value={title}
         onChange={(e) => setTitle(e.target.value)}
       />

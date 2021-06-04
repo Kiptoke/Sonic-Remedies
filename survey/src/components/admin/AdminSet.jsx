@@ -4,6 +4,7 @@ import AdminQuestion from "./AdminQuestion";
 import AddQuestion from "./AddQuestion";
 import ChangeOrder from "./ChangeOrder";
 import API from "../../services/api-client";
+import Button from "react-bootstrap/Button";
 
 import "../../css/components/admin/adminSet.css";
 
@@ -88,7 +89,7 @@ const AdminSet = ({ set, onDelete, onDuplicate }) => {
   };
 
   return (
-    <div>
+    <div className="admin-set">
       <h1 className="set-title">
         <b>{set.title}</b>
       </h1>
@@ -97,37 +98,38 @@ const AdminSet = ({ set, onDelete, onDuplicate }) => {
           <i>Set will contain music</i>
         </h3>
       )}
-      <button onClick={() => onDelete(set._id)}>Delete Set</button>
-      <button onClick={() => onDuplicate(currentSet)}>Duplicate Set</button>
-      <button onClick={() => displayChangeOrder()}>
+      <Button onClick={() => onDelete(set._id)}>Delete Set</Button>
+      <Button onClick={() => onDuplicate(currentSet)}>Duplicate Set</Button>
+      <Button onClick={() => displayChangeOrder()}>
         Change Question Order
-      </button>
+      </Button>
       {showQuestionOrder && (
         <ChangeOrder curquestions={questions} onChangeOrder={onChangeOrder} />
       )}
+      <div className="set-questions">
+        <ol>
+          {questions.map((question) => (
+            <li key={question._id}>
+              <AdminQuestion
+                key={question._id}
+                question={question}
+                deleteQuestion={deleteQuestion}
+              />
+            </li>
+          ))}
+        </ol>
 
-      <ol>
-        {questions.map((question) => (
-          <li key={question._id}>
-            <AdminQuestion
-              key={question._id}
-              question={question}
-              deleteQuestion={deleteQuestion}
-            />
-          </li>
-        ))}
-      </ol>
-
-      <button onClick={() => displayQuestions()}>
-        {showAddQuestion ? "Go Back" : "Add Questions to Set"}
-      </button>
-      {showAddQuestion && (
-        <AddQuestion
-          className="addQuestion"
-          onAddQuestions={onAddQuestions}
-          currentQuestions={currentSet.questions}
-        />
-      )}
+        <Button onClick={() => displayQuestions()}>
+          {showAddQuestion ? "Go Back" : "Add Questions to Set"}
+        </Button>
+        {showAddQuestion && (
+          <AddQuestion
+            className="addQuestion"
+            onAddQuestions={onAddQuestions}
+            currentQuestions={currentSet.questions}
+          />
+        )}
+      </div>
     </div>
   );
 };

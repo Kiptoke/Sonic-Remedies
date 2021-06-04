@@ -1,22 +1,23 @@
 import { Link } from "react-router-dom";
+import { Button, Container } from "react-bootstrap";
 
 const Admin = () => {
   return (
-    <div className="admin-container">
-      <h1>Admin Home Page</h1>
+    <Container>
+      <h1 className="h1">Admin Home Page</h1>
       <Link to="/admin/modifysurvey">
-        <button>Modify Survey</button>
+        <Button>Modify Survey</Button>
       </Link>
       <Link to="/admin/uploadmusic">
-        <button>Upload Music</button>
+        <Button>Upload Music</Button>
       </Link>
       <Link to="/admin/downloaddata">
-        <button>Download Data</button>
+        <Button>Download Data</Button>
       </Link>
       <Link to="/admin/viewmusic">
-        <button>View/Delete Music</button>
+        <Button>View/Delete Music</Button>
       </Link>
-    </div>
+    </Container>
   );
 };
 

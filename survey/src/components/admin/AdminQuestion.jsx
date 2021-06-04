@@ -1,6 +1,5 @@
 import React from "react";
-
-import "../../css/components/admin/adminQuestion.css";
+import { Button } from "react-bootstrap";
 
 const AdminQuestion = ({ question, deleteQuestion }) => {
   switch (question.input_type) {
@@ -17,12 +16,12 @@ const AdminQuestion = ({ question, deleteQuestion }) => {
               <li key={option}>{option}</li>
             ))}
           </ul>
-          <button
+          <Button
             className="small-btn"
             onClick={() => deleteQuestion(question._id)}
           >
             Remove From Set
-          </button>
+          </Button>
         </div>
       );
     case "check-box":
@@ -35,12 +34,12 @@ const AdminQuestion = ({ question, deleteQuestion }) => {
               <li key={option}>{option}</li>
             ))}
           </ul>
-          <button
+          <Button
             className="small-btn"
             onClick={() => deleteQuestion(question._id)}
           >
             Remove From Set
-          </button>
+          </Button>
         </div>
       );
     case "short-answer":
@@ -48,12 +47,12 @@ const AdminQuestion = ({ question, deleteQuestion }) => {
         <div>
           <h3>{question.title}</h3>
           <h5>{question.input_type}</h5>
-          <button
+          <Button
             className="small-btn"
             onClick={() => deleteQuestion(question._id)}
           >
             Remove From Set
-          </button>
+          </Button>
         </div>
       );
     case "color":
@@ -61,12 +60,12 @@ const AdminQuestion = ({ question, deleteQuestion }) => {
         <div>
           <h3>{question.title}</h3>
           <h5>{question.input_type}</h5>
-          <button
+          <Button
             className="small-btn"
             onClick={() => deleteQuestion(question._id)}
           >
             Remove From Set
-          </button>
+          </Button>
         </div>
       );
     case "slider":
@@ -74,12 +73,12 @@ const AdminQuestion = ({ question, deleteQuestion }) => {
         <div>
           <h3>{question.title}</h3>
           <h5>{question.input_type}</h5>
-          <button
+          <Button
             className="small-btn"
             onClick={() => deleteQuestion(question._id)}
           >
             Remove From Set
-          </button>
+          </Button>
         </div>
       );
   }

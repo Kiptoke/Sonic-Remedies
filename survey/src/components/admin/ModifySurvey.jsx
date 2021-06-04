@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import API from "../../services/api-client";
 import { Link } from "react-router-dom";
-
+import Button from "react-bootstrap/Button";
 import AdminSets from "./AdminSets";
 
 import "../../css/components/admin/admin.scss";
@@ -132,7 +132,7 @@ function Admin() {
   return (
     <div className="outer-div admin-container">
       <Link to="/admin">
-        <button>Return to Admin Home</button>
+        <Button>Return to Admin Home</Button>
       </Link>
       <AdminSets
         sets={sets}
