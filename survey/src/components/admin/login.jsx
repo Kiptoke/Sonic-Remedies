@@ -1,7 +1,9 @@
 import { useState } from "react";
 import API from "../../services/api-client";
+import Button from "react-bootstrap/Button";
+import Alert from "react-bootstrap/Alert";
 
-const doLogin = async (credentials, setLoggedIn) => {
+const doLogin = async (credentials, setLoggedIn, setError) => {
   const res = await API.post("login", credentials);
   if (res) {
     localStorage.setItem("token", res);
@@ -10,6 +12,7 @@ const doLogin = async (credentials, setLoggedIn) => {
     setLoggedIn(true);
   } else {
     setLoggedIn(false);
+    setError("The password was incorrect. Try Again.");
   }
 };
 
@@ -18,6 +21,8 @@ const Login = ({ setLoggedIn }) => {
     username: "admin",
     password: "",
   });
+
+  const [error, setError] = useState("");
 
   return (
     <div className="admin-container">
@@ -43,15 +48,18 @@ const Login = ({ setLoggedIn }) => {
             })
           }
         ></input>
-        <button
+        <Button
           onClick={(e) => {
             e.preventDefault();
-            doLogin(credentials, setLoggedIn);
+            doLogin(credentials, setLoggedIn, setError);
           }}
         >
           Login
-        </button>
+        </Button>
       </form>
+      <Alert variant="danger" style={{ display: error.length ? "" : "none" }}>
+        {error}
+      </Alert>
     </div>
   );
 };

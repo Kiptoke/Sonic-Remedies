@@ -6,6 +6,7 @@ import SliderFields from "./sliderFields";
 import PrevailKeyField from "./prevailKeyField";
 import submitMusic from "./submitMusic";
 import getDuration from "./getDuration";
+import Button from "react-bootstrap/Button";
 
 const MusicFileForm = () => {
   const [fileReadyToUpload, setFileReadyToUpload] = useState(false);
@@ -55,7 +56,7 @@ const MusicFileForm = () => {
       <YesNoFields
         setField={(value) => updateSubParam({ consistent_vibe: value })}
       />
-      <button
+      <Button
         onClick={(e) => {
           e.preventDefault();
           if (window.confirm("Are you sure you want to submit this?")) {
@@ -65,7 +66,7 @@ const MusicFileForm = () => {
         style={fileReadyToUpload && fieldsFilled ? {} : { display: "none" }}
       >
         Submit
-      </button>
+      </Button>
     </form>
   );
 };

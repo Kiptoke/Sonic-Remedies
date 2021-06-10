@@ -9,7 +9,7 @@ const makeToken = () => {
     { username: "admin" },
     fs.readFileSync(process.env.KEY_PATH).toString(),
     {
-      expiresIn: "30m",
+      expiresIn: "120m",
     }
   );
 };

@@ -1,7 +1,8 @@
 import React, { useState } from "react";
+import Button from "react-bootstrap/Button";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { FixedSizeList, areEqual } from "react-window";
-import "../../css/components/admin/changeOrder.css";
+import "../../../css/components/admin/changeOrder.css";
 
 function getStyle({ provided, style, isDragging }) {
   // If you don't want any spacing between your items
@@ -109,7 +110,7 @@ const ChangeOrder = ({ curquestions, onChangeOrder }) => {
         </div>
       </DragDropContext>
 
-      <button onClick={() => onChangeOrder(questions)}>Done</button>
+      <Button onClick={() => onChangeOrder(questions)}>Done</Button>
     </div>
   );
 };

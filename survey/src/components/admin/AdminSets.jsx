@@ -1,10 +1,8 @@
 import { useState } from "react";
-import AdminSet from "./AdminSet";
-import AddSet from "./AddSet";
-import NewQuestion from "./NewQuestion";
-import ChangeOrder from "./ChangeOrder";
-import DeleteQuestion from "./DeleteQuestion";
-import { Button, Container, ListGroup } from "react-bootstrap";
+import { Container, ListGroup, Row, Col } from "react-bootstrap";
+import Set from "./adminSet/Set";
+import BigMods from "./bigMods/bigMods";
+import BigModsMenu from "./bigMods/bigModsMenu";
 
 const AdminSets = ({
   sets,
@@ -12,94 +10,55 @@ const AdminSets = ({
   onDuplicate,
   onAddSet,
   onNewQuestion,
-  onOrderChanged,
+  onChangeOrder,
+  onMusicSwitch,
+  onEditTitle,
 }) => {
-  const [showAddSet, setShowAddSet] = useState(false);
-  const [showAddQuestion, setShowAddQuestion] = useState(false);
-  const [showChangeOrder, setShowChangeOrder] = useState(false);
-  const [deleteQuestions, setDeleteQuestions] = useState(false);
-
-  const handleClick = () => {
-    setShowAddSet(!showAddSet);
-  };
-
-  const handleManageQuestions = () => {
-    setShowAddQuestion(!showAddQuestion);
-  };
-
-  const handleChangeOrder = () => {
-    setShowChangeOrder(!showChangeOrder);
-  };
-
-  const onChangeOrder = (sets) => {
-    setShowChangeOrder(false);
-    onOrderChanged(sets);
-  };
-
-  const handleDeleteQuestion = () => {
-    setDeleteQuestions(!deleteQuestions);
-  };
+  const [bigMod, setBigMod] = useState("");
 
   return (
     <Container>
       <ListGroup>
-        <ListGroup.Item>Hello</ListGroup.Item>
         <ListGroup.Item>
-          <Container>
-            <Button>+</Button>
-          </Container>
+          <h1>Survey Modification Menus</h1>
+          <BigModsMenu bigMod={bigMod} setBigMod={setBigMod} />
         </ListGroup.Item>
+        <ListGroup.Item>
+          <BigMods
+            type={bigMod}
+            sets={sets}
+            setBigMod={setBigMod}
+            onChangeOrder={onChangeOrder}
+            onAddSet={onAddSet}
+            onNewQuestion={onNewQuestion}
+          ></BigMods>
+        </ListGroup.Item>
+        <ListGroup.Item>
+          <h1>Survey Sets</h1>
+          <Row>
+            <Col>Set Name</Col>
+            <Col>Has Music?</Col>
+            <Col>Edit Questions</Col>
+            <Col>Duplicate or Delete Set</Col>
+          </Row>
+        </ListGroup.Item>
+        {sets.map((set, i) => (
+          <Container>
+            <ListGroup.Item key={set._id}>
+              <Set
+                set={set}
+                index={i}
+                onDeleteSet={onDelete}
+                onDuplicateSet={onDuplicate}
+                onMusicSwitch={onMusicSwitch}
+                onEditTitle={onEditTitle}
+              ></Set>
+            </ListGroup.Item>
+          </Container>
+        ))}
       </ListGroup>
-      {/* <Button className="big-btn" onClick={() => handleClick()}>
-          Create New Set
-        </Button>
-        <Button className="big-btn" onClick={() => handleChangeOrder()}>
-          Change Set Order
-        </Button>
-        <Button className="big-btn" onClick={() => handleManageQuestions()}>
-          Create New Question
-        </Button>
-        <Button className="big-btn" onClick={() => handleDeleteQuestion()}>
-          Delete a Question
-        </Button> */}
     </Container>
   );
-  // <div className="admin-sets">
-  //   <div className="modify-whole">
-  //     <h1>Modify as a Whole:</h1>
-
-  //     {showAddSet && (
-  //       <AddSet onAddSet={onAddSet} setShowAddSet={setShowAddSet} />
-  //     )}
-  //     {showAddQuestion && (
-  //       <NewQuestion
-  //         onNewQuestion={onNewQuestion}
-  //         setShowAddQuestion={setShowAddQuestion}
-  //       />
-  //     )}
-  //     {showChangeOrder && (
-  //       <ChangeOrder curquestions={sets} onChangeOrder={onChangeOrder} />
-  //     )}
-  //     {deleteQuestions && (
-  //       <DeleteQuestion handleDeleteQuestion={handleDeleteQuestion} />
-  //     )}
-  //   </div>
-  //   <div className="modify-parts">
-  //     <h1>View/Modify Individual Sets:</h1>
-  //     <div className="sets">
-  //       {sets.map((set) => (
-  //         <AdminSet
-  //           qid={set._id}
-  //           key={set._id}
-  //           set={set}
-  //           onDelete={onDelete}
-  //           onDuplicate={onDuplicate}
-  //           onOrderChanged={onOrderChanged}
-  //         />
-  //       ))}
-  //     </div>
-  //   </div>
-  // </div>
 };
 
 export default AdminSets;

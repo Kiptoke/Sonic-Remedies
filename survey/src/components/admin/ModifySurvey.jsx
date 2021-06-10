@@ -129,6 +129,20 @@ function Admin() {
     setSets(orderedSets);
   };
 
+  const switchMusic = async (id, music, index) => {
+    API.patchOne("sets", id, { music: music });
+    let temp_sets = sets;
+    temp_sets[index].music = music;
+    setSets(temp_sets);
+  };
+
+  const editTitle = async (id, title, index) => {
+    API.patchOne("sets", id, { title: title });
+    let temp_sets = sets;
+    temp_sets[index].title = title;
+    setSets(temp_sets);
+  };
+
   return (
     <div className="outer-div admin-container">
       <Link to="/admin">
@@ -140,7 +154,9 @@ function Admin() {
         onDuplicate={duplicateSet}
         onAddSet={addSet}
         onNewQuestion={newQuestion}
-        onOrderChanged={changeSetOrder}
+        onChangeOrder={changeSetOrder}
+        onMusicSwitch={switchMusic}
+        onEditTitle={editTitle}
       />
     </div>
   );

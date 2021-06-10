@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import API from "../../services/api-client";
+import API from "../../../services/api-client";
 
-const DeleteQuestion = ({ handleDeleteQuestion }) => {
+const DeleteQuestion = ({ onDeleteQuestion }) => {
   const [questions, setQuestions] = useState([]);
   const [toDelete, setToDelete] = useState([]);
 
@@ -36,7 +36,7 @@ const DeleteQuestion = ({ handleDeleteQuestion }) => {
       for (let i = 0; i < toDelete.length; i++) {
         await API.deleteOne("questions", toDelete[i]);
       }
-      handleDeleteQuestion();
+      onDeleteQuestion();
     }
   };
 
@@ -73,7 +73,7 @@ const DeleteQuestion = ({ handleDeleteQuestion }) => {
         );
       })}
       <input
-        className="submit"
+        className="submit btn btn-primary"
         type="submit"
         value="Delete Selected Questions"
       />

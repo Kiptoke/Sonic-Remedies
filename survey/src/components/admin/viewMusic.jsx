@@ -35,7 +35,10 @@ const ViewMusic = () => {
           <div style={{ margin: "1rem" }}>{music.artist}</div>
           <Button
             style={{ margin: "1rem" }}
-            onClick={() => clickedDelete(music._id)}
+            onClick={() => {
+              if (window.confirm("Delete this music from the DB?"))
+                clickedDelete(music._id);
+            }}
           >
             Delete
           </Button>
