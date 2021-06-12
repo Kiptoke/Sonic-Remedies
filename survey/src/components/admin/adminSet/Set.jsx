@@ -8,6 +8,12 @@ import { useState } from "react";
 import AddQuestion from "./addQuestion";
 import ModButton from "../../common/modButton";
 
+const mods = [
+  { title: "Add Questions", mod: "add-q" },
+  { title: "Remove Questions", mod: "rem-q" },
+  { title: "View Questions", mod: "view-q" },
+];
+
 const Set = ({
   set,
   index,
@@ -17,7 +23,7 @@ const Set = ({
   onEditTitle,
 }) => {
   const [editingTitle, setEditingTitle] = useState(false);
-  const [mod, setMod] = useState("");
+  const [currentMod, setCurrentMod] = useState("");
   const { title, music, _id } = set;
   const length = set.questions ? set.questions.length : 0;
   return (
@@ -58,14 +64,18 @@ const Set = ({
         </Col>
         <Col>
           <Row>Number of Questions: {length}</Row>
-          <Row>
-            <ModButton setMod={setMod} buttonMod="add-q" currentMod={mod}>
-              Add Questions
-            </ModButton>
-          </Row>
-          <Row>
-            <Button disabled={length === 0}>Remove Questions</Button>
-          </Row>
+          {mods.map((mod) => (
+            <Row>
+              <ModButton
+                setMod={setCurrentMod}
+                buttonMod={mod.mod}
+                currentMod={currentMod}
+                disabled={mod.mod !== "add-q" && length === 0}
+              >
+                {mod.title}
+              </ModButton>
+            </Row>
+          ))}
         </Col>
         <Col>
           <Row>Duplicate Set</Row>
@@ -90,7 +100,7 @@ const Set = ({
           </Row>
         </Col>
       </Row>
-      <Row style={{ display: mod ? "" : "none" }}>
+      <Row style={{ display: currentMod ? "" : "none" }}>
         <AddQuestion currentQuestions={set.questions} />
       </Row>
     </Container>

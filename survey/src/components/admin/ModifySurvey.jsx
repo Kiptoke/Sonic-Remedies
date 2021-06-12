@@ -6,7 +6,7 @@ import AdminSets from "./AdminSets";
 
 import "../../css/components/admin/admin.scss";
 
-function Admin() {
+function ModifySurvey() {
   const [setOrder, setSetOrder] = useState([]);
   const [sets, setSets] = useState([]);
   const [questions, setQuestions] = useState([]);
@@ -162,4 +162,4 @@ function Admin() {
   );
 }
 
-export default Admin;
+export default ModifySurvey;
