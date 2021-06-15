@@ -16,8 +16,7 @@ const DeleteQuestion = ({ onDeleteQuestion }) => {
 
   const deleteQuestions = async (e) => {
     e.preventDefault();
-    var retval = window.confirm("Delete these questions?");
-    if (retval === true) {
+    if (window.confirm("Delete these questions?")) {
       const sets = await API.getAll("sets");
 
       //deletes questions from any set

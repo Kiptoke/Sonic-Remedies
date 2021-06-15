@@ -2,7 +2,7 @@ import { useState } from "react";
 import AdminQCheckbox from "./AdminQCheckbox";
 import API from "../../../services/api-client";
 
-const AddQuestion = ({
+const RemoveQuestion = ({
   setCurrentQuestions,
   currentQuestions,
   id,
@@ -10,14 +10,15 @@ const AddQuestion = ({
 }) => {
   const [selected, setSelected] = useState([]);
 
-  const availQ = allQuestions.filter(
-    (question) => !currentQuestions.includes(question._id)
+  const availQ = allQuestions.filter((question) =>
+    currentQuestions.includes(question._id)
   );
 
   const onSubmit = (e) => {
     e.preventDefault();
-    setCurrentQuestions([...currentQuestions, ...selected]);
-    API.patchOne("sets", id, { questions: [...currentQuestions, ...selected] });
+    const submit_questions = availQ.filter((q) => !selected.includes(q._id));
+    setCurrentQuestions(submit_questions.map((q) => q._id));
+    API.patchOne("sets", id, { questions: submit_questions });
   };
 
   const addToSelected = (id) => {
@@ -33,19 +34,16 @@ const AddQuestion = ({
 
   return (
     <form className="add-question-form" onSubmit={onSubmit}>
-      {availQ.map(
-        (question) =>
-          !currentQuestions.includes(question) && (
-            <AdminQCheckbox
-              question={question}
-              addToSelected={addToSelected}
-              key={question._id}
-            />
-          )
-      )}
+      {availQ.map((question) => (
+        <AdminQCheckbox
+          question={question}
+          addToSelected={addToSelected}
+          key={question._id}
+        />
+      ))}
       <input className="btn btn-primary" type="submit" value="Confirm" />
     </form>
   );
 };
 
-export default AddQuestion;
+export default RemoveQuestion;

@@ -92,6 +92,7 @@ function ModifySurvey() {
 
   function parseOptions(options) {
     const arr = [];
+    if (!options) return null;
     let start_of_opt = 0;
     for (let i = 0; i < options.length; i++) {
       let current = options.charAt(i);
@@ -150,6 +151,7 @@ function ModifySurvey() {
       </Link>
       <AdminSets
         sets={sets}
+        allQuestions={questions}
         onDelete={deleteSet}
         onDuplicate={duplicateSet}
         onAddSet={addSet}

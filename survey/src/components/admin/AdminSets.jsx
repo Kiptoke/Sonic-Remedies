@@ -6,6 +6,7 @@ import BigModsMenu from "./bigMods/bigModsMenu";
 
 const AdminSets = ({
   sets,
+  allQuestions,
   onDelete,
   onDuplicate,
   onAddSet,
@@ -43,15 +44,17 @@ const AdminSets = ({
           </Row>
         </ListGroup.Item>
         {sets.map((set, i) => (
-          <Container>
+          <Container key={set._id}>
             <ListGroup.Item key={set._id}>
               <Set
-                set={set}
+                inSet={set}
                 index={i}
                 onDeleteSet={onDelete}
                 onDuplicateSet={onDuplicate}
                 onMusicSwitch={onMusicSwitch}
                 onEditTitle={onEditTitle}
+                onAddQuestions={onNewQuestion}
+                allQuestions={allQuestions}
               ></Set>
             </ListGroup.Item>
           </Container>

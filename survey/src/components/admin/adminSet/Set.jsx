@@ -6,7 +6,10 @@ import Duplicate from "../../../vectors/admin/clipboard-check.svg";
 import EditTitle from "./editTitle";
 import { useState } from "react";
 import AddQuestion from "./addQuestion";
+import RemoveQuestion from "./removeQuestion";
 import ModButton from "../../common/modButton";
+import { setCurrentQuestions } from "./setHelper";
+import ViewQuestions from "./viewQuestions";
 
 const mods = [
   { title: "Add Questions", mod: "add-q" },
@@ -15,13 +18,15 @@ const mods = [
 ];
 
 const Set = ({
-  set,
+  inSet,
   index,
   onDeleteSet,
   onDuplicateSet,
   onMusicSwitch,
   onEditTitle,
+  allQuestions,
 }) => {
+  const [set, setSet] = useState(inSet);
   const [editingTitle, setEditingTitle] = useState(false);
   const [currentMod, setCurrentMod] = useState("");
   const { title, music, _id } = set;
@@ -63,14 +68,17 @@ const Set = ({
           </div>
         </Col>
         <Col>
-          <Row>Number of Questions: {length}</Row>
+          <Row>No. Questions in Set: {length}</Row>
           {mods.map((mod) => (
-            <Row>
+            <Row key={mod.mod}>
               <ModButton
                 setMod={setCurrentMod}
                 buttonMod={mod.mod}
                 currentMod={currentMod}
-                disabled={mod.mod !== "add-q" && length === 0}
+                disabled={
+                  (mod.mod !== "add-q" && length === 0) ||
+                  (mod.mod === "add-q" && length >= allQuestions.length)
+                }
               >
                 {mod.title}
               </ModButton>
@@ -100,8 +108,36 @@ const Set = ({
           </Row>
         </Col>
       </Row>
-      <Row style={{ display: currentMod ? "" : "none" }}>
-        <AddQuestion currentQuestions={set.questions} />
+      <Row>
+        {currentMod === "add-q" && (
+          <AddQuestion
+            setCurrentQuestions={(newQuestions) => {
+              setCurrentQuestions(set, setSet, newQuestions);
+              setCurrentMod("");
+            }}
+            currentQuestions={set.questions}
+            allQuestions={allQuestions}
+            id={set._id}
+          />
+        )}
+        {currentMod === "rem-q" && (
+          <RemoveQuestion
+            setCurrentQuestions={(newQuestions) => {
+              setCurrentQuestions(set, setSet, newQuestions);
+              setCurrentMod("");
+            }}
+            currentQuestions={set.questions}
+            allQuestions={allQuestions}
+            id={set._id}
+          />
+        )}
+        {currentMod === "view-q" && (
+          <ViewQuestions
+            questions={allQuestions.filter((q) =>
+              set.questions.includes(q._id)
+            )}
+          />
+        )}
       </Row>
     </Container>
   );
