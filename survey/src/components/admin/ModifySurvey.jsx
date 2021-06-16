@@ -151,7 +151,9 @@ function ModifySurvey() {
       </Link>
       <AdminSets
         sets={sets}
+        setSets={setSets}
         allQuestions={questions}
+        setAllQuestions={setQuestions}
         onDelete={deleteSet}
         onDuplicate={duplicateSet}
         onAddSet={addSet}

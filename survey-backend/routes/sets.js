@@ -75,7 +75,7 @@ router.patch("/:id", async (req, res) => {
   }
 });
 
-//put req
+//putOne req
 router.put("/:id", async (req, res) => {
   try {
     const set = await Set.findById(req.params.id);

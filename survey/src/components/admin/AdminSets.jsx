@@ -6,7 +6,9 @@ import BigModsMenu from "./bigMods/bigModsMenu";
 
 const AdminSets = ({
   sets,
+  setSets,
   allQuestions,
+  setAllQuestions,
   onDelete,
   onDuplicate,
   onAddSet,
@@ -28,10 +30,13 @@ const AdminSets = ({
           <BigMods
             type={bigMod}
             sets={sets}
+            setSets={setSets}
             setBigMod={setBigMod}
             onChangeOrder={onChangeOrder}
             onAddSet={onAddSet}
             onNewQuestion={onNewQuestion}
+            allQuestions={allQuestions}
+            setAllQuestions={setAllQuestions}
           ></BigMods>
         </ListGroup.Item>
         <ListGroup.Item>

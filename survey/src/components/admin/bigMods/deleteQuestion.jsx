@@ -1,41 +1,39 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import API from "../../../services/api-client";
 
-const DeleteQuestion = ({ onDeleteQuestion }) => {
-  const [questions, setQuestions] = useState([]);
+const DeleteQuestion = ({
+  allQuestions,
+  setAllQuestions,
+  sets,
+  setSets,
+  onDeleteQuestion,
+}) => {
+  let mySets = sets;
   const [toDelete, setToDelete] = useState([]);
-
-  useEffect(() => {
-    //get all questions in db
-    const getQuestions = async () => {
-      const serverQuestions = await API.getAll("questions");
-      setQuestions(serverQuestions);
-    };
-    getQuestions();
-  }, []);
 
   const deleteQuestions = async (e) => {
     e.preventDefault();
     if (window.confirm("Delete these questions?")) {
-      const sets = await API.getAll("sets");
-
+      setAllQuestions(allQuestions.filter((q) => !toDelete.includes(q._id)));
+      onDeleteQuestion();
+      // let sets = await API.getAll("sets");
       //deletes questions from any set
       for (let i = 0; i < toDelete.length; i++) {
-        for (let j = 0; j < sets.length; j++) {
-          for (let k = 0; k < sets[j].questions.length; k++) {
-            if (sets[j].questions[k] === toDelete[i]) {
-              sets[j].questions.splice(k, 1);
-              await API.putOne("sets", sets[j]._id, sets[j]);
+        for (let j = 0; j < mySets.length; j++) {
+          for (let k = 0; k < mySets[j].questions.length; k++) {
+            if (mySets[j].questions[k] === toDelete[i]) {
+              mySets[j].questions.splice(k, 1);
+              API.putOne("sets", mySets[j]._id, mySets[j]);
             }
           }
         }
       }
+      setSets(mySets);
 
       //delete each question in array
       for (let i = 0; i < toDelete.length; i++) {
         await API.deleteOne("questions", toDelete[i]);
       }
-      onDeleteQuestion();
     }
   };
 
@@ -58,7 +56,7 @@ const DeleteQuestion = ({ onDeleteQuestion }) => {
 
   return (
     <form onSubmit={deleteQuestions}>
-      {questions.map((question) => {
+      {allQuestions.map((question) => {
         return (
           <div
             key={question.title}

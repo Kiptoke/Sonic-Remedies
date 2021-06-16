@@ -6,6 +6,9 @@ import DeleteQuestion from "./deleteQuestion";
 const BigMods = ({
   type,
   sets,
+  setSets,
+  allQuestions,
+  setAllQuestions,
   setBigMod,
   onChangeOrder,
   onAddSet,
@@ -32,7 +35,15 @@ const BigMods = ({
         />
       );
     case "delete-q":
-      return <DeleteQuestion onDeleteQuestion={middle()} />;
+      return (
+        <DeleteQuestion
+          allQuestions={allQuestions}
+          setAllQuestions={setAllQuestions}
+          sets={sets}
+          setSets={setSets}
+          onDeleteQuestion={middle()}
+        />
+      );
   }
 };
 
