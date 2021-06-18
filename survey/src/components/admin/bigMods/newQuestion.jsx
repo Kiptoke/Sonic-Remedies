@@ -80,6 +80,12 @@ const NewQuestion = ({ onNewQuestion, allQuestions }) => {
         }}
       />
       <br />
+      <Alert variant="info">
+        {
+          "The conditional question is used if you would like a Yes/No response before the question. Ex: Do you have synesthesia? (if Yes) Do you associate a color with this piece?"
+        }
+      </Alert>
+      <br />
       <label>
         <b>Enter Question: </b>
       </label>
@@ -89,13 +95,6 @@ const NewQuestion = ({ onNewQuestion, allQuestions }) => {
         value={title}
         onChange={(e) => setTitle(e.target.value)}
       />
-      <br />
-
-      <Alert variant="info">
-        {
-          "The conditional question is used if you would like a Yes/No response before the question. Ex: Do you have synesthesia? (if Yes) Do you associate a color with this piece?"
-        }
-      </Alert>
       <br />
       <label>
         <b>Question Type: </b>
