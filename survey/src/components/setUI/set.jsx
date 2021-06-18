@@ -34,6 +34,7 @@ const Set = ({
         postResponse(updatedResponses);
       }
     } else {
+      console.log("Got here");
       updateCurrentQuestion(currentQuestion + 1);
     }
   };

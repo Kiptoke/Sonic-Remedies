@@ -1,4 +1,5 @@
 import API from "../services/api-client.js";
+import getAndSortSets from "../utils/orderSets";
 
 const convertSurveyData = (sets, questions) => {
   let new_sets = [];
@@ -10,7 +11,8 @@ const convertSurveyData = (sets, questions) => {
         ask: my_q.title,
         responses: my_q.options,
         type: my_q.input_type,
-        id: my_q._id
+        id: my_q._id,
+        config: my_q.config,
       });
     });
     new_sets.push({ questions: new_questions, music: set.music });
@@ -19,7 +21,7 @@ const convertSurveyData = (sets, questions) => {
 };
 
 const getSurveyData = async () => {
-  const sets = await API.getAll("sets");
+  const sets = await getAndSortSets();
   const questions = await API.getAll("questions/idict");
   return convertSurveyData(sets, questions);
 };

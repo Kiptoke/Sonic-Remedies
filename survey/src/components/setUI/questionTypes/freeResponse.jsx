@@ -4,7 +4,7 @@ import Joi from "joi";
 import { onOpenKB, onCloseKB } from "../../../utils/mobileKeyboard";
 
 const schema = Joi.object({
-  textfield: Joi.string().min(2).max(350).required().label("Answer"),
+  textfield: Joi.string().min(2).max(300).required().label("Answer"),
 });
 
 function verifyInput(evt, setResponse, setValidationError) {
@@ -19,7 +19,8 @@ function verifyInput(evt, setResponse, setValidationError) {
   }
 }
 
-const FreeResponse = ({ handleResponded }) => {
+const FreeResponse = ({ handleResponded, config }) => {
+  const maxLength = config ? config.maxLength : undefined;
   const [response, setResponse] = useState(null);
   const [validationError, setValidationError] = useState("");
   useEffect(() => {
@@ -28,7 +29,7 @@ const FreeResponse = ({ handleResponded }) => {
   return (
     <div className="question-fr">
       <textarea
-        maxLength="350"
+        maxLength={maxLength ? maxLength : 25}
         rows="6"
         placeholder="Write your answer here"
         onTouchEnd={onOpenKB}

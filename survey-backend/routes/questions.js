@@ -54,6 +54,7 @@ router.post("/", async (req, res) => {
     title: req.body.title,
     input_type: req.body.input_type,
     options: req.body.options,
+    config: req.body.config,
   });
   try {
     const newQuestion = await question.save();
@@ -64,18 +65,17 @@ router.post("/", async (req, res) => {
 });
 
 //Delete one
-router.delete('/:id', async (req, res) => {
+router.delete("/:id", async (req, res) => {
   try {
-      const question = await Question.findById(req.params.id)
-      if (question == null) {
-          return res.status(404).json({ message: 'Cannot find question' })
-      }
-      question.remove()
-      res.json({ message: 'Deleted question' })
+    const question = await Question.findById(req.params.id);
+    if (question == null) {
+      return res.status(404).json({ message: "Cannot find question" });
+    }
+    question.remove();
+    res.json({ message: "Deleted question" });
+  } catch (err) {
+    return res.status(500).json({ message: err.message });
   }
-  catch (err) {
-      return res.status(500).json({ message: err.message })
-  }
-})
+});
 
 module.exports = router;

@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import API from "../../services/api-client";
+import getAndSortSets from "../../utils/orderSets";
 import { Link } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import AdminSets from "./AdminSets";
@@ -13,40 +14,11 @@ function ModifySurvey() {
 
   //get sets
   useEffect(() => {
-    const getSets = async () => {
-      const serverSets = await API.getAll("sets");
-      const orderData = await API.getAll("set-order");
-
-      if (orderData.length === 0) {
-        let order = [];
-        for (let i = 0; i < serverSets.length; i++) {
-          order.push(serverSets[i]._id);
-        }
-        const orderObj = {
-          sets: order,
-        };
-        const newSetOrder = await API.post("set-order", orderObj);
-        setSetOrder(newSetOrder);
-        setSets(serverSets);
-      } else {
-        setSetOrder(orderData[0].sets);
-        const orderedSets = [];
-        for (let i = 0; i < orderData[0].sets.length; i++) {
-          for (let j = 0; j < serverSets.length; j++) {
-            if (orderData[0].sets[i] === serverSets[j]._id) {
-              orderedSets.push(serverSets[j]);
-              break;
-            }
-          }
-        }
-        setSets(orderedSets);
-      }
-    };
     const getQuestions = async () => {
       const serverQuestions = await API.getAll("questions");
       setQuestions(serverQuestions);
     };
-    getSets();
+    getAndSortSets(setSets, setSetOrder);
     getQuestions();
   }, []);
 
@@ -80,8 +52,8 @@ function ModifySurvey() {
     setSetOrder(orderData.sets);
   };
 
-  const newQuestion = async (title, type, options) => {
-    const question = { title: title, input_type: type };
+  const newQuestion = async (title, type, options, config) => {
+    const question = { title: title, input_type: type, config: config };
     if (options !== "") {
       const opts_arr = parseOptions(options);
       question.options = opts_arr;

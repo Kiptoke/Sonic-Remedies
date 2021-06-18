@@ -26,7 +26,12 @@ const BigMods = ({
     case "new-set":
       return <NewSet onAddSet={middle(onAddSet)} />;
     case "new-q":
-      return <NewQuestion onNewQuestion={middle(onNewQuestion)} />;
+      return (
+        <NewQuestion
+          onNewQuestion={middle(onNewQuestion)}
+          allQuestions={allQuestions}
+        />
+      );
     case "reorder":
       return (
         <ChangeOrder
