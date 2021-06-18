@@ -1,5 +1,4 @@
 const QuetsionView = ({ question }) => {
-  console.log(question);
   return (
     <div>
       <h3>
@@ -10,7 +9,7 @@ const QuetsionView = ({ question }) => {
       <h1>{question.title}</h1>
       <h2 style={{ fontStyle: "italic" }}>{question.input_type}</h2>
       {question.options.map((opt) => (
-        <li>{opt}</li>
+        <li key={opt}>{opt}</li>
       ))}
     </div>
   );

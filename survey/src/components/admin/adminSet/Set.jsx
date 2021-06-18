@@ -7,13 +7,16 @@ import EditTitle from "./editTitle";
 import { useState } from "react";
 import AddQuestion from "./addQuestion";
 import RemoveQuestion from "./removeQuestion";
+import ChangeOrder from "../bigMods/changeOrder";
 import ModButton from "../../common/modButton";
 import { setCurrentQuestions } from "./setHelper";
 import ViewQuestions from "./viewQuestions";
+import API from "../../../services/api-client";
 
 const mods = [
   { title: "Add Questions", mod: "add-q" },
   { title: "Remove Questions", mod: "rem-q" },
+  { title: "Order Questions", mod: "ord-q" },
   { title: "View Questions", mod: "view-q" },
 ];
 
@@ -131,10 +134,28 @@ const Set = ({
             id={set._id}
           />
         )}
+        {currentMod === "ord-q" && (
+          <div>
+            <h1>Order Questions</h1>
+            <ChangeOrder
+              curquestions={set.questions.map(
+                (qid) => allQuestions.filter((q) => q._id === qid)[0]
+              )}
+              onChangeOrder={(out) => {
+                let temp_set = set;
+                let q_temp = out.map((q) => q._id);
+                temp_set["questions"] = q_temp;
+                setSet(temp_set);
+                setCurrentMod("");
+                API.putOne("sets", set._id, temp_set);
+              }}
+            />
+          </div>
+        )}
         {currentMod === "view-q" && (
           <ViewQuestions
-            questions={allQuestions.filter((q) =>
-              set.questions.includes(q._id)
+            questions={set.questions.map(
+              (qid) => allQuestions.filter((q) => q._id === qid)[0]
             )}
           />
         )}
