@@ -14,6 +14,12 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   initViewHeight();
+  document.addEventListener("touchstart", (e) => {
+    e.preventDefault();
+  });
+  document.addEventListener("touchmove", (e) => {
+    e.preventDefault();
+  });
 
   return (
     <Fragment>

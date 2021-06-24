@@ -1,8 +1,14 @@
 import API from "../services/api-client";
+import localDB from "./localDB";
 
 const getAndSortSets = async (setSets, setSetOrder) => {
-  const serverSets = await API.getAll("sets");
-  const orderData = await API.getAll("set-order");
+  let serverSets = await API.getAll("sets");
+  let orderData = await API.getAll("set-order");
+  if (!serverSets || !orderData) {
+    serverSets = localDB["sets"];
+    orderData = localDB["set-order"];
+    alert("Failed to load DB");
+  }
 
   if (orderData.length === 0) {
     let order = [];

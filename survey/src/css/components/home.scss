@@ -5,15 +5,23 @@
   flex-direction: column;
   align-items: center;
   padding: 1rem;
+  overflow: hidden;
 
   p {
-    width: 30rem;
-    font-size: $medium;
+    max-width: 30rem;
   }
 
-  .admin-button {
-    position: absolute;
-    top: 0;
-    right: 25%;
+  .lighten {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 0.5rem;
+    margin: 0.5rem;
+
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .lighten::-webkit-scrollbar {
+    display: none;
   }
 }

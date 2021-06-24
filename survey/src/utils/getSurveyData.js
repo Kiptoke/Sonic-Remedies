@@ -1,5 +1,6 @@
 import API from "../services/api-client.js";
 import getAndSortSets from "../utils/orderSets";
+import localDB from "./localDB";
 
 const convertSurveyData = (sets, questions) => {
   let new_sets = [];
@@ -23,6 +24,10 @@ const convertSurveyData = (sets, questions) => {
 const getSurveyData = async () => {
   const sets = await getAndSortSets();
   const questions = await API.getAll("questions/idict");
+  if (!questions) {
+    alert("Failed to get server data");
+    return convertSurveyData(sets, localDB["questions-idict"]);
+  }
   return convertSurveyData(sets, questions);
 };
 export default getSurveyData;

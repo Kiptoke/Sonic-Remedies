@@ -22,6 +22,7 @@ body,
   font-family: Lato;
   margin: 0;
   padding: 0;
+  height: 100%;
 }
 
 ::placeholder {
@@ -33,13 +34,13 @@ body,
   background-color: $mainBgColor;
   background-image: url("../images/bg-arc.jpg");
   background-size: cover;
-  height: vh(100);
+  height: 100%;
   width: 100%;
 }
 
 @media (min-width: 960px) {
   .global-container {
-    width: 50vw;
+    width: 50%;
     margin: 0 auto;
     background-size: cover;
   }
