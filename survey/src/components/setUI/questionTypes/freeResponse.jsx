@@ -1,7 +1,7 @@
 import "../../../css/components/freeResponse.scss";
 import { useState, useEffect } from "react";
 import Joi from "joi";
-import { onOpenKB, onCloseKB } from "../../../utils/mobileKeyboard";
+// import { onOpenKB, onCloseKB } from "../../../utils/mobileKeyboard";
 
 const schema = Joi.object({
   textfield: Joi.string().min(2).max(300).required().label("Answer"),
@@ -32,8 +32,8 @@ const FreeResponse = ({ handleResponded, config }) => {
         maxLength={maxLength ? maxLength : 25}
         rows="6"
         placeholder="Write your answer here"
-        onTouchEnd={onOpenKB}
-        onMouseLeave={onCloseKB}
+        // onTouchEnd={onOpenKB}
+        // onMouseLeave={onCloseKB}
         onChange={(evt) => verifyInput(evt, setResponse, setValidationError)}
       />
       <div className="error">{validationError}</div>

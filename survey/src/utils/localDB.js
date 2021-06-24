@@ -26,13 +26,6 @@ const localDB = {
       music: false,
       __v: 16,
     },
-    {
-      questions: ["60cb7157c1fa3a04e5556a54"],
-      _id: "60cba4baa7692602c47ac866",
-      title: "Test SA",
-      music: false,
-      __v: 14,
-    },
   ],
   questions: [
     {
@@ -117,11 +110,7 @@ const localDB = {
   ],
   "set-order": [
     {
-      sets: [
-        "60cba4baa7692602c47ac866",
-        "60ca4cfa05da7f03dc132566",
-        "60ca29e5c76bf302c5949fa5",
-      ],
+      sets: ["60ca4cfa05da7f03dc132566", "60ca29e5c76bf302c5949fa5"],
       _id: "6077c3d622e3640e74f7b234",
       __v: 374,
     },

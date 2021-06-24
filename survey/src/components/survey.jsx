@@ -1,5 +1,7 @@
 import Set from "./setUI/set";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Fragment } from "react";
+import { useBeforeunload } from "react-beforeunload";
+import { Prompt } from "react-router-dom";
 import getSurveyData from "../utils/getSurveyData";
 import getMusicList from "../utils/getMusicList";
 import API from "../services/api-client";
@@ -22,6 +24,9 @@ const Survey = () => {
         setMusicList(musicListData);
       });
   }, []);
+  useBeforeunload((e) => {
+    return "Data will be lost.";
+  });
 
   //make post request with user responses
   const postResponse = (answers) => {
@@ -84,15 +89,18 @@ const Survey = () => {
   if (surveyData !== null && surveyData !== undefined) {
     const { sets } = surveyData;
     return (
-      <Set
-        musicFilename={musicList[currentSet]}
-        setId={currentSet}
-        set={sets[currentSet]}
-        nextSet={sets[currentSet + 1]}
-        setCurrentSet={setCurrentSet}
-        totalSets={sets.length}
-        postResponse={postResponse}
-      />
+      <Fragment>
+        <Prompt when={true} />
+        <Set
+          musicFilename={musicList[currentSet]}
+          setId={currentSet}
+          set={sets[currentSet]}
+          nextSet={sets[currentSet + 1]}
+          setCurrentSet={setCurrentSet}
+          totalSets={sets.length}
+          postResponse={postResponse}
+        ></Set>
+      </Fragment>
     );
   }
   return null;
