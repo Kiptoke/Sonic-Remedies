@@ -21,7 +21,11 @@ const MultipleChoice = ({ responses, handleResponded }) => {
     <div className="question-mc option-box">
       {responses.map((res, num) => {
         return (
-          <div key={num} className="option" onClick={() => setChoice(num)}>
+          <div
+            key={num}
+            className={num === choice ? "option selected" : "option"}
+            onClick={() => setChoice(num)}
+          >
             <div className="response">{res}</div>
             {renderRadar(choice, num)}
           </div>

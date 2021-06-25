@@ -38,9 +38,12 @@
     user-select: none;
   }
 
+  .selected {
+    background-color: $textHovColor;
+  }
+
   .option:hover {
     cursor: pointer;
-    background-color: $textHovColor;
   }
 
   .response {

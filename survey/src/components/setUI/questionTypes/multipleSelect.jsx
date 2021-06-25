@@ -42,7 +42,7 @@ const MultipleSelect = ({ responses, handleResponded }) => {
           return (
             <div
               key={num}
-              className="option"
+              className={selections[num] ? "option selected" : "option"}
               onClick={() => {
                 setSelections(Select([...selections], num));
               }}
