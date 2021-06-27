@@ -22,7 +22,7 @@ const localDB = {
       __v: 2,
     },
   ],
-  questions: {
+  "questions-idict": {
     "60d88f7590d16c3cc8c9b088": {
       options: ["A", "B", "C", "D"],
       _id: "60d88f7590d16c3cc8c9b088",
