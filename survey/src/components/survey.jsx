@@ -90,7 +90,7 @@ const Survey = () => {
     const { sets } = surveyData;
     return (
       <Fragment>
-        <Prompt when={true} />
+        <Prompt when={true} message="" />
         <Set
           musicFilename={musicList[currentSet]}
           setId={currentSet}

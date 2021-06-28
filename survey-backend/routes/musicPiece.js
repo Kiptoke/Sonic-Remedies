@@ -50,11 +50,9 @@ router.post("/", async (req, res) => {
 router.delete("/:id", async (req, res) => {
   fs.unlink("./files/" + req.params.id + ".mp3", (err) => {
     if (err) console.log(err);
-    else {
-      musicPiece.deleteOne({ _id: mongodb.ObjectId(req.params.id) }, (err) => {
-        if (err) console.log(err);
-      });
-    }
+    musicPiece.deleteOne({ _id: mongodb.ObjectId(req.params.id) }, (err) => {
+      if (err) console.log(err);
+    });
   });
 });
 
