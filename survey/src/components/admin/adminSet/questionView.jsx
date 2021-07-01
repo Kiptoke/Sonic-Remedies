@@ -1,17 +1,25 @@
-const QuetsionView = ({ question }) => {
+import Card from "react-bootstrap/Card";
+
+const QuetsionView = ({ question, num }) => {
   return (
-    <div>
-      <h3>
-        {question.config && question.config.condQuestion
-          ? "Conditional: " + question.config.condQuestion
-          : ""}
-      </h3>
-      <h1>{question.title}</h1>
-      <h2 style={{ fontStyle: "italic" }}>{question.input_type}</h2>
-      {question.options.map((opt) => (
-        <li key={opt}>{opt}</li>
-      ))}
-    </div>
+    <Card style={{ width: "18rem" }}>
+      <Card.Body>
+        <Card.Title>{`${num}. ${question.title}`}</Card.Title>
+        <Card.Text>
+          {question.config && question.config.condQuestion
+            ? "Conditional: " + question.config.condQuestion
+            : ""}
+        </Card.Text>
+        <Card.Text style={{ fontStyle: "italic" }}>
+          {question.input_type}
+        </Card.Text>
+        <Card.Text>
+          {question.options.map((opt) => (
+            <li key={opt}>{opt}</li>
+          ))}
+        </Card.Text>
+      </Card.Body>
+    </Card>
   );
 };
 

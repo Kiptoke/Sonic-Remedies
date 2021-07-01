@@ -14,10 +14,10 @@ import ViewQuestions from "./viewQuestions";
 import API from "../../../services/api-client";
 
 const mods = [
-  { title: "Add Questions", mod: "add-q" },
-  { title: "Remove Questions", mod: "rem-q" },
-  { title: "Order Questions", mod: "ord-q" },
-  { title: "View Questions", mod: "view-q" },
+  { title: "Add Questions to Set", mod: "add-q" },
+  { title: "Remove Questions from Set", mod: "rem-q" },
+  { title: "Reorder Set Questions", mod: "ord-q" },
+  { title: "View Set Questions", mod: "view-q" },
 ];
 
 const Set = ({
@@ -39,7 +39,7 @@ const Set = ({
       <Row>
         <Col>
           {!editingTitle ? (
-            title
+            <Row>{title}</Row>
           ) : (
             <EditTitle
               old={title}
@@ -49,12 +49,14 @@ const Set = ({
               index={index}
             ></EditTitle>
           )}
-          <Button
-            onClick={() => setEditingTitle(!editingTitle)}
-            style={{ display: editingTitle ? "none" : "" }}
-          >
-            Edit Name
-          </Button>
+          <Row>
+            <Button
+              onClick={() => setEditingTitle(!editingTitle)}
+              style={{ display: editingTitle ? "none" : "" }}
+            >
+              Edit Name
+            </Button>
+          </Row>
         </Col>
         <Col>
           <div>
@@ -89,8 +91,8 @@ const Set = ({
           ))}
         </Col>
         <Col>
-          <Row>Duplicate Set</Row>
-          <Row>
+          <Row className="justify-content-center">Duplicate Set</Row>
+          <Row className="justify-content-center">
             <Button
               onClick={() => {
                 onDuplicateSet(set);
@@ -99,8 +101,8 @@ const Set = ({
               <Icon src={Duplicate} width="2rem" />
             </Button>
           </Row>
-          <Row>Delete Set</Row>
-          <Row>
+          <Row className="justify-content-center">Delete Set</Row>
+          <Row className="justify-content-center">
             <Button
               onClick={() => {
                 onDeleteSet(_id);

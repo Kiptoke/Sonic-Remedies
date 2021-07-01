@@ -73,6 +73,7 @@ const NewQuestion = ({ onNewQuestion, allQuestions }) => {
       </label>
       <input
         type="text"
+        placeholder="Conditional Question Here..."
         onChange={(e) => {
           let temp_config = config;
           temp_config["condQuestion"] = e.target.value;
