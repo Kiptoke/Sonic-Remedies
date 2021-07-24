@@ -21,12 +21,8 @@ app.use(helmet());
 let certificate = "";
 let privateKey = "";
 if (process.env.SONICREM_NET) {
-  certificate = fs.readFileSync(
-    "../ssl/certs/sonicremedies_net_ee2f8_ed3d3_1626739199_99492aa2cd009eb466f472b351714a04.crt"
-  );
-  privateKey = fs.readFileSync(
-    "../ssl/keys/ee2f8_ed3d3_15f84329f0cb1ba91733cf1284c67bde.key"
-  );
+  certificate = fs.readFileSync("../ssl/certs/sonicremedies.crt");
+  privateKey = fs.readFileSync("../ssl/keys/sonicremedies.key");
 }
 
 const connection_string = process.env.SONICREM_NET
