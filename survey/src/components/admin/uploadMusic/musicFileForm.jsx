@@ -10,6 +10,7 @@ import Button from "react-bootstrap/Button";
 
 const MusicFileForm = () => {
   const [fileReadyToUpload, setFileReadyToUpload] = useState(false);
+  const [loadingFile, setLoadingFile] = useState("");
   const [fieldsFilled, setFieldsFilled] = useState(false);
   const [fileValidationError, setFileValidationError] = useState("");
   const [file, setFile] = useState(null);
@@ -18,6 +19,7 @@ const MusicFileForm = () => {
     improvisation: 0,
     consistent_vibe: false,
   });
+  const [duration, setDuration] = useState(null);
   const updateSubParam = (pairs) => {
     let temp_submission = { ...submission };
     for (const [key, value] of Object.entries(pairs)) {
@@ -33,10 +35,11 @@ const MusicFileForm = () => {
         onInput={(e) => {
           getDuration(
             e,
-            (value) => updateSubParam({ duration: value }),
+            (value) => setDuration(value),
             setFileValidationError,
             setFileReadyToUpload,
-            setFile
+            setFile,
+            setLoadingFile
           );
         }}
         accept={"audio/mp3"}
@@ -59,14 +62,16 @@ const MusicFileForm = () => {
       <Button
         onClick={(e) => {
           e.preventDefault();
+          console.log({ ...submission, duration });
           if (window.confirm("Are you sure you want to submit this?")) {
-            submitMusic(submission, file);
+            submitMusic({ ...submission, duration }, file);
           }
         }}
-        style={fileReadyToUpload && fieldsFilled ? {} : { display: "none" }}
+        disabled={!fileReadyToUpload || !fieldsFilled || !duration}
       >
         Submit
       </Button>
+      <p style={{ color: "red" }}>{loadingFile}</p>
     </form>
   );
 };

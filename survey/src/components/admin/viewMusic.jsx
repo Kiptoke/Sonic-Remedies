@@ -3,18 +3,18 @@ import API from "../../services/api-client";
 import { Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
 
-const clickedDelete = (id) => {
-  API.deleteOne("music", id);
-};
-
 const ViewMusic = () => {
   const [musics, setMusics] = useState([]);
+  const clickedDelete = (id) => {
+    API.deleteOne("music", id);
+    getAndSet();
+  };
   const getAndSet = async () => {
     setMusics(await API.getAll("music"));
   };
   useEffect(() => {
     getAndSet();
-  });
+  }, []);
   return (
     <div className="admin-container">
       <Link to="/admin">

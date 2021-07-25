@@ -15,31 +15,31 @@ const PROPORTION = {
 const getMusicList = async (sets) => {
   const num_musics = sets.filter((set) => set.music).length;
   let musics = await API.getAll("music");
-  const short = musics.filter((m) => m.duration < DURATION_LOWER);
-  const mid = musics.filter(
-    (m) => m.duration >= DURATION_LOWER && m.duration <= DURATION_UPPER
-  );
-  const long = musics.filter((m) => m.duration > DURATION_UPPER);
-  let sample = [];
-  sample = [
-    ...sample,
-    ..._.sample(short, Math.ceil(PROPORTION.short * num_musics)),
-  ];
-  sample = [
-    ...sample,
-    ..._.sample(mid, Math.ceil(PROPORTION.mid * num_musics)),
-  ];
-  sample = [
-    ...sample,
-    ..._.sample(long, Math.ceil(PROPORTION.long * num_musics)),
-  ];
-  while (sample.length > num_musics) {
-    const randI = Math.floor(Math.random(sample.length) * sample.length);
-    sample.splice(randI, 1);
-  }
+  // const short = musics.filter((m) => m.duration < DURATION_LOWER);
+  // const mid = musics.filter(
+  //   (m) => m.duration >= DURATION_LOWER && m.duration <= DURATION_UPPER
+  // );
+  // const long = musics.filter((m) => m.duration > DURATION_UPPER);
+  // let sample = [];
+  // sample = [
+  //   ...sample,
+  //   ..._.sample(short, Math.ceil(PROPORTION.short * num_musics)),
+  // ];
+  // sample = [
+  //   ...sample,
+  //   ..._.sample(mid, Math.ceil(PROPORTION.mid * num_musics)),
+  // ];
+  // sample = [
+  //   ...sample,
+  //   ..._.sample(long, Math.ceil(PROPORTION.long * num_musics)),
+  // ];
+  // while (sample.length > num_musics) {
+  //   const randI = Math.floor(Math.random(sample.length) * sample.length);
+  //   sample.splice(randI, 1);
+  // }
 
-  // let random_sample = _.sample(musics, num_musics);
-  let random_sample = sample;
+  let random_sample = _.sample(musics, num_musics);
+  // let random_sample = sample;
   console.log(random_sample);
   let i = -1;
   let music_filenames = [];

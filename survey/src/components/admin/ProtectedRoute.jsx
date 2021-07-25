@@ -12,6 +12,10 @@ const ProtectedRoute = ({ component: Component, ...rest }) => {
   const [user, setUser] = useState("");
   const [loggedIn, setLoggedIn] = useState(false);
   useEffect(() => {
+    if (process.env.REACT_APP_LOCALHOST) {
+      setLoggedIn(true);
+      setUser("admin");
+    }
     checkUser(localStorage.getItem("token"), setLoggedIn, setUser);
     if (user === "admin") setLoggedIn(true);
   }, [user]);
