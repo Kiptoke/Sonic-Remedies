@@ -1,3 +1,6 @@
+#musicfiles
+survey-backend/files
+
 #passwords
 *.key
 password.txt

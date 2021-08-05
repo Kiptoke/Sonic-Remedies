@@ -7,7 +7,7 @@ const ViewMusic = () => {
   const [musics, setMusics] = useState([]);
   const clickedDelete = (id) => {
     API.deleteOne("music", id);
-    getAndSet();
+    setMusics(musics.filter((m) => m._id !== id));
   };
   const getAndSet = async () => {
     setMusics(await API.getAll("music"));
