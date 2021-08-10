@@ -31,12 +31,18 @@ const ViewMusic = () => {
         </thead>
         <tbody>
           {musics
-            .sort((a, b) =>
-              a.fileName.toLowerCase() < b.fileName.toLowerCase() ? -1 : 1
-            )
+            .sort((a, b) => {
+              if (a.fileName && b.fileName)
+                return a.fileName.toLowerCase() < b.fileName.toLowerCase()
+                  ? -1
+                  : 1;
+              return 0;
+            })
             .map((music) => (
               <tr>
-                <td style={{ margin: "1rem" }}>{music.fileName}</td>
+                <td style={{ margin: "1rem" }}>
+                  {music.fileName ? music.fileName : "N/A"}
+                </td>
                 <td style={{ margin: "1rem" }}>{music.title}</td>
                 <td style={{ margin: "1rem" }}>{music.artist}</td>
                 <td>
