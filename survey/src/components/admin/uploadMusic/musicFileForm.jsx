@@ -14,6 +14,7 @@ const MusicFileForm = () => {
   const [fieldsFilled, setFieldsFilled] = useState(false);
   const [fileValidationError, setFileValidationError] = useState("");
   const [file, setFile] = useState(null);
+  const [fileName, setFileName] = useState(null);
   const [submission, setSubmission] = useState({
     prevailingKey: "N/A",
     improvisation: 0,
@@ -39,7 +40,8 @@ const MusicFileForm = () => {
             setFileValidationError,
             setFileReadyToUpload,
             setFile,
-            setLoadingFile
+            setLoadingFile,
+            setFileName
           );
         }}
         accept={"audio/mp3"}
@@ -62,9 +64,9 @@ const MusicFileForm = () => {
       <Button
         onClick={(e) => {
           e.preventDefault();
-          console.log({ ...submission, duration });
+          console.log({ ...submission, duration, fileName });
           if (window.confirm("Are you sure you want to submit this?")) {
-            submitMusic({ ...submission, duration }, file);
+            submitMusic({ ...submission, duration, fileName }, file);
           }
         }}
         disabled={!fileReadyToUpload || !fieldsFilled || !duration}

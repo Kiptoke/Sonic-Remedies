@@ -6,9 +6,11 @@ const getDuration = (
   setFileValidationError,
   setFileReadyToUpload,
   setFile,
-  setLoadingFile
+  setLoadingFile,
+  setFileName
 ) => {
   if (e.target.files[0] && e.target.files[0].type === "audio/mpeg") {
+    setFileName(e.target.files[0].name);
     setLoadingFile("Loading File...");
     const fileObj = e.target.files[0];
     const objectURL = window.URL.createObjectURL(fileObj);

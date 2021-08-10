@@ -37,6 +37,10 @@ const musicPieceSchema = mongoose.Schema({
     type: Boolean,
     required: true,
   },
+  fileName: {
+    type: String,
+    required: true,
+  },
 });
 
 module.exports = mongoose.model("Piece", musicPieceSchema);
