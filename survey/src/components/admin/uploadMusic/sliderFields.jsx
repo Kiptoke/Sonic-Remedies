@@ -1,6 +1,8 @@
+import { useRef } from "react";
 const SliderFields = ({ setField }) => {
   const field = "Improvisation";
-  const vals = ["0%", "25%", "50%", "75%", "100%"];
+  const valueRef = useRef(0);
+
   return (
     <div className="field-container" key={field}>
       <div className="fc-main">
@@ -15,11 +17,7 @@ const SliderFields = ({ setField }) => {
               justifyContent: "space-between",
             }}
           >
-            {vals.map((val) => (
-              <div style={{ fontSize: "10px" }} key={val}>
-                {val}
-              </div>
-            ))}
+            {`${valueRef.current}%`}
           </div>
           <input
             id={field}
@@ -27,9 +25,12 @@ const SliderFields = ({ setField }) => {
             type="range"
             min="0"
             max="100"
-            step="25"
+            step="10"
             defaultValue="0"
-            onChange={(e) => setField(e.target.value)}
+            onChange={(e) => {
+              setField(e.target.value);
+              valueRef.current = e.target.value;
+            }}
           ></input>
         </div>
       </div>
