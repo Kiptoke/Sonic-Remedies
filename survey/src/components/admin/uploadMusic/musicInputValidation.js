@@ -2,7 +2,7 @@ import Joi from "joi";
 
 const schema = Joi.object({
   filename: Joi.string().pattern(/.+.(mp3)$/),
-  textfield: Joi.string().max(30),
+  textfield: Joi.string().max(100),
   number: Joi.number().max(1000).min(1),
 });
 const checkFileInput = (input, setValidationError, setReadyToUpload) => {

@@ -4,7 +4,7 @@ const inputFields = [
   { name: "artist", readable: "Artist", example: "Lady Gaga" },
   { name: "album", readable: "Album", example: "Chromatica" },
   { name: "genre", readable: "Genre", example: "Pop" },
-  { name: "tempo", readable: "Tempo (bpm)", example: "118", type: "number" },
+  { name: "tempo", readable: "Tempo (bpm)", example: "118" },
 ];
 
 const TextFields = ({ validator, setFieldsFilled, sendFields }) => {
@@ -33,7 +33,7 @@ const TextFields = ({ validator, setFieldsFilled, sendFields }) => {
                   field.type
                 );
                 let temp_fields = { ...fields };
-                temp_fields[field.name] = e.target.value.toLowerCase();
+                temp_fields[field.name] = e.target.value;
                 setFields(temp_fields);
                 sendFields(temp_fields);
               }}

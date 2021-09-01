@@ -64,9 +64,9 @@ const MusicFileForm = () => {
       <Button
         onClick={(e) => {
           e.preventDefault();
-          console.log({ ...submission, duration, fileName });
           if (window.confirm("Are you sure you want to submit this?")) {
             submitMusic({ ...submission, duration, fileName }, file);
+            window.location.reload();
           }
         }}
         disabled={!fileReadyToUpload || !fieldsFilled || !duration}

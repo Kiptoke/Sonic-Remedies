@@ -26,7 +26,7 @@ const musicPieceSchema = mongoose.Schema({
     required: true,
   },
   tempo: {
-    type: Number,
+    type: String,
     required: true,
   },
   improvisation: {
